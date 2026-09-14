@@ -4,7 +4,7 @@
 
 **YourDesignGPT** es un proyecto de diseño y desarrollo web creado por **Pedro Soriano Calderón**, enfocado en crear páginas web modernas, visuales y adaptadas a todo tipo de dispositivos.
 
-🌐 **Web oficial:**
+🌐 **Web oficial:**  
 https://pitersc10.github.io/yourdesigngpt/
 
 ---
@@ -23,17 +23,17 @@ Con una filosofía clara: crear webs atractivas, rápidas y funcionales sin comp
 
 ## ✨ Características
 
-* 📱 Diseño **100% responsive**
-* ⚡ Webs rápidas y optimizadas
-* 🎨 Diseño personalizado
-* 🔍 Base preparada para **SEO**
-* 🔒 Publicación mediante **HTTPS / SSL**
-* 💬 Integración con WhatsApp y redes sociales
-* 📍 Integración de mapas y datos de contacto
-* 📝 Formularios y llamadas a la acción
-* 🌍 Posibilidad de múltiples idiomas
-* 🖥️ Adaptación para móvil, tablet y ordenador
-* 🛠️ Hosting, dominio y mantenimiento gestionados
+- 📱 Diseño **100% responsive**
+- ⚡ Webs rápidas y optimizadas
+- 🎨 Diseño personalizado
+- 🔍 Base preparada para **SEO**
+- 🔒 Publicación mediante **HTTPS / SSL**
+- 💬 Integración con WhatsApp y redes sociales
+- 📍 Integración de mapas y datos de contacto
+- 📝 Formularios y llamadas a la acción
+- 🌍 Posibilidad de múltiples idiomas
+- 🖥️ Adaptación para móvil, tablet y ordenador
+- 🛠️ Hosting, dominio y mantenimiento gestionados
 
 ---
 
@@ -41,13 +41,13 @@ Con una filosofía clara: crear webs atractivas, rápidas y funcionales sin comp
 
 El proyecto incluye diferentes conceptos y demostraciones de diseño web:
 
-* 🛥️ **Ibiza Jet Experience** — Motos de agua y experiencias
-* 🍽️ **Áurea Málaga** — Restaurante
-* ⚡ **Voltio Málaga** — Electricista
-* 💧 **AquaFix Málaga** — Fontanería
-* ✨ **Lúmina Estética Málaga** — Centro de estética
-* 👤 **Web Personal** — Portfolio y marca personal
-* 🏨 **Hotel Málaga Central** — Alojamiento y hotel
+- 🛥️ **Ibiza Jet Experience** — Motos de agua y experiencias
+- 🍽️ **Áurea Málaga** — Restaurante
+- ⚡ **Voltio Málaga** — Electricista
+- 💧 **AquaFix Málaga** — Fontanería
+- ✨ **Lúmina Estética Málaga** — Centro de estética
+- 👤 **Web Personal** — Portfolio y marca personal
+- 🏨 **Hotel Málaga Central** — Alojamiento y hotel
 
 Los proyectos de demostración utilizan contenido ficticio y sirven para mostrar diferentes estilos, sectores y posibilidades de desarrollo.
 
