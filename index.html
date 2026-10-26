@@ -7710,6 +7710,7 @@ img,video,canvas,svg{max-width:100%}
           </div>
           <p class="ydg-submit-note" data-lang-key="cfg-submit-note">Sin compromiso · Respuesta lo antes posible · Dominio + hosting + mantenimiento + 3 ajustes menores incluidos en los 100 €/año.</p>
           <div id="ydg-config-status" class="ydg-config-status" aria-live="polite"></div>
+          <a id="ydg-config-email-fallback" href="mailto:iampetersc@gmail.com" hidden style="display:none;margin-top:10px;color:#a5f3fc;text-decoration:underline;font-size:.8rem;text-align:right">Preparar solicitud por correo →</a>
         </div>
       </form>
     </div>
@@ -11077,6 +11078,7 @@ function initYDGConfigurator117(){
   const styleField=document.getElementById('ydg-style-field');
   const summary=document.getElementById('ydg-summary-text');
   const status=document.getElementById('ydg-config-status');
+  const emailFallback=document.getElementById('ydg-config-email-fallback');
 
   const otherButton=form.querySelector('.ydg-mini-choice[data-function="Otros"]');
   const otherWrap=document.getElementById('ydg-other-function-wrap');
@@ -11275,12 +11277,23 @@ function initYDGConfigurator117(){
       status.style.color='#7dd3fc';
     }
     if(submit)submit.disabled=true;
+    if(emailFallback){emailFallback.hidden=true;emailFallback.style.display='none';}
+
+    const payload=new FormData(form);
+    const data=Object.fromEntries(payload.entries());
+    data._url=window.location.origin+window.location.pathname;
+    data._replyto=data.Email;
+    payload.set('_url',data._url);
+    payload.set('_replyto',data._replyto);
+    const controller=new AbortController();
+    const timer=setTimeout(()=>controller.abort(),15000);
 
     try{
       const res=await fetch(form.action,{
         method:'POST',
-        body:new FormData(form),
-        headers:{Accept:'application/json'}
+        body:payload,
+        headers:{Accept:'application/json'},
+        signal:controller.signal
       });
       if(!res.ok)throw new Error('send');
       const reply=await res.json().catch(()=>null);
@@ -11294,10 +11307,17 @@ function initYDGConfigurator117(){
       if(text)text.textContent='Solicitud enviada';
     }catch(_){
       if(status){
-        status.textContent='No se pudo enviar ahora. Puedes usar el botón de contacto o WhatsApp.';
+        status.textContent='No hemos podido confirmar el envío. Puedes preparar un correo con tus datos; la solicitud podría llegar duplicada.';
         status.style.color='#fca5a5';
       }
+      if(emailFallback){
+        const body=['Solicitud de presupuesto — YourDesignGPT', '', ...Object.entries(data).filter(([key])=>!key.startsWith('_')).map(([key,value])=>`${key}: ${value}`)].join('\n');
+        emailFallback.href='mailto:iampetersc@gmail.com?subject='+encodeURIComponent('Solicitud de presupuesto — YourDesignGPT')+'&body='+encodeURIComponent(body);
+        emailFallback.hidden=false;
+        emailFallback.style.display='block';
+      }
     }finally{
+      clearTimeout(timer);
       if(submit)submit.disabled=false;
     }
   });
