@@ -11244,6 +11244,7 @@ function initYDGConfigurator117(){
   // FORM SEND
   form.addEventListener('submit',async e=>{
     e.preventDefault();
+    if(!form.reportValidity()) return;
     updateSummary();
 
     const submit=form.querySelector('.ydg-submit-budget');
@@ -11260,6 +11261,8 @@ function initYDGConfigurator117(){
         headers:{Accept:'application/json'}
       });
       if(!res.ok)throw new Error('send');
+      const reply=await res.json().catch(()=>null);
+      if(!reply || !(reply.success===true || reply.success==='true'))throw new Error('unconfirmed_send');
 
       if(status){
         status.textContent='✓ Solicitud enviada. Nos pondremos en contacto contigo.';
