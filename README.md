@@ -5,7 +5,7 @@
 **YourDesignGPT** es un proyecto de diseño y desarrollo web creado por **Pedro Soriano Calderón**, enfocado en crear páginas web modernas, visuales y adaptadas a todo tipo de dispositivos.
 
 🌐 **Web oficial:**  
-https://pitersc10.github.io/yourdesigngpt/
+https://yourdesigngpt.vercel.app/
 
 ---
 
