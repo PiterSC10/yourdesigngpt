@@ -7345,6 +7345,25 @@ img,video,canvas,svg{max-width:100%}
 .ydg-client-area-link{display:inline-flex;align-items:center;justify-content:center;padding:.58rem .95rem;border:1px solid rgba(45,212,191,.28);border-radius:999px;background:rgba(17,24,39,.72);color:#94a3b8;text-decoration:none;font-size:.78rem;font-weight:700;letter-spacing:.01em;transition:color .2s ease,border-color .2s ease,box-shadow .2s ease,transform .2s ease}
 .ydg-client-area-link:hover,.ydg-client-area-link:focus-visible{color:#fff;border-color:#2dd4bf;box-shadow:0 0 18px rgba(45,212,191,.18);transform:translateY(-1px);outline:none}
 </style>
+<style id="ydg-config-mobile-stability">
+@media(max-width:800px){
+  #configurador .ydg-config-main{overflow-anchor:none}
+  #configurador .ydg-config-head{gap:10px;margin-bottom:14px}
+  #configurador .ydg-config-head h2{font-size:2rem}
+  #configurador .ydg-config-head p{font-size:.8rem;margin-top:6px}
+  #configurador .ydg-config-steps{align-self:flex-start}
+  #ydg-visual-config-form{height:clamp(320px,calc(100svh - 230px),580px)}
+  #configurador .ydg-step-panel.is-active{height:100%;box-sizing:border-box;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;scrollbar-gutter:stable;padding:3px 5px 5px;animation:none}
+  #configurador .ydg-choice-card{min-height:74px;padding:8px 6px;gap:3px}
+  #configurador .ydg-choice-card small{font-size:.58rem}
+  #configurador .ydg-type-grid{gap:7px}
+  #configurador .ydg-block-title{margin-bottom:10px}
+  #configurador .ydg-step-actions{position:sticky;bottom:-5px;z-index:2;background:#07111f;padding:10px 0 4px;margin-top:12px}
+  #configurador .ydg-subgrid{gap:10px;margin-top:12px}
+  #configurador .ydg-final-grid{gap:10px}
+  #configurador .ydg-summary{gap:8px;padding:10px;margin-top:10px}
+}
+</style>
 <style id="ydg-config-clarity">
 /* Contraste y selección del configurador, manteniendo su paleta original. */
 #configurador .ydg-choice-card,#configurador .ydg-mini-choice,#configurador .ydg-pill-choice{position:relative;border-color:rgba(100,165,250,.5);background:linear-gradient(160deg,rgba(17,41,67,.96),rgba(8,20,38,.96));box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
@@ -11160,7 +11179,10 @@ function initYDGConfigurator117(){
       const heading=panel?.querySelector('h3');
       if(heading){heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true});}
       const section=document.getElementById('configurador');
-      if(section){
+      if(matchMedia('(max-width: 800px)').matches){
+        // Keep the mobile page stationary; only reset the newly opened panel.
+        if(panel) panel.scrollTop=0;
+      }else if(section){
         const header=document.querySelector('header');
         const offset=(header?.getBoundingClientRect().height || 0)+12;
         const top=window.scrollY+section.getBoundingClientRect().top-offset;
