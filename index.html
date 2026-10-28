@@ -7362,6 +7362,21 @@ img,video,canvas,svg{max-width:100%}
   #configurador .ydg-subgrid{gap:10px;margin-top:12px}
   #configurador .ydg-final-grid{gap:10px}
   #configurador .ydg-summary{gap:8px;padding:10px;margin-top:10px}
+  #configurador .ydg-step-panel[data-step="3"] .ydg-final-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  #configurador .ydg-step-panel[data-step="3"] .ydg-input-wrap{gap:4px;min-width:0}
+  #configurador .ydg-step-panel[data-step="3"] .ydg-input-wrap input{padding:9px 10px;min-width:0;width:100%;box-sizing:border-box;font-size:16px}
+  #configurador .ydg-step-panel[data-step="3"] .ydg-input-wrap textarea{padding:9px 10px;min-height:68px;font-size:16px}
+  #configurador .ydg-step-panel[data-step="3"] .ydg-summary{flex-direction:row;align-items:center;gap:10px;padding:8px;margin-top:8px}
+  #configurador .ydg-step-panel[data-step="3"] .ydg-summary>div:first-child{flex:1;min-width:0}
+  #configurador .ydg-step-panel[data-step="3"] .ydg-price-summary{flex-shrink:0;text-align:right}
+  #configurador .ydg-step-panel[data-step="3"] .ydg-price-summary span{display:block;margin-left:0}
+  #configurador .ydg-step-panel[data-step="3"] .ydg-submit-row{flex-direction:row;align-items:stretch;gap:8px;margin-top:8px}
+  #configurador .ydg-step-panel[data-step="3"] .ydg-submit-budget{flex:1;width:auto;min-width:0;padding:11px 10px;font-size:.8rem}
+  #configurador .ydg-step-panel[data-step="3"] .ydg-prev-step{padding:10px 12px}
+  #configurador .ydg-step-panel[data-step="3"] .ydg-submit-note{margin-top:6px;line-height:1.35;text-align:left}
+  @media(max-width:360px){
+    #configurador .ydg-step-panel[data-step="3"] .ydg-final-grid{grid-template-columns:1fr}
+  }
 }
 </style>
 <style id="ydg-config-clarity">
