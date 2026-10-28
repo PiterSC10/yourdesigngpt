@@ -146,7 +146,7 @@ function create(){
   if(advancedPrice)text+='<br><br>No hay una tarifa cerrada publicada para esa ampliación. Los 99 € corresponden a la landing de presentación, no a confirmar el coste de esta función.';
   if(changed&&profile&&!['identity','chatLimits','chatPrivacy','humanHelp','contact'].includes(first))text=(correction?'Actualizo el contexto: ':'Para tu proyecto de ')+profile.name+'. '+text;
   if(ids.includes('booking'))state.need='reservas';
-  if(ids.some(x=>['shop','extras','integrations','booking'].includes(x)))text+=ask('need','¿Qué debería poder hacer el visitante exactamente?');
+  if(ids.some(x=>['shop','extras','integrations','booking'].includes(x)))state.pending='need';
   else if(ids.some(x=>['time','deadline','materials'].includes(x))&&state.materials===null)text+=ask('materials','¿Ya tienes el contenido preparado?');
   else if(ids.some(x=>['price','start','included','budgetObjection'].includes(x))&&!state.sector)text+=ask('sector','¿Para qué actividad o proyecto sería?');
   if(all.length>2)text+='<br><br>Has mencionado más temas; podemos ir al siguiente cuando quieras.';
