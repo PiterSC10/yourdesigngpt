@@ -7392,6 +7392,32 @@ img,video,canvas,svg{max-width:100%}
 #configurador button:focus-visible,#configurador input:focus-visible,#configurador textarea:focus-visible{outline:3px solid #a5f3fc;outline-offset:3px}
 @media(prefers-reduced-motion:reduce){#configurador .ydg-step-panel.is-active{animation:none}#configurador button{transition:none}}
 </style>
+<style id="ydg-brand-signature-style">
+:root{--ydg-header-height:150px}
+body{padding-top:var(--ydg-header-height)!important}
+html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
+#ydg-site-header{padding-bottom:0!important;background:rgba(7,13,24,.98)!important}
+#ydg-brand-home .ydg-mini-mark{font-size:1.45rem!important;font-weight:900!important;letter-spacing:-.04em!important;background:linear-gradient(100deg,#22d3ee,#60a5fa,#c084fc);background-clip:text;-webkit-background-clip:text;color:transparent}
+.ydg-brand-strip{display:flex;justify-content:center;margin:12px -24px 0;padding:8px 18px 10px;border-top:1px solid #183044;border-bottom:1px solid #25546a;background:linear-gradient(110deg,#070d18,#0b1727,#070d18)}
+.ydg-signature{position:relative;display:inline-flex;align-items:center;gap:10px;max-width:100%;padding:3px 22px 8px 0;text-decoration:none;isolation:isolate}
+.ydg-signature:focus-visible{outline:2px solid #67e8f9;outline-offset:3px;border-radius:8px}
+.ydg-signature::after{content:'';position:absolute;left:15px;right:10px;bottom:3px;height:2px;background:linear-gradient(90deg,#22d3ee,#3b82f6,#c026d3);box-shadow:0 0 9px #22d3ee55}
+.ydg-monitor{width:46px;height:40px;flex:none;color:#22d3ee;filter:drop-shadow(0 0 5px #22d3ee44)}
+.ydg-wordmark{position:relative;font-family:Inter,system-ui,sans-serif;font-weight:900;font-size:clamp(1.3rem,5.8vw,2.1rem);letter-spacing:-.055em;line-height:1.2;white-space:nowrap;background:linear-gradient(100deg,#22d3ee 0%,#38bdf8 35%,#818cf8 66%,#d946ef 100%);background-clip:text;-webkit-background-clip:text;color:transparent}
+.ydg-wordmark::after{content:'YourDesignGPT';position:absolute;inset:0;color:transparent;background:linear-gradient(110deg,transparent 25%,#fff 48%,transparent 70%);background-size:250% 100%;background-position:150% 0;background-clip:text;-webkit-background-clip:text;opacity:0;pointer-events:none}
+.ydg-click-cursor{position:absolute;right:0;bottom:-1px;width:24px;height:28px;color:#38bdf8;transform:rotate(-8deg);filter:drop-shadow(0 0 4px #38bdf855)}
+.ydg-click-ring{position:absolute;right:13px;bottom:17px;width:14px;height:14px;border:2px solid #67e8f9;border-radius:50%;opacity:0;pointer-events:none}
+.ydg-signature.is-playing .ydg-click-cursor{animation:ydgCursorClick 1.8s ease both}
+.ydg-signature.is-playing .ydg-click-ring{animation:ydgClickRing 1.8s ease both}
+.ydg-signature.is-playing .ydg-wordmark::after{animation:ydgLetterSweep 1.8s ease both}
+.ydg-signature.is-playing .ydg-monitor{animation:ydgMonitorGlow 1.8s ease both}
+@keyframes ydgCursorClick{0%{transform:translate(10px,7px) rotate(-8deg);opacity:0}25%{transform:translate(0,0) rotate(-8deg);opacity:1}35%{transform:scale(.82) rotate(-8deg)}48%,100%{transform:scale(1) rotate(-8deg);opacity:1}}
+@keyframes ydgClickRing{0%,30%{opacity:0;transform:scale(.3)}38%{opacity:1;transform:scale(.6)}70%,100%{opacity:0;transform:scale(2.5)}}
+@keyframes ydgLetterSweep{0%,36%{opacity:0;background-position:150% 0}42%{opacity:.9}90%{opacity:.8;background-position:-150% 0}100%{opacity:0;background-position:-150% 0}}
+@keyframes ydgMonitorGlow{0%,30%,100%{filter:drop-shadow(0 0 5px #22d3ee44)}45%,70%{filter:drop-shadow(0 0 10px #67e8f9)}}
+@media(max-width:380px){.ydg-signature{gap:7px}.ydg-monitor{width:35px;height:33px}.ydg-wordmark{font-size:6vw}}
+@media(prefers-reduced-motion:reduce){.ydg-signature *,.ydg-signature *::after{animation:none!important}.ydg-click-ring{display:none}}
+</style>
 </head>
 <body class="ydg-promo-on antialiased">
 <!-- V80 · Launch Offer Modal -->
@@ -7488,12 +7514,11 @@ img,video,canvas,svg{max-width:100%}
 </div>
 </div>
 <!-- Header Section -->
-<header class="bg-[#0d1117] text-white py-4 px-6 shadow-lg fixed w-full z-50 top-0">
+<header id="ydg-site-header" class="bg-[#0d1117] text-white py-4 px-6 shadow-lg fixed w-full z-50 top-0">
 <nav aria-label="Navegación principal" class="container mx-auto flex justify-between items-center flex-wrap">
 <div class="text-2xl font-bold">
-<a class="ydg-header-brand text-white hover:text-gray-300" href="#main-content" id="ydg-brand-home" aria-label="YourDesignGPT · Inicio" data-nav-key="home">
-<img src="favicon.png" alt="" class="ydg-header-logo" width="38" height="38">
-<span>YourDesignGPT</span>
+<a class="ydg-header-brand text-white hover:text-gray-300" href="#main-content" id="ydg-brand-home" aria-label="YourDesignGPT · Inicio" >
+<span class="ydg-mini-mark">[YDG]</span>
 </a>
 </div>
 <div class="mobile-weather-mini" aria-label="Tiempo actual en Málaga">
@@ -7555,6 +7580,7 @@ img,video,canvas,svg{max-width:100%}
 </div>
 </div>
 </nav>
+<div class="ydg-brand-strip"><a class="ydg-signature" id="ydg-signature" href="#main-content" aria-label="YourDesignGPT · Volver al inicio"><svg class="ydg-monitor" viewBox="0 0 52 46" fill="none" aria-hidden="true"><defs><linearGradient id="ydg-monitor-gradient"><stop stop-color="#22d3ee"/><stop offset="1" stop-color="#c084fc"/></linearGradient></defs><rect x="3" y="3" width="46" height="31" rx="6" stroke="url(#ydg-monitor-gradient)" stroke-width="3"/><path d="m20 13-7 6 7 5m12-11 7 6-7 5m-4-13-4 16M26 35v7m-11 1h22" stroke="url(#ydg-monitor-gradient)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ydg-wordmark">YourDesignGPT</span><span class="ydg-click-ring" aria-hidden="true"></span><svg class="ydg-click-cursor" viewBox="0 0 25 30" aria-hidden="true"><path d="M3 2 22 17l-9 1 4 9-5 2-4-10-6 6Z" fill="currentColor" stroke="#07111f" stroke-width="1.4"/></svg></a></div>
 </header>
 <main id="main-content">
 <!-- Hero Section -->
@@ -11699,5 +11725,19 @@ if(document.readyState==='loading'){
   window.addEventListener('load',refreshProgress,{once:true});
 })();
 </script>
-<style id="ydg-project-estimate-style">.ydg-project-estimate{margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column;align-items:flex-start;gap:9px}.ydg-estimate-toggle{cursor:pointer;border:1px solid rgba(45,212,191,.5);background:rgba(45,212,191,.08);color:#a7f3d0;border-radius:999px;padding:8px 13px;font:inherit;font-size:.83rem;font-weight:700}.ydg-estimate-toggle:hover{background:rgba(45,212,191,.2)}.ydg-estimate-detail{font-size:.82rem;line-height:1.5;color:#cbd5e1}</style><script id="ydg-project-estimate-script">document.addEventListener('click',function(e){const b=e.target.closest('.ydg-estimate-toggle');if(!b)return;const d=b.parentElement.querySelector('.ydg-estimate-detail');if(!d)return;d.hidden=!d.hidden;b.setAttribute('aria-expanded',String(!d.hidden));b.textContent=d.hidden?'Ver valoración estimada':'Ocultar valoración';});</script></body>
+<style id="ydg-project-estimate-style">.ydg-project-estimate{margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column;align-items:flex-start;gap:9px}.ydg-estimate-toggle{cursor:pointer;border:1px solid rgba(45,212,191,.5);background:rgba(45,212,191,.08);color:#a7f3d0;border-radius:999px;padding:8px 13px;font:inherit;font-size:.83rem;font-weight:700}.ydg-estimate-toggle:hover{background:rgba(45,212,191,.2)}.ydg-estimate-detail{font-size:.82rem;line-height:1.5;color:#cbd5e1}</style><script id="ydg-project-estimate-script">document.addEventListener('click',function(e){const b=e.target.closest('.ydg-estimate-toggle');if(!b)return;const d=b.parentElement.querySelector('.ydg-estimate-detail');if(!d)return;d.hidden=!d.hidden;b.setAttribute('aria-expanded',String(!d.hidden));b.textContent=d.hidden?'Ver valoración estimada':'Ocultar valoración';});</script><script id="ydg-brand-signature-script">
+(function(){
+ const header=document.getElementById('ydg-site-header');
+ const signature=document.getElementById('ydg-signature');
+ if(!header||!signature)return;
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ let endTimer;
+ function measure(){document.documentElement.style.setProperty('--ydg-header-height',Math.ceil(header.getBoundingClientRect().height)+'px');}
+ function play(){if(reduced.matches)return;clearTimeout(endTimer);signature.classList.remove('is-playing');void signature.offsetWidth;signature.classList.add('is-playing');endTimer=setTimeout(()=>signature.classList.remove('is-playing'),1900);}
+ measure();if('ResizeObserver' in window)new ResizeObserver(measure).observe(header);else addEventListener('resize',measure);
+ signature.addEventListener('click',function(e){e.preventDefault();play();window.scrollTo({top:0,behavior:reduced.matches?'instant':'smooth'});});
+ if(document.readyState==='complete')play();else addEventListener('load',play,{once:true});
+})();
+</script>
+</body>
 </html>
