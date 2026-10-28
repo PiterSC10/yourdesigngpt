@@ -4,6 +4,18 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"/>
+<!-- Redirect only the legacy GitHub Pages homepage to the official site. -->
+<script id="legacy-github-pages-redirect">
+(function () {
+  var legacyPaths = ["/yourdesigngpt", "/yourdesigngpt/", "/yourdesigngpt/index.html"];
+  if (window.location.hostname === "pitersc10.github.io" &&
+      legacyPaths.indexOf(window.location.pathname) !== -1) {
+    window.location.replace("https://yourdesigngpt.vercel.app/" +
+      window.location.search + window.location.hash);
+  }
+}());
+</script>
+
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <!-- Google Site Verification -->
 <meta content="vxXhWIlAV8oBEOjLwRsoTAuYVDDPiCFCyG1HtZJ3LhQ" name="google-site-verification"/>
