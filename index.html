@@ -7418,7 +7418,14 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
 @media(max-width:380px){.ydg-signature{gap:7px}.ydg-monitor{width:35px;height:33px}.ydg-wordmark{font-size:6vw}}
 @media(prefers-reduced-motion:reduce){.ydg-signature *,.ydg-signature *::after{animation:none!important}.ydg-click-ring{display:none}}
 </style>
-</head>
+<style id="ydg-academy-choice-style">
+#configurador .ydg-choice-card.ydg-academy-choice{border-color:#f472b6;background:linear-gradient(145deg,#3c183d,#181b39);box-shadow:inset 0 0 0 1px #f472b633,0 0 16px #ec489922}
+#configurador .ydg-academy-choice .ydg-choice-icon,#configurador .ydg-academy-choice b{color:#fbcfe8}
+#configurador .ydg-choice-card.ydg-academy-choice.is-selected{border-color:#f9a8d4;background:linear-gradient(145deg,#69274f,#302050);box-shadow:0 0 20px #ec48994d,inset 0 0 0 1px #f9a8d477}
+#configurador .ydg-choice-card.ydg-academy-choice.is-selected::after{background:#f9a8d4;color:#4a123b}
+#configurador .ydg-academy-note{font-size:.73rem;line-height:1.6;padding:11px 13px;margin:12px 0;border:1px solid #f472b655;border-radius:12px;background:#351c344d;color:#fbcfe8}
+#configurador .ydg-academy-note[hidden]{display:none}
+</style></head>
 <body class="ydg-promo-on antialiased">
 <!-- V80 · Launch Offer Modal -->
 <div class="ydg-launch-backdrop" id="ydg-launch-backdrop" aria-hidden="true">
@@ -7657,8 +7664,14 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
               <b data-lang-key="cfg-type-other">Otro proyecto</b>
               <small data-lang-key="cfg-type-other-desc">Cuéntanos tu idea</small>
             </button>
+            <button type="button" class="ydg-choice-card ydg-academy-choice" data-type="Academia / Cuestionarios tipo test">
+              <span class="ydg-choice-icon" aria-hidden="true">▤</span>
+              <b>Academia · Test</b>
+              <small>Temario, cuestionarios y oposiciones</small>
+            </button>
           </div>
 
+          <p class="ydg-academy-note" data-academy-note hidden>Creación: 99 €. Dominio, hosting y mantenimiento del primer año: 100 €. Ambos pagos son necesarios para publicar (199 € en total). Después puedes cancelar la renovación: la web seguirá activa hasta finalizar el año abonado.</p>
           <div class="ydg-step-actions">
             <button type="button" class="ydg-next-step"><span data-lang-key="cfg-continue">Continuar</span> <span>→</span></button>
           </div>
@@ -7773,6 +7786,7 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
             </div>
           </div>
 
+          <p class="ydg-academy-note" data-academy-note hidden>Creación: 99 €. Dominio, hosting y mantenimiento del primer año: 100 €. Ambos pagos son necesarios para publicar (199 € en total). Después puedes cancelar la renovación: la web seguirá activa hasta finalizar el año abonado.</p>
           <div class="ydg-submit-row">
             <button type="button" class="ydg-prev-step">← <span data-lang-key="cfg-back">Volver</span></button>
             <button type="submit" class="ydg-submit-budget">
@@ -7859,7 +7873,7 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
 <article class="portfolio-card" data-ydg-preview="RADIOSAS ACADEMY · DEMO LIMITADA">
 <a aria-label="Ver demo limitada de RadioSAS Academy" class="portfolio-cover" href="radiosas-demo/">
 <span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small>yourdesigngpt / demo limitada</small></span><span class="portfolio-badge">RadioSAS Academy</span><img alt="RadioSAS Academy: plataforma de test con avatar genérico Aquí tu foto, sin datos personales" height="675" loading="lazy" src="radiosas-demo/portada.svg" width="1200"></a>
-<div class="portfolio-body"><div class="portfolio-sector">EdTech · Plataforma de preparación de exámenes</div><h3 class="portfolio-title">RadioSAS Academy</h3><p class="portfolio-description">Academia de test personalizable con corrección y estadísticas locales. Demo pública con solo 5 enunciados de un banco de referencia de 1.000; exámenes, soluciones y banco completo no accesibles.</p><div class="portfolio-tech"><span>Test y simulacros</span><span>Progreso local</span><span>Demo limitada</span></div><p style="color:#a7f3d0;font-weight:800;margin:12px 0">Promoción de adaptación: 200 € en total el primer año · Hasta 31/12/2026</p><a class="portfolio-link" href="radiosas-demo/">Ver demostración limitada →</a><div class="ydg-project-estimate"><button type="button" class="ydg-estimate-toggle" aria-expanded="false">Ver valoración estimada</button><span class="ydg-estimate-detail" hidden>Estimación orientativa de un desarrollo a medida de alcance similar: 1.500–3.000 €. No es un precio pagado ni una tasación. Oferta de adaptación sobre la plataforma existente: 200 € el primer año; renovación de servicio: 100 €/año. Nuevas funciones y validación académica del banco, aparte.</span></div></div></article>
+<div class="portfolio-body"><div class="portfolio-sector">EdTech · Plataforma de preparación de exámenes</div><h3 class="portfolio-title">RadioSAS Academy</h3><p class="portfolio-description">Academia de test personalizable con corrección y estadísticas locales. Demo pública con solo 5 enunciados de un banco de referencia de 1.000; exámenes, soluciones y banco completo no accesibles.</p><div class="portfolio-tech"><span>Test y simulacros</span><span>Progreso local</span><span>Demo limitada</span></div><a class="portfolio-link" href="radiosas-demo/">Ver demostración limitada →</a><div class="ydg-project-estimate"><button type="button" class="ydg-estimate-toggle" aria-expanded="false">Ver valoración estimada</button><span class="ydg-estimate-detail" hidden>Estimación orientativa de un desarrollo a medida de alcance similar: 1.500–3.000 €. No es un precio pagado ni una tasación. Adaptación de la plataforma existente: 99 € de creación + 100 € del primer año (199 € en total). Ambos pagos son necesarios para publicar. Renovación desde el segundo año: 100 €/año; puedes cancelarla y conservar el servicio durante el periodo abonado. Nuevas funciones y validación académica del banco, aparte.</span></div></div></article>
 <article class="portfolio-card" data-ydg-preview="DEA HABBO ES · PROYECTO REAL">
 <a aria-label="Ver proyecto DEA HABBO ES" class="portfolio-cover" href="https://dea-habbo-es.vercel.app/" target="_blank" rel="noopener noreferrer">
 <span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small>yourdesigngpt / proyecto real</small></span>
@@ -11785,6 +11799,13 @@ if(document.readyState==='loading'){
  if(document.readyState==='complete')play();else addEventListener('load',play,{once:true});
 })();
 </script>
-<script id="ydg-radio-offer-script">(()=>{if(new URLSearchParams(location.search).get('oferta')!=='radiosas')return;const form=document.getElementById('ydg-visual-config-form');if(!form)return;const note=document.createElement('aside');note.setAttribute('role','note');note.style.cssText='margin:12px 0;padding:14px;border:1px solid #e6aacd;border-radius:12px;background:#241e36;color:#ffe0ee;font-size:14px;line-height:1.5';note.textContent='Oferta RadioSAS: adaptación de academia por 200 € en total el primer año. Renovación: 100 €/año. La promoción de landing de 99 € no se aplica a esta solicitud. El alcance y el contenido se confirman antes de pagar.';form.before(note);const idea=form.querySelector('textarea[name="Idea"]');if(idea&&!idea.value)idea.value='Solicito la oferta RadioSAS: 200 € total el primer año, renovación 100 €/año. Adaptación de la plataforma de test existente. Mi proyecto: ';let field=form.querySelector('input[name="Oferta solicitada"]');if(!field){field=document.createElement('input');field.type='hidden';field.name='Oferta solicitada';form.appendChild(field);}field.value='RadioSAS Academy · 200 € total primer año · 100 €/año desde segundo año';const price=form.querySelector('input[name="Precio"]'),promo=form.querySelector('input[name="Promoción"]');if(price)price.value='200 € total primer año; 100 €/año desde segundo año';if(promo)promo.value='RADIOSAS · Adaptación academia';const sync=()=>{const b=form.querySelector('.ydg-price-summary b'),label=form.querySelector('.ydg-price-summary small'),year=form.querySelector('.ydg-price-summary span');if(b)b.textContent='200 €';if(label)label.textContent='RADIOSAS · PRIMER AÑO';if(year)year.textContent='Después, 100 €/año';};sync();form.addEventListener('click',()=>setTimeout(sync,0));form.addEventListener('submit',()=>{if(price)price.value='200 € total primer año; 100 €/año desde segundo año';if(promo)promo.value='RADIOSAS · Adaptación academia';},true);})();</script></body>
+<script id="ydg-academy-choice-script">
+(()=>{const form=document.getElementById('ydg-visual-config-form');if(!form)return;
+const option=form.querySelector('.ydg-academy-choice');
+function sync(){const selected=option?.classList.contains('is-selected');form.querySelectorAll('[data-academy-note]').forEach(n=>n.hidden=!selected);}
+form.addEventListener('click',e=>{if(e.target.closest('[data-type]'))setTimeout(sync,0);});
+const params=new URLSearchParams(location.search);if(params.get('oferta')==='radiosas'||params.get('tipo')==='academia')option?.click();
+sync();
+})();</script></body>
 </html>
 
