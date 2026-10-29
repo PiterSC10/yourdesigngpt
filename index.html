@@ -11800,12 +11800,13 @@ if(document.readyState==='loading'){
 })();
 </script>
 <script id="ydg-academy-choice-script">
-(()=>{const form=document.getElementById('ydg-visual-config-form');if(!form)return;
+(()=>{function init(){const form=document.getElementById('ydg-visual-config-form');if(!form)return;
 const option=form.querySelector('.ydg-academy-choice');
 function sync(){const selected=option?.classList.contains('is-selected');form.querySelectorAll('[data-academy-note]').forEach(n=>n.hidden=!selected);}
 form.addEventListener('click',e=>{if(e.target.closest('[data-type]'))setTimeout(sync,0);});
 const params=new URLSearchParams(location.search);if(params.get('oferta')==='radiosas'||params.get('tipo')==='academia')option?.click();
-sync();
+sync();}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();</script></body>
 </html>
 
