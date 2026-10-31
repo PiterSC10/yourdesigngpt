@@ -28,3 +28,15 @@ body.aurora-focused #configurador .ydg-config-shell{display:block!important;max-
 body.aurora-focused .aurora-links a[aria-current]{color:#70edff!important}
 body.aurora-focused .aurora-visual figcaption{font-size:9px}
 body.aurora-focused #scrollToTopBtn{display:none!important}
+
+html body #ydg-site-header .aurora-config-direct{order:2;display:inline-flex!important;align-items:center;justify-content:center;min-height:42px;padding:11px 18px;border-radius:11px;background:#27dff1;color:#041624!important;font-size:12px;font-weight:800;text-decoration:none;white-space:nowrap;box-shadow:0 0 18px #27dff120}
+html body #ydg-site-header .aurora-client{order:3}
+html body #ydg-site-header #nav-toggle{order:4}
+.aurora-click-brand{position:relative}
+.aurora-brand-cursor{position:absolute;right:-10px;bottom:-4px;color:#5eeeff;opacity:0;pointer-events:none;filter:drop-shadow(0 0 6px #27dff1)}
+.aurora-click-brand.aurora-brand-playing .aurora-brand-cursor{animation:auroraCursorClick 1.8s ease both}
+.aurora-click-brand.aurora-brand-playing>span:not(.aurora-brand-cursor){animation:auroraWordClick 1.8s ease both}
+@keyframes auroraCursorClick{0%{opacity:0;transform:translate(18px,18px)}25%,45%{opacity:1;transform:translate(0,0)}52%{opacity:1;transform:translate(-3px,-3px) scale(.88)}65%{opacity:1;transform:translate(0,0)}100%{opacity:0;transform:translate(7px,8px)}}
+@keyframes auroraWordClick{0%,42%,100%{text-shadow:none;transform:scale(1)}52%{text-shadow:0 0 18px #27dff1;transform:scale(.98)}65%{text-shadow:0 0 20px #a570ff;transform:scale(1)}}
+@media(max-width:1000px){html body #ydg-site-header .aurora-client{order:0}html body #ydg-site-header .aurora-config-direct{order:0}html body #ydg-site-header #nav-toggle{order:0}html body #ydg-site-header #nav-content{order:5}}
+@media(max-width:700px){html body .aurora-nav{display:grid!important;grid-template-columns:1fr auto;gap:8px 12px}html body .aurora-brand{grid-column:1;grid-row:1}html body #ydg-site-header #nav-toggle{grid-column:2;grid-row:1;justify-self:end}html body #ydg-site-header .aurora-config-direct{grid-column:1;grid-row:2;min-height:34px;padding:8px 16px;font-size:11px}html body #ydg-site-header .aurora-client{grid-column:2;grid-row:2;min-height:34px;margin:0;font-size:10px}html body #ydg-site-header #nav-content{grid-column:1/-1;grid-row:3}html body{padding-top:125px!important}html{scroll-padding-top:135px}}
