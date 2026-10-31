@@ -1,3 +1,44 @@
 body{display:flex;background:#090d17}main{flex:1;min-width:0;max-width:none;padding:28px 24px}.side{width:226px;min-height:100vh;flex-shrink:0;background:#0d1422;border-right:1px solid #263148;padding:28px 14px;display:flex;flex-direction:column;gap:26px}.brand{padding:6px 8px;font-size:16px}.brand span{color:#a481ff}.brand small{display:block;margin-top:7px;font-size:11px}.side nav{display:grid;gap:8px}.side nav a{padding:13px;color:#cad4e8;text-decoration:none;border-radius:10px}.side nav a:hover,.side nav a.active{background:linear-gradient(90deg,#5424a4,#241d43);color:#fff}.side-tip{margin-top:auto;padding:14px;background:#172137;border-radius:12px;font-size:12px;color:#a9b9db;line-height:1.5}.stats{grid-template-columns:repeat(3,minmax(0,1fr))}.stat{min-height:115px}.stat:nth-child(1){background:#142541}.stat:nth-child(2){background:#292219}.stat:nth-child(3){background:#211d3b}.stat:nth-child(4){background:#102c2a}.workflows{display:flex;flex-wrap:wrap;gap:10px;margin:15px 0}.workflows button{padding:10px 14px;background:#222d45;border:1px solid #3b4966}.workflows button:hover{background:#5534a2}.lead-drawer{position:fixed;z-index:5;right:0;top:0;bottom:0;width:min(420px,100vw);overflow-y:auto;box-shadow:-20px 0 40px #0008;background:#101827;border-left:1px solid #374663;padding:22px}.drawer-title{display:flex;justify-content:space-between;align-items:center}.drawer-title h2{margin:0}.drawer-title button{padding:8px 12px}.tabs{display:flex;gap:8px;margin:20px 0}.tabs button{background:#242d45}.tabs button.selected{background:#6945da}.lead-drawer textarea{min-height:270px;resize:vertical}.lead-drawer p{line-height:1.55}.empty-note{padding:20px;text-align:center;color:#adb9d0;border:1px dashed #3b4960;border-radius:12px;margin:14px 0}#rows tr{cursor:pointer}#rows tr:hover{background:#202940}#rows tr td:nth-child(4){font-weight:700}#rows tr td:nth-child(4):has(*){white-space:nowrap}#app{position:relative}.filters{grid-template-columns:2fr repeat(4,minmax(130px,1fr))}.panel h2{font-size:21px}@media(max-width:860px){body{display:block}.side{min-height:auto;width:100%;padding:10px}.side .brand{display:none}.side nav{display:flex;overflow-x:auto}.side nav a{white-space:nowrap;padding:10px}.side-tip{display:none}main{padding:14px}.stats{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:1150px){.filters{grid-template-columns:repeat(2,minmax(0,1fr))}.filters input{grid-column:1/-1}}
 @media(max-width:650px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.filters{grid-template-columns:1fr}.filters input{grid-column:auto}}
+
+
+/* YDG Leads premium skin v2 — presentation only; data and auth untouched */
+:root{--ydg-bg:#080d1b;--ydg-panel:#111b30;--ydg-edge:#2a3955;--ydg-purple:#8657ff;--ydg-cyan:#40d7ee}
+body{background:radial-gradient(ellipse at 65% -20%,#26305c 0%,transparent 43%),var(--ydg-bg);color:#eff4ff}
+.side{background:linear-gradient(180deg,#101b32,#0b1223 75%);border-right-color:#30405e;box-shadow:8px 0 35px #0002}
+.brand{letter-spacing:.035em}.brand b{font-size:17px}.brand span{color:#ac8aff}
+.side nav a{transition:background .18s,transform .18s,border-color .18s;border:1px solid transparent;font-weight:600}
+.side nav a:hover{transform:translateX(3px);border-color:#7057ae66}
+.side nav a.active{background:linear-gradient(100deg,#6234bd,#312653);border-color:#8458e566;box-shadow:0 8px 24px #6b41d22a}
+main{padding:30px clamp(16px,3vw,46px)}
+header.bar{padding-bottom:18px;border-bottom:1px solid #293753;margin-bottom:24px}
+header h1{font-size:clamp(25px,2.6vw,35px);letter-spacing:-.035em}
+.panel{background:linear-gradient(145deg,#141f34,#10192b);border:1px solid var(--ydg-edge);box-shadow:0 12px 34px #0002;border-radius:20px;padding:clamp(16px,2vw,26px)}
+.panel h2{letter-spacing:-.025em}
+.stats{gap:16px}.stat{border:1px solid #40517b70;border-radius:18px;position:relative;overflow:hidden;box-shadow:0 12px 30px #0003;transition:transform .2s,box-shadow .2s}
+.stat:hover{transform:translateY(-3px);box-shadow:0 17px 35px #0005}
+.stat:before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:linear-gradient(90deg,#8c5cff,#39d5f1);opacity:.8}
+.stat:nth-child(1){background:linear-gradient(125deg,#19395c,#162441)}
+.stat:nth-child(2){background:linear-gradient(125deg,#3b3020,#211e23)}
+.stat:nth-child(3){background:linear-gradient(125deg,#312653,#1b1e3a)}
+.stat:nth-child(4){background:linear-gradient(125deg,#16443c,#102b2e)}
+.stat:nth-child(5){background:linear-gradient(125deg,#1b2c49,#131d31)}
+.stat:nth-child(6){background:linear-gradient(125deg,#263450,#17243c)}
+.stat strong{font-size:clamp(28px,2.8vw,38px);letter-spacing:-.045em}
+button{transition:transform .15s,filter .15s,box-shadow .15s;background:linear-gradient(115deg,#7445f5,#925aff);box-shadow:0 5px 16px #5e37d12a}
+button:hover{filter:brightness(1.13)}button:active{transform:scale(.98)}
+button.secondary,.workflows button{background:#263650;box-shadow:none;border:1px solid #405274}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--ydg-cyan);outline-offset:2px}
+input,select,textarea{background:#101a2d;border:1px solid #344665}
+input:focus,select:focus,textarea:focus{border-color:#9b79ff}
+.scroll{border-radius:13px;border:1px solid #2b3a56}
+table thead{background:#1b2941}th{font-size:11px;text-transform:uppercase;letter-spacing:.075em}
+td{border-bottom-color:#2b3950}#rows tr:nth-child(even){background:#ffffff04}#rows tr:hover{background:#263453}
+.workflows button{border-radius:12px}
+.lead-drawer{width:min(520px,100vw);background:linear-gradient(160deg,#16233a,#0e1729);border-left:1px solid #6c58aa;box-shadow:-25px 0 65px #0009}
+.tabs button.selected{background:linear-gradient(110deg,#7446e8,#955aff)}
+dialog{background:#121e32;border-color:#596b90;box-shadow:0 25px 80px #0009}
+@media(max-width:860px){main{padding:16px 12px}.side{border-right:0;border-bottom:1px solid #314160}.side nav a:hover{transform:none}.stats{gap:10px}}
+@media(max-width:650px){.panel{padding:14px}.stat{min-height:100px}.stat strong{font-size:28px}.lead-drawer{padding:16px}.bar{align-items:flex-start}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
