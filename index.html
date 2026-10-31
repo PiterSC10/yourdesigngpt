@@ -7426,42 +7426,11 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
 #configurador .ydg-choice-card.ydg-academy-choice.is-selected::after{background:#f9a8d4;color:#4a123b}
 #configurador .ydg-academy-note{font-size:.73rem;line-height:1.6;padding:11px 13px;margin:12px 0;border:1px solid #f472b655;border-radius:12px;background:#351c344d;color:#fbcfe8}
 #configurador .ydg-academy-note[hidden]{display:none}
-</style></head>
+</style><link rel="stylesheet" href="aurora.css?v=131">
+</head>
 <body class="ydg-promo-on antialiased">
 <!-- V80 · Launch Offer Modal -->
-<div class="ydg-launch-backdrop" id="ydg-launch-backdrop" aria-hidden="true">
-  <div class="ydg-launch-modal" role="dialog" aria-modal="true" aria-labelledby="ydg-launch-title" aria-describedby="ydg-launch-desc">
-    <button class="ydg-launch-close" id="ydg-launch-close" type="button" aria-label="Cerrar oferta">×</button>
-    <div class="ydg-launch-topline">
-      <span class="ydg-launch-flash">⚡</span>
-      <span id="ydg-launch-title" data-lang-key="launch-kicker">OFERTA DE LANZAMIENTO</span>
-      <b data-lang-key="launch-limited">LIMITADA</b>
-    </div>
-    <div class="ydg-launch-main">
-      <div class="ydg-launch-price-block">
-        <small data-lang-key="launch-web-label">TU WEB PROFESIONAL</small>
-        <div class="ydg-launch-price">99<span>€</span></div>
-        <p data-lang-key="launch-maintenance">+ 100 €/año · válida hasta 31/12/2026</p>
-      </div>
-      <div class="ydg-launch-divider"></div>
-      <div class="ydg-launch-code-block">
-        <small data-lang-key="launch-use-code">USA EL CÓDIGO</small>
-        <button class="ydg-launch-code" id="ydg-launch-code" type="button" aria-label="Copiar código promocional">
-          <span>YOURDESIGNGPT</span><i data-lang-key="launch-copy">COPIAR</i>
-        </button>
-        <p id="ydg-launch-desc" data-lang-key="launch-code-help">Añádelo al enviar tu proyecto para aplicar la promoción.</p>
-      </div>
-    </div>
-    <div class="ydg-launch-actions">
-      <button class="ydg-launch-primary" id="ydg-launch-apply" type="button" data-lang-key="launch-cta">QUIERO MI WEB POR 99 €</button>
-      <button class="ydg-launch-secondary" id="ydg-launch-continue" type="button" data-lang-key="launch-continue">Seguir viendo la web</button>
-    </div>
-    <div class="ydg-launch-terms">
-      <span class="ydg-launch-dot"></span>
-      <p data-lang-key="launch-terms">Oferta válida hasta el 31/12/2026. Después: 495 € de desarrollo + 150 €/año. Funciones o integraciones especiales se presupuestan aparte.</p>
-    </div>
-  </div>
-</div>
+
 
 
 <div class="ydg-easter-toast" id="ydg-easter-toast" aria-hidden="true">
@@ -7522,77 +7491,187 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
 </div>
 </div>
 <!-- Header Section -->
-<header id="ydg-site-header" class="bg-[#0d1117] text-white py-4 px-6 shadow-lg fixed w-full z-50 top-0">
-<nav aria-label="Navegación principal" class="container mx-auto flex justify-between items-center flex-wrap">
-<div class="text-2xl font-bold">
-<a class="ydg-header-brand text-white hover:text-gray-300" href="#main-content" id="ydg-brand-home" aria-label="YourDesignGPT · Inicio" >
-<span class="ydg-mini-mark">[YDG]</span>
-</a>
-</div>
-<div class="mobile-weather-mini" aria-label="Tiempo actual en Málaga">
-  <span class="mobile-weather-icon" data-weather-icon aria-hidden="true">
-    <span class="sun-core"></span><span class="cloud-piece"></span>
-  </span>
-  <span class="mobile-weather-temp" data-weather-temp>--°</span>
-</div>
-<div class="block lg:hidden">
-<button class="flex items-center px-3 py-2 border rounded text-gray-200 border-gray-400 hover:text-white hover:border-white" id="nav-toggle">
-<svg class="fill-current h-3 w-3" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v15z"></path></svg>
-</button>
-</div>
-<div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden" id="nav-content">
-<div class="text-sm lg:flex-grow mt-4 lg:mt-0 lg:ml-auto">
-<a class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white nav-link" href="#main-content">Inicio</a>
-<a class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white nav-link" href="#configurador" data-nav-key="quote">Presupuesto</a>
-<a class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white nav-link" href="#portfolio" data-nav-key="projects">Proyectos</a>
-<a class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white nav-link" href="#calidad" data-nav-key="quality">Calidad</a>
-<a class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white nav-link" href="#incluye" data-nav-key="included">Qué incluye</a>
-<a class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white nav-link" href="#como-funciona" data-nav-key="process">Proceso</a>
-<a class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white nav-link" href="#opiniones" data-nav-key="reviews">Reseñas</a>
-<a class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white nav-link" href="#faq" data-nav-key="faq">FAQ</a>
-<a class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white nav-link" href="#capacidades" data-lang-key="nav-capabilities" data-nav-key="capabilities">Capacidades</a>
-<a class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white nav-link ydg-store-nav-link" href="#tienda" data-nav-key="store" data-ydg-store-nav>YDG-STORE</a>
-<a class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white nav-link" href="#links-importantes" data-nav-key="contact">Contacto</a>
-</div>
-<div class="mt-4 lg:mt-0 flex items-center">
-
-<span id="header-weather-desktop-anchor" aria-hidden="true"></span>
-<div class="header-weather" id="header-weather" aria-label="Tiempo actual en Málaga">
-  <span class="header-weather-live"></span>
-  <span class="header-weather-icon" data-weather-icon aria-hidden="true">
-    <span class="sun-core"></span><span class="cloud-piece"></span>
-  </span>
-  <span class="header-weather-main">
-    <span class="header-weather-temp" data-weather-temp>--°</span>
-    <span class="header-weather-desc" data-weather-desc>Cargando…</span>
-  </span>
-  <span class="header-weather-stats">
-    <span class="header-weather-chip"><small>MAX</small><b data-weather-max>--°</b></span>
-    <span class="header-weather-chip"><small>MIN</small><b data-weather-min>--°</b></span>
-    <span class="header-weather-chip"><small>HUM</small><b data-weather-humidity>--%</b></span>
-    <span class="header-weather-chip"><small>UV</small><b data-weather-uv>--</b></span>
-    <span class="header-weather-chip"><small>SENS</small><b data-weather-feels>--°</b></span>
-    <span class="header-weather-chip"><small>VTO</small><b data-weather-wind>-- km/h</b></span>
-    <span class="header-weather-chip"><small>ACT</small><b data-weather-updated>--:--</b></span>
-  </span>
-  <button class="header-weather-refresh" type="button" data-weather-refresh aria-label="Actualizar tiempo" title="Actualizar tiempo">↻</button>
-</div>
-
-<div class="ydg-language-strip" id="ydg-language-strip" role="group" aria-label="Language selector">
+<header id="ydg-site-header" class="aurora-header"><nav aria-label="Navegación principal" class="aurora-nav">
+<a id="ydg-brand-home" class="aurora-brand" href="#main-content" aria-label="YourDesignGPT · Inicio"><img src="android-chrome-512x512-v122.png" width="68" height="68" alt="Logo YDG"><span>YourDesignGPT<small>WEB DESIGN & DEVELOPMENT</small></span></a>
+<a class="aurora-client" href="https://pitersc10.github.io/ydg-client-portal/login.html" data-aurora="client">Área de clientes</a>
+<button id="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-content"><span></span><span></span><span></span></button>
+<div id="nav-content" class="hidden"><div class="aurora-links"><a href="#main-content" data-aurora="home">Inicio</a><a href="#portfolio" data-nav-key="projects">Proyectos</a><a href="#incluye" data-aurora="services">Servicios</a><a href="#configurador" data-aurora="pricing">Precios</a><a href="#links-importantes" data-nav-key="contact">Contacto</a></div><div class="ydg-language-strip" id="ydg-language-strip" role="group" aria-label="Language selector">
 <button class="lang-flag-btn text-gray-400 font-bold hover:text-white flex items-center" id="lang-es" data-lang="es" type="button" aria-label="Español" title="Español"><svg class="lang-flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#AA151B"/><rect y="5" width="30" height="10" fill="#F1BF00"/></svg></button>
 <button class="lang-flag-btn text-gray-600 hover:text-white flex items-center" id="lang-en" data-lang="en" type="button" aria-label="English" title="English"><svg class="lang-flag" viewBox="0 0 60 30" aria-hidden="true"><rect width="60" height="30" fill="#012169"/><path d="M0 0 L60 30 M60 0 L0 30" stroke="#FFF" stroke-width="6"/><path d="M0 0 L60 30 M60 0 L0 30" stroke="#C8102E" stroke-width="3"/><path d="M30 0V30 M0 15H60" stroke="#FFF" stroke-width="10"/><path d="M30 0V30 M0 15H60" stroke="#C8102E" stroke-width="6"/></svg></button>
 <button class="lang-flag-btn text-gray-600 hover:text-white flex items-center" id="lang-fr" data-lang="fr" type="button" aria-label="Français" title="Français"><svg class="lang-flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="10" height="20" fill="#0055A4"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#EF4135"/></svg></button>
 <button class="lang-flag-btn text-gray-600 hover:text-white flex items-center" id="lang-it" data-lang="it" type="button" aria-label="Italiano" title="Italiano"><svg class="lang-flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="10" height="20" fill="#009246"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#CE2B37"/></svg></button>
 <button class="lang-flag-btn text-gray-600 hover:text-white flex items-center" id="lang-de" data-lang="de" type="button" aria-label="Deutsch" title="Deutsch"><svg class="lang-flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="6.67" fill="#000"/><rect y="6.67" width="30" height="6.67" fill="#DD0000"/><rect y="13.34" width="30" height="6.66" fill="#FFCE00"/></svg></button>
-</div>
-</div>
-</div>
-</nav>
-<div class="ydg-brand-strip"><a class="ydg-signature" id="ydg-signature" href="#main-content" aria-label="YourDesignGPT · Volver al inicio"><svg class="ydg-monitor" viewBox="0 0 52 46" fill="none" aria-hidden="true"><defs><linearGradient id="ydg-monitor-gradient"><stop stop-color="#22d3ee"/><stop offset="1" stop-color="#c084fc"/></linearGradient></defs><rect x="3" y="3" width="46" height="31" rx="6" stroke="url(#ydg-monitor-gradient)" stroke-width="3"/><path d="m20 13-7 6 7 5m12-11 7 6-7 5m-4-13-4 16M26 35v7m-11 1h22" stroke="url(#ydg-monitor-gradient)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ydg-wordmark">YourDesignGPT</span><span class="ydg-click-ring" aria-hidden="true"></span><svg class="ydg-click-cursor" viewBox="0 0 25 30" aria-hidden="true"><path d="M3 2 22 17l-9 1 4 9-5 2-4-10-6 6Z" fill="currentColor" stroke="#07111f" stroke-width="1.4"/></svg></a></div>
-</header>
+</div></div></nav></header>
 <main id="main-content">
+<section id="aurora-home" aria-labelledby="aurora-title"><div class="aurora-hero-grid"><div class="aurora-copy"><p class="aurora-eyebrow" data-aurora="eyebrow">DISEÑO WEB PROFESIONAL · MÁLAGA</p><h1 id="aurora-title"><span data-aurora="headline">Una web que no pasa</span> <em data-aurora="highlight">desapercibida.</em></h1><p class="aurora-lead" data-aurora="lead">Diseño y desarrollo web para negocios que quieren destacar. Tu marca, con su mejor versión digital.</p><div class="aurora-offer"><p class="aurora-price"><strong>99 €</strong><span>+</span><strong>100 €<small data-aurora="year">/año</small></strong></p><p class="aurora-price-label" data-aurora="priceLabel">de creación + servicio anual</p><p class="aurora-expiry" data-aurora="expiry">Promoción hasta el 31/12/2026 · Primer año: 199 €</p><div class="aurora-actions"><a class="aurora-primary" href="#configurador"><span data-aurora="cta">Quiero mi web</span> ↗</a><a class="aurora-secondary" href="#portfolio" data-aurora="projects">Ver proyectos</a></div><p class="aurora-terms" data-aurora="terms">Dominio, hosting, SSL, mantenimiento y hasta 3 ajustes menores al año. Funciones avanzadas, aparte.</p></div></div><figure class="aurora-visual"><img src="aurora-hero.webp" width="1600" height="800" alt="Ejemplo ilustrativo de una web de arquitectura en ordenador y móvil" fetchpriority="high"><figcaption data-aurora="example">Ejemplo de diseño · Tu web se adapta a tu negocio</figcaption></figure></div>
+<div class="aurora-benefits"><a href="#incluye" class="aurora-benefit"><span class="aurora-icon" aria-hidden="true">✦</span><div><h2 data-aurora="custom">Diseño a tu medida</h2><p data-aurora="customDesc">Tu identidad, tus servicios y una imagen que conecta con tus clientes.</p></div></a><a href="#portfolio" class="aurora-benefit"><span class="aurora-icon" aria-hidden="true">▣</span><div><h2 data-aurora="mobile">Tu web, también en móvil</h2><p data-aurora="mobileDesc">Una experiencia cuidada en ordenador, tablet y teléfono.</p></div></a><a href="https://pitersc10.github.io/ydg-client-portal/login.html" class="aurora-benefit"><span class="aurora-icon" aria-hidden="true">◎</span><div><h2 data-aurora="client">Área de clientes</h2><p data-aurora="clientDesc">Accede a tu espacio de cliente desde un único lugar.</p></div></a></div></section>
+
 <!-- Hero Section -->
 
+
+
+
+<section id="servicios-web" aria-labelledby="servicios-web-title" style="padding:48px 20px;background:#0b1422;color:#d6e2f2"><div style="max-width:1080px;margin:auto"><p style="color:#5eead4;font-weight:800;letter-spacing:.08em">YOURDESIGNGPT · PEDRO SC</p><h2 id="servicios-web-title" style="font-size:clamp(1.9rem,4vw,2.8rem);line-height:1.2;font-weight:900;color:#fff;margin:12px 0">Diseño web en Málaga para negocios y profesionales</h2><p style="max-width:800px;margin:16px 0">Creamos páginas de presentación para negocios, autónomos y marcas personales. Define tu proyecto con Pedro SC: desde una landing económica hasta una web con funciones adicionales presupuestadas según su alcance. Atención online para Málaga y proyectos en España.</p><p style="margin:16px 0">Promoción de lanzamiento: <strong>99 € de desarrollo + 100 €/año</strong> para dominio, hosting, mantenimiento y hasta 3 ajustes menores. Código YOURDESIGNGPT, hasta el 31/12/2026. Las funciones avanzadas se valoran aparte.</p><nav aria-label="Servicios de diseño web" style="display:flex;gap:14px;flex-wrap:wrap;margin-top:22px"><a href="/diseno-web-economico.html" style="color:#67e8f9;text-decoration:underline;padding:12px 16px;border:1px solid #28536a;border-radius:14px">Diseño web económico →</a><a href="/web-en-72-horas.html" style="color:#67e8f9;text-decoration:underline;padding:12px 16px;border:1px solid #28536a;border-radius:14px">Web en 72 horas: condiciones →</a><a href="/diseno-web-personal.html" style="color:#67e8f9;text-decoration:underline;padding:12px 16px;border:1px solid #28536a;border-radius:14px">Web personal y portfolio →</a></nav><p style="margin-top:20px"><a href="#configurador" style="color:#5eead4;text-decoration:underline">Prepara tu presupuesto</a> · <a href="#capacidades" style="color:#67e8f9;text-decoration:underline">Conoce a Pedro SC</a></p></div></section>
+<section aria-labelledby="portfolio-title" class="py-20 bg-[#0d1117] px-4" id="portfolio">
+<div class="container mx-auto section-box">
+<div class="text-center mb-12">
+<p class="text-teal-400 font-bold uppercase tracking-[0.18em] text-sm mb-3" data-lang-key="portfolio-eyebrow">Portfolio</p>
+<h2 class="text-4xl md:text-5xl font-extrabold gradient-text mb-5" data-lang-key="portfolio-title" id="portfolio-title">Nuestros trabajos realizados</h2>
+<p class="text-lg text-gray-300 max-w-3xl mx-auto" data-lang-key="portfolio-subtitle">Diseños creados para mostrar cómo adaptamos cada web al sector, la identidad visual y los objetivos de cada negocio.</p>
+</div>
+<div class="portfolio-swipe-hint" id="portfolio-swipe-hint" aria-hidden="true">
+<span class="swipe-arrow">←</span>
+<span data-lang-key="portfolio-swipe-hint">Desliza para ver más</span>
+<span class="swipe-arrow">→</span>
+</div>
+<div class="portfolio-grid" id="portfolio-mobile-carousel">
+<article class="portfolio-card" data-ydg-preview="RADIOSAS ACADEMY · DEMO LIMITADA">
+<a aria-label="Ver demo limitada de RadioSAS Academy" class="portfolio-cover" href="radiosas-demo/">
+<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small>yourdesigngpt / demo limitada</small></span><span class="portfolio-badge">RadioSAS Academy</span><img alt="RadioSAS Academy: plataforma de test con avatar genérico Aquí tu foto, sin datos personales" height="675" loading="lazy" src="radiosas-demo/portada.svg" width="1200"></a>
+<div class="portfolio-body"><div class="portfolio-sector">EdTech · Plataforma de preparación de exámenes</div><h3 class="portfolio-title">RadioSAS Academy</h3><p class="portfolio-description">Academia de test personalizable con corrección y estadísticas locales. Demo pública con solo 5 enunciados de un banco de referencia de 1.000; exámenes, soluciones y banco completo no accesibles.</p><div class="portfolio-tech"><span>Test y simulacros</span><span>Progreso local</span><span>Demo limitada</span></div><a class="portfolio-link" href="radiosas-demo/">Ver demostración limitada →</a><div class="ydg-project-estimate"><button type="button" class="ydg-estimate-toggle" aria-expanded="false">Ver valoración estimada</button><span class="ydg-estimate-detail" hidden>Estimación orientativa de un desarrollo a medida de alcance similar: 1.500–3.000 €. No es un precio pagado ni una tasación. Adaptación de la plataforma existente: 99 € de creación + 100 € del primer año (199 € en total). Ambos pagos son necesarios para publicar. Renovación desde el segundo año: 100 €/año; puedes cancelarla y conservar el servicio durante el periodo abonado. Nuevas funciones y validación académica del banco, aparte.</span></div></div></article>
+<article class="portfolio-card" data-ydg-preview="DEA HABBO ES · PROYECTO REAL">
+<a aria-label="Ver proyecto DEA HABBO ES" class="portfolio-cover" href="https://dea-habbo-es.vercel.app/" target="_blank" rel="noopener noreferrer">
+<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small>yourdesigngpt / proyecto real</small></span>
+<span class="portfolio-badge">DEA HABBO ES</span>
+<img alt="Imagen ilustrativa del sector tecnológico del proyecto DEA HABBO ES" height="675" loading="lazy" src="dea-habbo-es-portfolio-1200x675.webp" width="1200"/>
+</a>
+<div class="portfolio-body">
+<div class="portfolio-sector">Agencia virtual · Plataforma de gestión</div>
+<h3 class="portfolio-title">DEA HABBO ES</h3>
+<p class="portfolio-description">Plataforma con información pública, área privada, integración de Discord, registro de miembros, roles y gestión administrativa.</p>
+<div class="portfolio-tech"><span>Discord OAuth</span><span>Intranet</span><span>Gestión</span></div>
+<a class="portfolio-link" href="https://dea-habbo-es.vercel.app/" target="_blank" rel="noopener noreferrer">Ver proyecto →</a>
+<div class="ydg-project-estimate"><button type="button" class="ydg-estimate-toggle" aria-expanded="false">Ver valoración estimada</button><span class="ydg-estimate-detail" hidden>Valoración orientativa de desarrollo: 5.000–9.000 €. No es un precio de venta.</span></div>
+</div></article>
+<article class="portfolio-card" data-ydg-preview="HABBOHOTEL · PROYECTO REAL">
+<a aria-label="Ver proyecto HabboHotel · 10PEDRO" class="portfolio-cover" href="https://habbohotel-10pedro.vercel.app/" target="_blank" rel="noopener noreferrer">
+<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small>yourdesigngpt / proyecto real</small></span>
+<span class="portfolio-badge">HabboHotel · 10PEDRO</span>
+<img alt="Imagen ilustrativa del sector tecnológico del proyecto HabboHotel · 10PEDRO" height="675" loading="lazy" src="habbohotel-portfolio-1200x675.webp" width="1200"/>
+</a>
+<div class="portfolio-body">
+<div class="portfolio-sector">Comunidad gaming · Panel operativo</div>
+<h3 class="portfolio-title">HabboHotel · 10PEDRO</h3>
+<p class="portfolio-description">Plataforma de consulta interna con acceso, rangos, reclutamiento, formación, ascensos y procedimientos.</p>
+<div class="portfolio-tech"><span>Panel interno</span><span>Rangos</span><span>Responsive</span></div>
+<a class="portfolio-link" href="https://habbohotel-10pedro.vercel.app/" target="_blank" rel="noopener noreferrer">Ver proyecto →</a>
+<div class="ydg-project-estimate"><button type="button" class="ydg-estimate-toggle" aria-expanded="false">Ver valoración estimada</button><span class="ydg-estimate-detail" hidden>Valoración orientativa de desarrollo: 1.500–2.500 €. No es un precio de venta.</span></div>
+</div></article>
+
+
+<article class="portfolio-card" data-ydg-preview="JET SKI · RESPONSIVE · DEMO">
+<a aria-label="Ver proyecto Ibiza Jet Experience" class="portfolio-cover" href="ibiza-jetski.html">
+<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small data-lang-key="portfolio-browser-label">yourdesigngpt / proyecto</small></span>
+<span class="portfolio-badge">Ibiza Jet Experience</span>
+
+
+<img alt="Ibiza Jet Experience · web premium de motos de agua" height="720" loading="lazy" src="jetski-hero-final.webp" width="1200"/>
+</a>
+<div class="portfolio-body">
+<div class="portfolio-sector" data-lang-key="portfolio-jetski-sector">Jet Ski · Experiencias premium</div>
+<h3 class="portfolio-title" data-lang-key="portfolio-jetski-title">Ibiza Jet Experience</h3>
+<p class="portfolio-description" data-lang-key="portfolio-jetski-desc">Web comercial para motos de agua en Ibiza con experiencias, rutas, galería, seguridad, contacto y sistema preparado para reservas.</p>
+<div class="portfolio-tech"><span data-lang-key="tag-bookings">Reservas</span><span>Responsive</span><span data-lang-key="tag-routes">Rutas</span></div>
+<a class="portfolio-link" href="ibiza-jetski.html" data-lang-key="portfolio-case">Ver web →</a>
+</div>
+</article>
+<article class="portfolio-card" data-ydg-preview="RESTAURANTE · RESPONSIVE · DEMO">
+<a aria-label="Ver proyecto Restaurante Áurea Málaga" class="portfolio-cover" href="restaurante.html">
+<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small data-lang-key="portfolio-browser-label">yourdesigngpt / proyecto</small></span>
+<span class="portfolio-badge" data-lang-key="portfolio-restaurant-badge">Áurea Málaga</span>
+<img alt="Vista del proyecto web Restaurante Áurea Málaga" height="675" loading="lazy" src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&amp;fit=crop&amp;w=1200&amp;q=82" width="1200"/>
+</a>
+<div class="portfolio-body">
+<div class="portfolio-sector" data-lang-key="portfolio-restaurant-sector">Restauración · Web premium</div>
+<h3 class="portfolio-title">Áurea Málaga</h3>
+<p class="portfolio-description" data-lang-key="portfolio-restaurant-desc">Web gastronómica elegante con carta, especialidades, galería, reservas, contacto y una experiencia visual orientada a conversión.</p>
+<div class="portfolio-tech"><span>Carta digital</span><span>Reservas</span><span>Galería</span></div>
+<a class="portfolio-link" href="restaurante.html" data-lang-key="portfolio-case">Ver web →</a>
+</div>
+</article>
+<article class="portfolio-card" data-ydg-preview="ELECTRICIDAD · RESPONSIVE · DEMO">
+<a aria-label="Ver proyecto Voltio Málaga" class="portfolio-cover" href="electricista.html">
+<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small data-lang-key="portfolio-browser-label">yourdesigngpt / proyecto</small></span>
+<span class="portfolio-badge" data-lang-key="portfolio-electrician-badge">Voltio Málaga</span>
+<img alt="Vista del proyecto web Voltio Málaga" height="675" loading="lazy" src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&amp;fit=crop&amp;w=1200&amp;q=82" width="1200"/>
+</a>
+<div class="portfolio-body">
+<div class="portfolio-sector" data-lang-key="portfolio-electrician-sector">Electricidad · Servicios locales</div>
+<h3 class="portfolio-title">Voltio Málaga</h3>
+<p class="portfolio-description" data-lang-key="portfolio-electrician-desc">Diseño profesional enfocado a averías, urgencias, instalaciones y captación local mediante llamadas, formularios y WhatsApp.</p>
+<div class="portfolio-tech"><span>Servicios</span><span>Contacto</span><span>Responsive</span></div>
+<a class="portfolio-link" href="electricista.html" data-lang-key="portfolio-case">Ver web →</a>
+</div>
+</article>
+<article class="portfolio-card" data-ydg-preview="FONTANERÍA · RESPONSIVE · DEMO">
+<a aria-label="Ver proyecto AquaFix Málaga" class="portfolio-cover" href="fontanero.html">
+<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small data-lang-key="portfolio-browser-label">yourdesigngpt / proyecto</small></span>
+<span class="portfolio-badge" data-lang-key="portfolio-plumber-badge">AquaFix Málaga</span>
+<img alt="Vista del proyecto web AquaFix Málaga" height="675" loading="lazy" src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&amp;fit=crop&amp;w=1200&amp;q=82" width="1200"/>
+</a>
+<div class="portfolio-body">
+<div class="portfolio-sector" data-lang-key="portfolio-plumber-sector">Fontanería · Captación local</div>
+<h3 class="portfolio-title">AquaFix Málaga</h3>
+<p class="portfolio-description" data-lang-key="portfolio-plumber-desc">Web de servicios con urgencias, fugas, atascos, zonas de trabajo, contacto inmediato y estructura preparada para SEO local.</p>
+<div class="portfolio-tech"><span>Urgencias</span><span>Contacto</span><span>Responsive</span></div>
+<a class="portfolio-link" href="fontanero.html" data-lang-key="portfolio-case">Ver web →</a>
+</div>
+</article>
+<article class="portfolio-card" data-ydg-preview="ESTÉTICA · RESPONSIVE · DEMO">
+<a aria-label="Ver proyecto Lúmina Estética Málaga" class="portfolio-cover" href="estetica.html">
+<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small data-lang-key="portfolio-browser-label">yourdesigngpt / proyecto</small></span>
+<span class="portfolio-badge" data-lang-key="portfolio-beauty-badge">Lúmina Estética Málaga</span>
+<img alt="Vista del proyecto web Lúmina Estética Málaga" height="675" loading="lazy" src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&amp;fit=crop&amp;w=1200&amp;q=82" width="1200"/>
+</a>
+<div class="portfolio-body">
+<div class="portfolio-sector" data-lang-key="portfolio-beauty-sector">Estética · Imagen premium</div>
+<h3 class="portfolio-title">Lúmina Estética Málaga</h3>
+<p class="portfolio-description" data-lang-key="portfolio-beauty-desc">Experiencia visual sofisticada para tratamientos, packs, galería, reservas y confianza de marca en un centro de estética.</p>
+<div class="portfolio-tech"><span>Tratamientos</span><span>Reservas</span><span>Galería</span></div>
+<a class="portfolio-link" href="estetica.html" data-lang-key="portfolio-case">Ver web →</a>
+</div>
+</article>
+<article class="portfolio-card" data-ydg-preview="MARCA PERSONAL · RESPONSIVE · DEMO">
+<a aria-label="Ver proyecto Web Personal" class="portfolio-cover" href="webpersonal.html">
+<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small data-lang-key="portfolio-browser-label">yourdesigngpt / proyecto</small></span>
+<span class="portfolio-badge" data-lang-key="portfolio-personal-badge">Web Personal</span>
+<img alt="Vista del proyecto de web personal premium" height="675" loading="lazy" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&amp;fit=crop&amp;w=1200&amp;q=82" width="1200"/>
+</a>
+<div class="portfolio-body">
+<div class="portfolio-sector" data-lang-key="portfolio-personal-sector">Marca personal · Portfolio</div>
+<h3 class="portfolio-title" data-lang-key="portfolio-personal-title">Web Personal</h3>
+<p class="portfolio-description" data-lang-key="portfolio-personal-desc">Carta de presentación digital con perfil, proyectos, experiencia, blog, galería, redes sociales y contacto en una sola web.</p>
+<div class="portfolio-tech"><span>Portfolio</span><span>Contacto</span><span>Responsive</span></div>
+<a class="portfolio-link" href="webpersonal.html" data-lang-key="portfolio-case">Ver web →</a>
+</div>
+</article>
+<article class="portfolio-card" data-ydg-preview="HOTEL · RESPONSIVE · DEMO">
+<a aria-label="Ver proyecto Hotel Málaga Central" class="portfolio-cover" href="hotelmalaga.html">
+<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small data-lang-key="portfolio-browser-label">yourdesigngpt / proyecto</small></span>
+<span class="portfolio-badge" data-lang-key="portfolio-hotel-badge">Hotel Málaga</span>
+<img alt="Vista del proyecto web Hotel Málaga Central" height="675" loading="lazy" src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&amp;fit=crop&amp;w=1200&amp;q=82" width="1200"/>
+</a>
+<div class="portfolio-body">
+<div class="portfolio-sector" data-lang-key="portfolio-hotel-sector">Hotel · Web dossier</div>
+<h3 class="portfolio-title" data-lang-key="portfolio-hotel-title">Hotel Málaga Central</h3>
+<p class="portfolio-description" data-lang-key="portfolio-hotel-desc">Web oficial tipo dossier para presentar habitaciones, servicios, ubicación y conducir al huésped al motor real de reservas del hotel.</p>
+<div class="portfolio-tech"><span>Habitaciones</span><span>Reservas</span><span>Responsive</span></div>
+<a class="portfolio-link" href="hotelmalaga.html" data-lang-key="portfolio-case">Ver web →</a>
+</div>
+</article>
+<article class="portfolio-card portfolio-next-card">
+  <div class="portfolio-next-inner">
+    <span class="portfolio-next-code">&lt;/&gt;</span>
+    <small data-lang-key="portfolio-next-label">SIGUIENTE PROYECTO</small>
+    <h3 data-lang-key="portfolio-next-title">Tu web podría estar aquí</h3>
+    <p data-lang-key="portfolio-next-desc">Convierte tu negocio en el próximo proyecto de YourDesignGPT.</p>
+    <a class="gradient-button portfolio-next-button" href="#configurador" data-lang-key="portfolio-next-button">Crear mi web →</a>
+  </div>
+</article>
+</div>
+<p class="portfolio-note" data-lang-key="portfolio-note">Este portfolio combina demostraciones de diseño con proyectos reales. Las demostraciones usan datos ficticios; las valoraciones de proyectos reales son orientativas.</p>
+</div>
+</section>
 
 <section id="configurador" class="ydg-config-v108" aria-labelledby="config-title">
   <div class="ydg-config-shell">
@@ -7836,190 +7915,7 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
       </div>
     </aside>
   </div>
-</section>
-<section id="hero-section" class="ydg-compact-identity-strip" aria-label="YourDesignGPT · Estado del proyecto">
-  <div class="ydg-compact-identity-inner">
-    <div class="ydg-compact-brand">
-      <span class="ydg-compact-brand-dot" aria-hidden="true"></span>
-      <strong data-lang-key="hero-eyebrow">YourDesignGPT · Diseño Web</strong>
-    </div>
-    <div class="ydg-compact-separator" aria-hidden="true"></div>
-    <div class="ydg-compact-pipeline">
-      <span class="hero-status-dot" aria-hidden="true"></span>
-      <span data-lang-key="compact-pipeline">DISEÑO / DESARROLLO / PUBLICACIÓN</span>
-    </div>
-    <div class="ydg-compact-separator" aria-hidden="true"></div>
-    <div class="ydg-compact-capacity">
-      <span class="capacity-pulse" aria-hidden="true"></span>
-      <small data-lang-key="capacity-month">PROMOCIÓN · HASTA 31/12/2026</small>
-      <strong data-lang-key="capacity-slots">2 plazas disponibles</strong>
-    </div>
-    <a class="ydg-compact-cta" href="#configurador" data-lang-key="capacity-cta">Consultar proyecto →</a>
-  </div>
-</section>
-<section id="servicios-web" aria-labelledby="servicios-web-title" style="padding:48px 20px;background:#0b1422;color:#d6e2f2"><div style="max-width:1080px;margin:auto"><p style="color:#5eead4;font-weight:800;letter-spacing:.08em">YOURDESIGNGPT · PEDRO SC</p><h1 id="servicios-web-title" style="font-size:clamp(1.9rem,4vw,2.8rem);line-height:1.2;font-weight:900;color:#fff;margin:12px 0">Diseño web en Málaga para negocios y profesionales</h1><p style="max-width:800px;margin:16px 0">Creamos páginas de presentación para negocios, autónomos y marcas personales. Define tu proyecto con Pedro SC: desde una landing económica hasta una web con funciones adicionales presupuestadas según su alcance. Atención online para Málaga y proyectos en España.</p><p style="margin:16px 0">Promoción de lanzamiento: <strong>99 € de desarrollo + 100 €/año</strong> para dominio, hosting, mantenimiento y hasta 3 ajustes menores. Código YOURDESIGNGPT, hasta el 31/12/2026. Las funciones avanzadas se valoran aparte.</p><nav aria-label="Servicios de diseño web" style="display:flex;gap:14px;flex-wrap:wrap;margin-top:22px"><a href="/diseno-web-economico.html" style="color:#67e8f9;text-decoration:underline;padding:12px 16px;border:1px solid #28536a;border-radius:14px">Diseño web económico →</a><a href="/web-en-72-horas.html" style="color:#67e8f9;text-decoration:underline;padding:12px 16px;border:1px solid #28536a;border-radius:14px">Web en 72 horas: condiciones →</a><a href="/diseno-web-personal.html" style="color:#67e8f9;text-decoration:underline;padding:12px 16px;border:1px solid #28536a;border-radius:14px">Web personal y portfolio →</a></nav><p style="margin-top:20px"><a href="#configurador" style="color:#5eead4;text-decoration:underline">Prepara tu presupuesto</a> · <a href="#capacidades" style="color:#67e8f9;text-decoration:underline">Conoce a Pedro SC</a></p></div></section>
-<section aria-labelledby="portfolio-title" class="py-20 bg-[#0d1117] px-4" id="portfolio">
-<div class="container mx-auto section-box">
-<div class="text-center mb-12">
-<p class="text-teal-400 font-bold uppercase tracking-[0.18em] text-sm mb-3" data-lang-key="portfolio-eyebrow">Portfolio</p>
-<h2 class="text-4xl md:text-5xl font-extrabold gradient-text mb-5" data-lang-key="portfolio-title" id="portfolio-title">Nuestros trabajos realizados</h2>
-<p class="text-lg text-gray-300 max-w-3xl mx-auto" data-lang-key="portfolio-subtitle">Diseños creados para mostrar cómo adaptamos cada web al sector, la identidad visual y los objetivos de cada negocio.</p>
-</div>
-<div class="portfolio-swipe-hint" id="portfolio-swipe-hint" aria-hidden="true">
-<span class="swipe-arrow">←</span>
-<span data-lang-key="portfolio-swipe-hint">Desliza para ver más</span>
-<span class="swipe-arrow">→</span>
-</div>
-<div class="portfolio-grid" id="portfolio-mobile-carousel">
-<article class="portfolio-card" data-ydg-preview="RADIOSAS ACADEMY · DEMO LIMITADA">
-<a aria-label="Ver demo limitada de RadioSAS Academy" class="portfolio-cover" href="radiosas-demo/">
-<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small>yourdesigngpt / demo limitada</small></span><span class="portfolio-badge">RadioSAS Academy</span><img alt="RadioSAS Academy: plataforma de test con avatar genérico Aquí tu foto, sin datos personales" height="675" loading="lazy" src="radiosas-demo/portada.svg" width="1200"></a>
-<div class="portfolio-body"><div class="portfolio-sector">EdTech · Plataforma de preparación de exámenes</div><h3 class="portfolio-title">RadioSAS Academy</h3><p class="portfolio-description">Academia de test personalizable con corrección y estadísticas locales. Demo pública con solo 5 enunciados de un banco de referencia de 1.000; exámenes, soluciones y banco completo no accesibles.</p><div class="portfolio-tech"><span>Test y simulacros</span><span>Progreso local</span><span>Demo limitada</span></div><a class="portfolio-link" href="radiosas-demo/">Ver demostración limitada →</a><div class="ydg-project-estimate"><button type="button" class="ydg-estimate-toggle" aria-expanded="false">Ver valoración estimada</button><span class="ydg-estimate-detail" hidden>Estimación orientativa de un desarrollo a medida de alcance similar: 1.500–3.000 €. No es un precio pagado ni una tasación. Adaptación de la plataforma existente: 99 € de creación + 100 € del primer año (199 € en total). Ambos pagos son necesarios para publicar. Renovación desde el segundo año: 100 €/año; puedes cancelarla y conservar el servicio durante el periodo abonado. Nuevas funciones y validación académica del banco, aparte.</span></div></div></article>
-<article class="portfolio-card" data-ydg-preview="DEA HABBO ES · PROYECTO REAL">
-<a aria-label="Ver proyecto DEA HABBO ES" class="portfolio-cover" href="https://dea-habbo-es.vercel.app/" target="_blank" rel="noopener noreferrer">
-<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small>yourdesigngpt / proyecto real</small></span>
-<span class="portfolio-badge">DEA HABBO ES</span>
-<img alt="Imagen ilustrativa del sector tecnológico del proyecto DEA HABBO ES" height="675" loading="lazy" src="dea-habbo-es-portfolio-1200x675.webp" width="1200"/>
-</a>
-<div class="portfolio-body">
-<div class="portfolio-sector">Agencia virtual · Plataforma de gestión</div>
-<h3 class="portfolio-title">DEA HABBO ES</h3>
-<p class="portfolio-description">Plataforma con información pública, área privada, integración de Discord, registro de miembros, roles y gestión administrativa.</p>
-<div class="portfolio-tech"><span>Discord OAuth</span><span>Intranet</span><span>Gestión</span></div>
-<a class="portfolio-link" href="https://dea-habbo-es.vercel.app/" target="_blank" rel="noopener noreferrer">Ver proyecto →</a>
-<div class="ydg-project-estimate"><button type="button" class="ydg-estimate-toggle" aria-expanded="false">Ver valoración estimada</button><span class="ydg-estimate-detail" hidden>Valoración orientativa de desarrollo: 5.000–9.000 €. No es un precio de venta.</span></div>
-</div></article>
-<article class="portfolio-card" data-ydg-preview="HABBOHOTEL · PROYECTO REAL">
-<a aria-label="Ver proyecto HabboHotel · 10PEDRO" class="portfolio-cover" href="https://habbohotel-10pedro.vercel.app/" target="_blank" rel="noopener noreferrer">
-<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small>yourdesigngpt / proyecto real</small></span>
-<span class="portfolio-badge">HabboHotel · 10PEDRO</span>
-<img alt="Imagen ilustrativa del sector tecnológico del proyecto HabboHotel · 10PEDRO" height="675" loading="lazy" src="habbohotel-portfolio-1200x675.webp" width="1200"/>
-</a>
-<div class="portfolio-body">
-<div class="portfolio-sector">Comunidad gaming · Panel operativo</div>
-<h3 class="portfolio-title">HabboHotel · 10PEDRO</h3>
-<p class="portfolio-description">Plataforma de consulta interna con acceso, rangos, reclutamiento, formación, ascensos y procedimientos.</p>
-<div class="portfolio-tech"><span>Panel interno</span><span>Rangos</span><span>Responsive</span></div>
-<a class="portfolio-link" href="https://habbohotel-10pedro.vercel.app/" target="_blank" rel="noopener noreferrer">Ver proyecto →</a>
-<div class="ydg-project-estimate"><button type="button" class="ydg-estimate-toggle" aria-expanded="false">Ver valoración estimada</button><span class="ydg-estimate-detail" hidden>Valoración orientativa de desarrollo: 1.500–2.500 €. No es un precio de venta.</span></div>
-</div></article>
-
-
-<article class="portfolio-card" data-ydg-preview="JET SKI · RESPONSIVE · DEMO">
-<a aria-label="Ver proyecto Ibiza Jet Experience" class="portfolio-cover" href="ibiza-jetski.html">
-<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small data-lang-key="portfolio-browser-label">yourdesigngpt / proyecto</small></span>
-<span class="portfolio-badge">Ibiza Jet Experience</span>
-
-
-<img alt="Ibiza Jet Experience · web premium de motos de agua" height="720" loading="lazy" src="jetski-hero-final.webp" width="1200"/>
-</a>
-<div class="portfolio-body">
-<div class="portfolio-sector" data-lang-key="portfolio-jetski-sector">Jet Ski · Experiencias premium</div>
-<h3 class="portfolio-title" data-lang-key="portfolio-jetski-title">Ibiza Jet Experience</h3>
-<p class="portfolio-description" data-lang-key="portfolio-jetski-desc">Web comercial para motos de agua en Ibiza con experiencias, rutas, galería, seguridad, contacto y sistema preparado para reservas.</p>
-<div class="portfolio-tech"><span data-lang-key="tag-bookings">Reservas</span><span>Responsive</span><span data-lang-key="tag-routes">Rutas</span></div>
-<a class="portfolio-link" href="ibiza-jetski.html" data-lang-key="portfolio-case">Ver web →</a>
-</div>
-</article>
-<article class="portfolio-card" data-ydg-preview="RESTAURANTE · RESPONSIVE · DEMO">
-<a aria-label="Ver proyecto Restaurante Áurea Málaga" class="portfolio-cover" href="restaurante.html">
-<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small data-lang-key="portfolio-browser-label">yourdesigngpt / proyecto</small></span>
-<span class="portfolio-badge" data-lang-key="portfolio-restaurant-badge">Áurea Málaga</span>
-<img alt="Vista del proyecto web Restaurante Áurea Málaga" height="675" loading="lazy" src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&amp;fit=crop&amp;w=1200&amp;q=82" width="1200"/>
-</a>
-<div class="portfolio-body">
-<div class="portfolio-sector" data-lang-key="portfolio-restaurant-sector">Restauración · Web premium</div>
-<h3 class="portfolio-title">Áurea Málaga</h3>
-<p class="portfolio-description" data-lang-key="portfolio-restaurant-desc">Web gastronómica elegante con carta, especialidades, galería, reservas, contacto y una experiencia visual orientada a conversión.</p>
-<div class="portfolio-tech"><span>Carta digital</span><span>Reservas</span><span>Galería</span></div>
-<a class="portfolio-link" href="restaurante.html" data-lang-key="portfolio-case">Ver web →</a>
-</div>
-</article>
-<article class="portfolio-card" data-ydg-preview="ELECTRICIDAD · RESPONSIVE · DEMO">
-<a aria-label="Ver proyecto Voltio Málaga" class="portfolio-cover" href="electricista.html">
-<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small data-lang-key="portfolio-browser-label">yourdesigngpt / proyecto</small></span>
-<span class="portfolio-badge" data-lang-key="portfolio-electrician-badge">Voltio Málaga</span>
-<img alt="Vista del proyecto web Voltio Málaga" height="675" loading="lazy" src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&amp;fit=crop&amp;w=1200&amp;q=82" width="1200"/>
-</a>
-<div class="portfolio-body">
-<div class="portfolio-sector" data-lang-key="portfolio-electrician-sector">Electricidad · Servicios locales</div>
-<h3 class="portfolio-title">Voltio Málaga</h3>
-<p class="portfolio-description" data-lang-key="portfolio-electrician-desc">Diseño profesional enfocado a averías, urgencias, instalaciones y captación local mediante llamadas, formularios y WhatsApp.</p>
-<div class="portfolio-tech"><span>Servicios</span><span>Contacto</span><span>Responsive</span></div>
-<a class="portfolio-link" href="electricista.html" data-lang-key="portfolio-case">Ver web →</a>
-</div>
-</article>
-<article class="portfolio-card" data-ydg-preview="FONTANERÍA · RESPONSIVE · DEMO">
-<a aria-label="Ver proyecto AquaFix Málaga" class="portfolio-cover" href="fontanero.html">
-<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small data-lang-key="portfolio-browser-label">yourdesigngpt / proyecto</small></span>
-<span class="portfolio-badge" data-lang-key="portfolio-plumber-badge">AquaFix Málaga</span>
-<img alt="Vista del proyecto web AquaFix Málaga" height="675" loading="lazy" src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&amp;fit=crop&amp;w=1200&amp;q=82" width="1200"/>
-</a>
-<div class="portfolio-body">
-<div class="portfolio-sector" data-lang-key="portfolio-plumber-sector">Fontanería · Captación local</div>
-<h3 class="portfolio-title">AquaFix Málaga</h3>
-<p class="portfolio-description" data-lang-key="portfolio-plumber-desc">Web de servicios con urgencias, fugas, atascos, zonas de trabajo, contacto inmediato y estructura preparada para SEO local.</p>
-<div class="portfolio-tech"><span>Urgencias</span><span>Contacto</span><span>Responsive</span></div>
-<a class="portfolio-link" href="fontanero.html" data-lang-key="portfolio-case">Ver web →</a>
-</div>
-</article>
-<article class="portfolio-card" data-ydg-preview="ESTÉTICA · RESPONSIVE · DEMO">
-<a aria-label="Ver proyecto Lúmina Estética Málaga" class="portfolio-cover" href="estetica.html">
-<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small data-lang-key="portfolio-browser-label">yourdesigngpt / proyecto</small></span>
-<span class="portfolio-badge" data-lang-key="portfolio-beauty-badge">Lúmina Estética Málaga</span>
-<img alt="Vista del proyecto web Lúmina Estética Málaga" height="675" loading="lazy" src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&amp;fit=crop&amp;w=1200&amp;q=82" width="1200"/>
-</a>
-<div class="portfolio-body">
-<div class="portfolio-sector" data-lang-key="portfolio-beauty-sector">Estética · Imagen premium</div>
-<h3 class="portfolio-title">Lúmina Estética Málaga</h3>
-<p class="portfolio-description" data-lang-key="portfolio-beauty-desc">Experiencia visual sofisticada para tratamientos, packs, galería, reservas y confianza de marca en un centro de estética.</p>
-<div class="portfolio-tech"><span>Tratamientos</span><span>Reservas</span><span>Galería</span></div>
-<a class="portfolio-link" href="estetica.html" data-lang-key="portfolio-case">Ver web →</a>
-</div>
-</article>
-<article class="portfolio-card" data-ydg-preview="MARCA PERSONAL · RESPONSIVE · DEMO">
-<a aria-label="Ver proyecto Web Personal" class="portfolio-cover" href="webpersonal.html">
-<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small data-lang-key="portfolio-browser-label">yourdesigngpt / proyecto</small></span>
-<span class="portfolio-badge" data-lang-key="portfolio-personal-badge">Web Personal</span>
-<img alt="Vista del proyecto de web personal premium" height="675" loading="lazy" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&amp;fit=crop&amp;w=1200&amp;q=82" width="1200"/>
-</a>
-<div class="portfolio-body">
-<div class="portfolio-sector" data-lang-key="portfolio-personal-sector">Marca personal · Portfolio</div>
-<h3 class="portfolio-title" data-lang-key="portfolio-personal-title">Web Personal</h3>
-<p class="portfolio-description" data-lang-key="portfolio-personal-desc">Carta de presentación digital con perfil, proyectos, experiencia, blog, galería, redes sociales y contacto en una sola web.</p>
-<div class="portfolio-tech"><span>Portfolio</span><span>Contacto</span><span>Responsive</span></div>
-<a class="portfolio-link" href="webpersonal.html" data-lang-key="portfolio-case">Ver web →</a>
-</div>
-</article>
-<article class="portfolio-card" data-ydg-preview="HOTEL · RESPONSIVE · DEMO">
-<a aria-label="Ver proyecto Hotel Málaga Central" class="portfolio-cover" href="hotelmalaga.html">
-<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small data-lang-key="portfolio-browser-label">yourdesigngpt / proyecto</small></span>
-<span class="portfolio-badge" data-lang-key="portfolio-hotel-badge">Hotel Málaga</span>
-<img alt="Vista del proyecto web Hotel Málaga Central" height="675" loading="lazy" src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&amp;fit=crop&amp;w=1200&amp;q=82" width="1200"/>
-</a>
-<div class="portfolio-body">
-<div class="portfolio-sector" data-lang-key="portfolio-hotel-sector">Hotel · Web dossier</div>
-<h3 class="portfolio-title" data-lang-key="portfolio-hotel-title">Hotel Málaga Central</h3>
-<p class="portfolio-description" data-lang-key="portfolio-hotel-desc">Web oficial tipo dossier para presentar habitaciones, servicios, ubicación y conducir al huésped al motor real de reservas del hotel.</p>
-<div class="portfolio-tech"><span>Habitaciones</span><span>Reservas</span><span>Responsive</span></div>
-<a class="portfolio-link" href="hotelmalaga.html" data-lang-key="portfolio-case">Ver web →</a>
-</div>
-</article>
-<article class="portfolio-card portfolio-next-card">
-  <div class="portfolio-next-inner">
-    <span class="portfolio-next-code">&lt;/&gt;</span>
-    <small data-lang-key="portfolio-next-label">SIGUIENTE PROYECTO</small>
-    <h3 data-lang-key="portfolio-next-title">Tu web podría estar aquí</h3>
-    <p data-lang-key="portfolio-next-desc">Convierte tu negocio en el próximo proyecto de YourDesignGPT.</p>
-    <a class="gradient-button portfolio-next-button" href="#configurador" data-lang-key="portfolio-next-button">Crear mi web →</a>
-  </div>
-</article>
-</div>
-<p class="portfolio-note" data-lang-key="portfolio-note">Este portfolio combina demostraciones de diseño con proyectos reales. Las demostraciones usan datos ficticios; las valoraciones de proyectos reales son orientativas.</p>
-</div>
-</section>
-
-<section id="calidad" class="ydg-system-status" aria-labelledby="system-status-title">
+</section><section id="calidad" class="ydg-system-status" aria-labelledby="system-status-title">
   <div class="ydg-status-shell">
     <div class="ydg-status-heading">
       <span class="ydg-status-kicker">SYSTEM STATUS</span>
@@ -10676,90 +10572,7 @@ try{
 </script>
 
 
-<script id="ydg-launch-popup-v1291-script">
-(function(){
-  const backdrop=document.getElementById('ydg-launch-backdrop');
-  const closeBtn=document.getElementById('ydg-launch-close');
-  const continueBtn=document.getElementById('ydg-launch-continue');
-  const applyBtn=document.getElementById('ydg-launch-apply');
-  const codeBtn=document.getElementById('ydg-launch-code');
-  const promoBanner=document.getElementById('ydg-promo-applied');
-  const promoField=document.getElementById('ydg-promo-field');
-  const promoPrice=document.getElementById('ydg-promo-price');
-  const promoRemove=document.getElementById('ydg-promo-remove');
-  const configurator=document.getElementById('configurador') || document.getElementById('web-config-form');
-  if(!backdrop) return;
-  let opened=false;
-  const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function showLaunchOffer(){
-    if(opened)return;
-    opened=true;
-    backdrop.classList.remove('ydg-launch-inline');
-    backdrop.classList.add('is-visible');
-    backdrop.setAttribute('aria-hidden','false');
-    document.body.classList.add('ydg-launch-open');
-    setTimeout(()=>closeBtn?.focus({preventScroll:true}),reduced?0:260);
-  }
-  function hideLaunchOffer(){
-    backdrop.classList.remove('is-visible');
-    backdrop.setAttribute('aria-hidden','true');
-    document.body.classList.remove('ydg-launch-open');
-  }
-  function applyPromo(){
-    if(promoField)promoField.value='YOURDESIGNGPT';
-    if(promoPrice)promoPrice.value='99 € + 100 €/año · dominio + hosting + mantenimiento + 3 cambios/ajustes menores';
-    promoBanner?.classList.add('is-active');
-  }
-  async function copyCode(){
-    try{
-      await navigator.clipboard.writeText('YOURDESIGNGPT');
-      codeBtn?.classList.add('is-copied');
-      const label=codeBtn?.querySelector('i');
-      if(label){
-        const old=label.textContent;
-        const l=(document.documentElement.lang||'es').slice(0,2);
-        const copied={es:'COPIADO',en:'COPIED',fr:'COPIÉ',it:'COPIATO',de:'KOPIERT'};
-        label.textContent=copied[l]||copied.es;
-        setTimeout(()=>{label.textContent=old;codeBtn?.classList.remove('is-copied')},1200);
-      }
-    }catch(e){}
-  }
-  function launchToConfigurator(){
-    applyPromo();
-    copyCode();
-    hideLaunchOffer();
-    setTimeout(()=>configurator?.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'}),reduced?0:180);
-  }
-  closeBtn?.addEventListener('click',hideLaunchOffer);
-  continueBtn?.addEventListener('click',hideLaunchOffer);
-  applyBtn?.addEventListener('click',launchToConfigurator);
-  codeBtn?.addEventListener('click',copyCode);
-  promoRemove?.addEventListener('click',()=>{if(promoField)promoField.value='';if(promoPrice)promoPrice.value='';promoBanner?.classList.remove('is-active')});
-  backdrop.addEventListener('click',e=>{if(e.target===backdrop)hideLaunchOffer()});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&backdrop.classList.contains('is-visible'))hideLaunchOffer()});
 
-  // Show immediately after the intro/presentation finishes. Fallback prevents it from getting stuck.
-  const intro=document.getElementById('fx-intro');
-  if(intro){
-    const obs=new MutationObserver(()=>{
-      if(intro.classList.contains('fx-hide')||intro.style.display==='none'){
-        obs.disconnect();
-        setTimeout(showLaunchOffer,reduced?0:320);
-      }
-    });
-    obs.observe(intro,{attributes:true,attributeFilter:['class','style']});
-    const bodyObs=new MutationObserver(()=>{
-      if(!document.getElementById('fx-intro')){
-        bodyObs.disconnect();obs.disconnect();setTimeout(showLaunchOffer,reduced?0:320);
-      }
-    });
-    bodyObs.observe(document.body,{childList:true,subtree:false});
-    setTimeout(()=>{if(!opened)showLaunchOffer()},5200);
-  }else{
-    setTimeout(showLaunchOffer,reduced?100:550);
-  }
-})();
-</script>
 
 
 <script>
@@ -11694,7 +11507,7 @@ if(document.readyState==='loading'){
   launch.addEventListener('click',()=>{launch.classList.remove('pulse');void launch.offsetWidth;launch.classList.add('pulse');setOpen(!opened)});bubble.addEventListener('click',()=>{setOpen(true)});closeBtn.addEventListener('click',()=>setOpen(false));clearBtn.addEventListener('click',()=>{context={sector:''};lastIntent='';welcome();input.focus()});form.addEventListener('submit',e=>{e.preventDefault();answer(input.value)});
   root.addEventListener('click',e=>{const q=e.target.closest('[data-query]');if(q)answer(q.textContent,replies[q.dataset.query]?q.dataset.query:null);const a=e.target.closest('[data-target]');if(a)scrollToTarget(a.dataset.target)});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&opened)setOpen(false)});window.addEventListener('ydg-language-change',localize);
-  welcome();localize(); startStatusCycle(); if(!reduced){bubbleTimer=setTimeout(showBubble,2200);setInterval(showBubble,13500)}
+  welcome();localize(); startStatusCycle(); /* Aurora: chat opens only when requested. */
 })();
 </script>
 
@@ -11808,6 +11621,6 @@ form.addEventListener('click',e=>{if(e.target.closest('[data-type]'))setTimeout(
 const params=new URLSearchParams(location.search);if(params.get('oferta')==='radiosas'||params.get('tipo')==='academia')option?.click();
 sync();}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
-})();</script></body>
+})();</script><script src="aurora.js?v=131"></script></body>
 </html>
 
