@@ -39,7 +39,7 @@ function validUrl(v){if(!v)return null;try{const u=new URL(v);return ['http:','h
 function normalize(data){let name=String(data.name||'').trim();if(!name)throw Error('Nombre obligatorio');
 return {name:name.slice(0,150),city:String(data.city||'').trim().slice(0,100),sector:String(data.sector||'').trim().slice(0,100),status:statuses.includes(data.status)?data.status:statuses[0],email:String(data.email||'').trim().slice(0,254),phone:String(data.phone||'').trim().slice(0,50),website:validUrl(data.website),source_url:validUrl(data.source_url),contacted_at:safeDate(data.contacted_at),next_followup:safeDate(data.next_followup),notes:String(data.notes||'').slice(0,5000)}}
 async function refresh(){const {data,error}=await db.from('crm_leads').select('*').order('created_at',{ascending:false}).limit(5000);if(error){$('message').textContent='Error: '+error.message;return}records=data||[];render()}
-function render(){
+function render(){setTimeout(()=>window.dispatchEvent(new Event('ydg-leads-refreshed')),0);
 const filtered=records.filter(r=>{let q=$('q').value.toLocaleLowerCase(),s=$('statusFilter').value,c=$('cityFilter').value;return (s==='Todos'||r.status===s)&&(c==='Todos'||r.city===c)&&[r.name,r.city,r.sector,r.email].some(v=>String(v||'').toLocaleLowerCase().includes(q))});
 const cities=[...new Set(records.map(r=>r.city).filter(Boolean))].sort();const old=$('cityFilter').value;$('cityFilter').replaceChildren(option('Todos'),...cities.map(option));$('cityFilter').value=cities.includes(old)?old:'Todos';
 const counters=[['Empresas',records.length],['Pendientes',records.filter(x=>x.status==='Pendiente de enviar').length],['Esperando respuesta',records.filter(x=>x.status==='Esperando respuesta').length],['Clientes',records.filter(x=>x.status==='Cliente').length]];
@@ -64,5 +64,6 @@ if(raw.length>1000)throw Error('Máximo 1000 registros por importación');const 
 const keys=new Set(records.map(r=>[r.name,r.city].join('|').toLocaleLowerCase()));const unique=parsed.filter(r=>{const k=[r.name,r.city].join('|').toLocaleLowerCase();if(keys.has(k))return false;keys.add(k);return true});let n=0;
 for(let i=0;i<unique.length;i+=100){const {error}=await db.from('crm_leads').insert(unique.slice(i,i+100).map(r=>({...r,owner_id:user.id})));if(error)throw Error('Importadas '+n+' antes de error: '+error.message);n+=Math.min(100,unique.length-i)}
 await refresh();$('message').textContent='Importadas '+n+' empresas; omitidos '+(parsed.length-n)+' posibles duplicados'}catch(err){$('message').textContent='Importación: '+err.message}};
+window.YDG_LEADS_API={records:()=>records,edit:openEditor,markSent:async(id)=>{const {error}=await db.from('crm_leads').update({status:'Enviado',contacted_at:new Date().toISOString().slice(0,10)}).eq('id',id).eq('owner_id',user.id);if(error)throw error;await refresh()}};
 })();
 </script></body></html>
