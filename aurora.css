@@ -117,3 +117,34 @@ html body #configurador .ydg-config-head{margin-bottom:20px!important}
  html body #configurador .ydg-choice-card p{font-size:11px!important}
  html body footer .connect-block{padding:6px!important}
 }
+
+/* Header stays in document flow: mobile navigation can never cover the hero. */
+html body.aurora-focused{padding-top:0!important}
+html body #ydg-site-header.aurora-header{position:sticky!important;top:0!important;inset:auto!important;width:100%!important;padding:10px 20px!important}
+html body #ydg-site-header .aurora-brand{min-width:0!important;position:relative!important;padding-right:18px!important}
+html body #ydg-site-header .aurora-brand>span:not(.ydg-click-cursor):not(.ydg-click-ring){min-width:0;font-size:20px!important}
+html body #ydg-site-header .ydg-wordmark{display:block!important;font-size:inherit!important;line-height:1.2!important;background:linear-gradient(100deg,#22d3ee 0%,#38bdf8 35%,#818cf8 66%,#d946ef 100%)!important;background-clip:text!important;-webkit-background-clip:text!important;color:transparent!important}
+html body #ydg-site-header .ydg-click-cursor{opacity:1!important;right:0!important;bottom:3px!important;width:20px!important;height:24px!important;color:#38bdf8!important;font-size:0!important}
+html body #ydg-site-header .ydg-click-cursor svg{width:20px;height:24px}
+html body #ydg-site-header .aurora-brand-playing .ydg-click-cursor{animation:ydgCursorClick 1.8s ease both}
+html body #ydg-site-header .aurora-brand-playing .ydg-click-ring{animation:ydgClickRing 1.8s ease both}
+html body #ydg-site-header .aurora-brand-playing .ydg-wordmark::after{animation:ydgLetterSweep 1.8s ease both}
+html body #ydg-site-header .aurora-links{display:flex!important;flex-wrap:nowrap!important;align-items:center!important;border:0!important}
+html body #ydg-site-header .aurora-links a{display:flex!important;align-items:center;justify-content:center;min-height:42px!important;padding:0 10px!important;border-radius:9px;font-weight:600!important}
+html body #ydg-site-header .aurora-links a[aria-current]{background:#103047!important;color:#83f1ff!important}
+@media(max-width:700px){
+ html body #ydg-site-header.aurora-header{padding:10px 12px!important}
+ html body #ydg-site-header .aurora-nav{display:grid!important;grid-template-columns:minmax(0,1fr) 105px!important;gap:12px 8px!important;align-items:center!important}
+ html body #ydg-site-header .aurora-brand{gap:7px!important}
+ html body #ydg-site-header .aurora-brand>span:not(.ydg-click-cursor):not(.ydg-click-ring){font-size:clamp(13px,3.6vw,17px)!important;letter-spacing:-.7px!important}
+ html body #ydg-site-header .aurora-brand small{font-size:5px!important;letter-spacing:1px!important;margin-top:5px!important;white-space:nowrap}
+ html body #ydg-site-header .aurora-brand img{width:40px!important;height:40px!important;flex:none}
+ html body #ydg-site-header .aurora-client{min-height:38px!important;width:105px!important;justify-content:center!important;padding:7px!important;font-size:10px!important;white-space:normal!important;text-align:center!important}
+ html body #ydg-site-header #nav-content,html body #ydg-site-header #nav-content.hidden{grid-row:2!important;grid-column:1!important;width:100%!important;min-width:0!important;margin:0!important;border:0!important}
+ html body #ydg-site-header .aurora-links{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:3px!important;width:100%!important;min-width:0!important}
+ html body #ydg-site-header .aurora-links a{font-size:11px!important;padding:0 3px!important;min-height:40px!important;letter-spacing:0!important}
+ html body #ydg-site-header .aurora-config-direct{grid-row:2!important;grid-column:2!important;width:105px!important;min-height:40px!important;padding:8px!important;font-size:12px!important}
+ html body #ydg-site-header .ydg-click-cursor{width:16px!important;right:0!important;bottom:0!important}
+ html body #ydg-site-header .ydg-click-cursor svg{width:16px!important}
+ html body.aurora-focused #aurora-home{padding-top:25px!important}
+}
