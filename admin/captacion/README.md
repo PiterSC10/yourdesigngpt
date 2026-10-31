@@ -24,3 +24,14 @@ La app NO envía comunicaciones ni automatiza captación. Cumple con LSSI/RGPD a
 - Seguridad: acceso privado, RLS, almacenamiento privado para imágenes, minimización de datos, noindex y pruebas antes de integrar producción.
 - Compliance: no realizar envíos comerciales no solicitados a direcciones públicas; requerir base jurídica válida y registrar supresión/no contactar.
 - Las capacidades de render de imagen, envío Gmail integrado, mapa real y estadísticas avanzadas están **pendientes de implementación**; el frontend actual es parcial.
+
+## Campaña territorial acordada (31 octubre 2026)
+- Objetivo: identificar 500 negocios REALES sin web propia localizada, no 500 búsquedas brutas; ninguna cifra se presenta como hallazgo hasta su verificación.
+- Cobertura: Marbella, Benalmádena, Torremolinos, Fuengirola, Mijas (incluida La Cala de Mijas), Estepona, Rincón de la Victoria, Alhaurín de la Torre, Alhaurín el Grande y Vélez-Málaga. Málaga capital excluida.
+- Zona de búsqueda específica: La Cala de Mijas; evitar duplicación en Mijas. Rincón de la Victoria incluye La Cala del Moral; verificar confusiones entre nombres de zonas.
+- Filtro de inclusión: actividad vigente, presencia web revisada, sin web propia localizada, fuentes públicas, fecha y referencia, deduplicación; direcciones y correos solo si verificados.
+- Indicadores: localizados, verificados, elegibles sin web localizada, propuestas redactadas, envíos confirmados, respuestas recibidas, interesados, clientes; ceros reales hasta tener datos.
+- Workflow: empresa seleccionada -> generar mockup PNG/JPG claramente etiquetado DEMO NO OFICIAL -> revisión mensaje y adjunto -> comprobación de autorización/contacto permitido -> confirmación explícita del usuario -> envío por Gmail -> confirmación proveedor -> historial y seguimiento.
+- Indicador visual de respuesta nueva: icono bombilla + contador de respuestas sin leer, vínculo a ficha y conversación Gmail; marcar leída y estado de respuesta tras verificación, sin clasificar automáticamente como interesado sin evidencia.
+- Gmail debe recibir eventos o consultar threads por ID en forma autenticada. Envío con acuse de API no equivale a entrega ni lectura. No enviar campañas comerciales no solicitadas a direcciones públicas.
+- Estado técnico actual: mapa real, mockups imagen, envío Gmail, escucha de respuestas y búsqueda/autoimportación masiva pendientes. No marcar como completado hasta pruebas y credenciales.
