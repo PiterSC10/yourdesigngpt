@@ -65,3 +65,18 @@ main{padding:20px 20px 35px}header.bar{border:0;padding-bottom:0;margin-bottom:1
 .status-badge[data-status="Interesado"]{background:#725017;color:#ffe09b}.status-badge[data-status="Cliente"]{background:#0a6655;color:#9affdf}.status-badge[data-status="Enviado"],.status-badge[data-status="Esperando respuesta"]{background:#105b59;color:#a2fff0}.status-badge[data-status="Descartado"],.status-badge[data-status="No contactar"]{background:#6b2638;color:#ffb1c5}.status-badge[data-status="Pendiente de enviar"]{background:#4d2a95;color:#dfc2ff}
 .lead-drawer{width:min(440px,100vw);background:#0e1930;border-left-color:#293b62}
 @media(max-width:1250px){.stats{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:860px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.side{width:100%}.brand{display:none}}@media(max-width:650px){.leads-table-panel .filters{grid-template-columns:1fr}.stat{min-height:100px!important}}
+
+
+/* Explicit filter headings and actionable priorities */
+.leads-table-panel .filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px 12px}
+.leads-table-panel .filters .filter-field{display:flex;flex-direction:column;gap:6px;margin:0;min-width:0;font-size:12px;font-weight:650;color:#aebfe7}
+.leads-table-panel .filters .filter-field span{padding-left:2px}
+.leads-table-panel .filters .filter-field input,.leads-table-panel .filters .filter-field select{width:100%;grid-column:auto;min-width:0}
+.leads-table-panel .filters .filter-search{grid-column:1/-1}
+.priority-panel{margin:17px 0 20px;padding:0}.priority-heading{display:flex;align-items:center;justify-content:space-between;margin:0 0 12px}.priority-heading h2{font-size:18px;margin:0 0 3px;color:#f3f5ff}.priority-heading small{font-size:12px}
+.priority-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.priority-card{display:flex;flex-direction:column;align-items:flex-start;gap:7px;min-height:106px;text-align:left;padding:15px 18px;border:1px solid #344464;border-left:3px solid var(--priority-accent);border-radius:12px;background:linear-gradient(130deg,#18233d,#101b30);box-shadow:none}
+.priority-card span{font-size:12px;color:var(--priority-accent);font-weight:700}.priority-card strong{font-size:29px;line-height:1.1;color:#fff}.priority-card small{font-size:11px;color:#aabada;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.priority-card:hover{background:#1c2c4d}
+@media(max-width:850px){.leads-table-panel .filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.leads-table-panel .filters{grid-template-columns:1fr}.priority-cards{grid-template-columns:1fr}.priority-card{min-height:85px}}
