@@ -12,3 +12,19 @@ html{scroll-padding-top:110px}body{background:var(--aurora-bg)!important;color:#
 html body #main-content{background:#050c18!important}html body #aurora-home{background:radial-gradient(ellipse at 70% 30%,rgba(40,68,145,.24),transparent 62%)!important}html body .ydg-side-ornaments,html body #ydg-scroll-progress,html body #ydg-robot-widget{display:none!important}html body #ydg-site-header .aurora-links{gap:22px!important}html body #cookie-banner.hidden{display:none!important}html body:not(.ydg-cookie-visible){padding-bottom:0!important}html body .aurora-header #ydg-brand-home:after,html body .aurora-header #ydg-brand-home:before{display:none!important}html body .aurora-hero-grid{gap:24px!important}html body #aurora-title{font-size:clamp(38px,4.2vw,61px)!important}html body .aurora-visual{margin:0 -15px 0 0!important}
 @media(max-width:1000px){html body #ydg-site-header .aurora-links{gap:20px!important}}
 @media(max-width:700px){html body #aurora-title{font-size:clamp(34px,9.1vw,54px)!important;letter-spacing:-1.6px!important}html body .aurora-visual{margin:8px -12px 0!important}html body .aurora-hero-grid{gap:14px!important}}
+
+/* Simplified experience: focused homepage and direct configuration. */
+body.aurora-focused #main-content>section{display:none!important}
+body.aurora-focused #main-content>section.aurora-active-section{display:block!important;min-height:65vh}
+body.aurora-focused #aurora-home .aurora-benefits{display:none!important}
+body.aurora-focused #aurora-home{padding-top:35px;padding-bottom:45px}
+body.aurora-focused #servicios-web,body.aurora-focused .aurora-terms{display:none!important}
+body.aurora-focused footer{padding-top:18px!important;padding-bottom:18px!important}
+body.aurora-focused footer .connect-block,body.aurora-focused footer #install-app-btn,body.aurora-focused footer #ydg-client-area-link{display:none!important}
+body.aurora-focused[data-aurora-view="links-importantes"] footer .connect-block{display:block!important}
+body.aurora-focused #aurora-footer-links{margin:10px auto;font-size:11px}
+body.aurora-focused #configurador .ydg-config-side{display:none!important}
+body.aurora-focused #configurador .ydg-config-shell{display:block!important;max-width:1000px;margin:auto}
+body.aurora-focused .aurora-links a[aria-current]{color:#70edff!important}
+body.aurora-focused .aurora-visual figcaption{font-size:9px}
+body.aurora-focused #scrollToTopBtn{display:none!important}
