@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>YDG Leads · CRM privado</title>
+<style>
+:root{color-scheme:dark;font-family:Inter,system-ui,Arial;background:#090d18;color:#f2f4fc}*{box-sizing:border-box}body{margin:0}main{max-width:1240px;margin:auto;padding:28px 18px}h1{font-size:26px;margin:4px 0}small,.muted{color:#9ba7c2}a{color:#94baff}button,input,select,textarea{font:inherit;border-radius:10px;padding:11px;border:1px solid #32415e;background:#161e30;color:#fff}button{cursor:pointer;background:#6548ee;border:0;font-weight:700}button.secondary{background:#26334c}button.danger{background:#653047}input,select,textarea{width:100%}label{display:block;font-size:13px;color:#b6c2d9;margin:10px 0 4px}.bar,.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.bar{justify-content:space-between;margin-bottom:18px}.panel{background:#121a2a;border:1px solid #27334a;border-radius:17px;padding:18px;margin:15px 0}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat strong{display:block;font-size:29px;margin-top:8px}table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:11px;border-bottom:1px solid #29354d;text-align:left}th{color:#adbad0}td button{padding:7px} .scroll{overflow:auto}.filters{display:grid;grid-template-columns:2fr repeat(2,1fr);gap:10px}.fields{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.hidden{display:none!important}.hint{color:#f1ce75}.error{color:#ffa5ae} .pill{border:1px solid #475675;padding:3px 9px;border-radius:20px;white-space:nowrap}.wide{grid-column:1/-1}dialog{background:#121a2a;color:white;border:1px solid #40506c;border-radius:18px;max-width:800px;width:95%;max-height:90vh;overflow:auto}dialog::backdrop{background:#000b} @media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}.fields,.filters{grid-template-columns:1fr}main{padding:16px 10px}h1{font-size:22px}}
+</style></head><body><main>
+<header class="bar"><div><small>YOURDESIGNGPT · ZONA PRIVADA</small><h1>Centro de captación</h1><small>Negocios · Propuestas · Seguimientos</small></div><button id="logout" class="secondary hidden">Cerrar sesión</button></header>
+<section id="setup" class="panel hidden"><h2>Configuración pendiente</h2><p>El panel está publicado, pero todavía no hay una base de datos conectada. Sigue las instrucciones del archivo <code>admin/captacion/README.md</code> del repositorio. No introduzcas datos comerciales hasta activar la autenticación y las políticas de acceso.</p></section>
+<section id="login" class="panel hidden" style="max-width:420px"><h2>Acceso privado</h2><form id="loginForm"><label>Correo autorizado</label><input id="email" type="email" autocomplete="email" required><label>Contraseña</label><input id="password" type="password" autocomplete="current-password" required><p id="loginMessage" class="error" aria-live="polite"></p><button type="submit">Entrar</button></form></section>
+<section id="app" class="hidden"><div class="stats" id="stats"></div>
+<div class="panel"><div class="bar"><h2>Empresas</h2><div class="row"><button id="newLead">+ Nueva empresa</button><button id="import" class="secondary">Importar Excel</button><button id="export" class="secondary">Exportar Excel</button><input type="file" id="file" accept=".xlsx,.xls,.csv" hidden></div></div>
+<div class="filters"><input id="q" placeholder="Buscar negocio, sector, municipio o email..."><select id="statusFilter"></select><select id="cityFilter"></select></div>
+<p id="message" class="muted" aria-live="polite"></p><div class="scroll"><table><thead><tr><th>Empresa</th><th>Municipio</th><th>Sector</th><th>Estado</th><th>Email</th><th>Seguimiento</th><th>Acciones</th></tr></thead><tbody id="rows"></tbody></table></div></div></section>
+<dialog id="editor"><form id="leadForm"><h2 id="formTitle">Empresa</h2><div class="fields">
+<div><label>Negocio *</label><input name="name" maxlength="150" required></div>
+<div><label>Municipio</label><input name="city" maxlength="100"></div>
+<div><label>Sector</label><input name="sector" maxlength="100"></div>
+<div><label>Estado</label><select name="status" id="editStatus"></select></div>
+<div><label>Email profesional</label><input name="email" type="email" maxlength="254"></div>
+<div><label>Teléfono de empresa</label><input name="phone" maxlength="50"></div>
+<div><label>Web actual</label><input name="website" type="url" placeholder="https://..."></div>
+<div><label>Fuente pública / enlace</label><input name="source_url" type="url" placeholder="https://..."></div>
+<div><label>Último contacto</label><input name="contacted_at" type="date"></div>
+<div><label>Próximo seguimiento</label><input name="next_followup" type="date"></div>
+<div class="wide"><label>Notas / historial de comunicación</label><textarea name="notes" rows="4" maxlength="5000"></textarea></div></div><p class="muted">Registrar solo datos profesionales pertinentes y contactos realizados por vías permitidas. No se envían correos automáticamente.</p><div class="row"><button type="submit">Guardar</button><button type="button" id="close" class="secondary">Cancelar</button><button type="button" id="delete" class="danger hidden">Eliminar</button></div><p id="formMessage" class="error"></p></form></dialog>
+</main><script src="./config.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script><script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script>
+(function(){
+'use strict';
+const statuses=['Por investigar','Pendiente de enviar','Enviado','Esperando respuesta','Interesado','Cliente','Descartado','No contactar'];
+const $=id=>document.getElementById(id); let db=null, user=null, records=[], editing=null;
+const config=window.YDG_CRM_CONFIG||{};
+if(!config.url||!config.anonKey||!window.supabase){$('setup').classList.remove('hidden');return}
+db=window.supabase.createClient(config.url,config.anonKey,{auth:{persistSession:true,autoRefreshToken:true}});
+const option=(v)=>{const x=document.createElement('option');x.value=v;x.textContent=v;return x};
+statuses.forEach(s=>{$('editStatus').append(option(s));$('statusFilter').append(option(s))});
+$('statusFilter').prepend(option('Todos')); $('statusFilter').value='Todos';
+function safeDate(v){return /^\d{4}-\d{2}-\d{2}$/.test(String(v||''))?String(v):null}
+function validUrl(v){if(!v)return null;try{const u=new URL(v);return ['http:','https:'].includes(u.protocol)?u.href:null}catch{return null}}
+function normalize(data){let name=String(data.name||'').trim();if(!name)throw Error('Nombre obligatorio');
+return {name:name.slice(0,150),city:String(data.city||'').trim().slice(0,100),sector:String(data.sector||'').trim().slice(0,100),status:statuses.includes(data.status)?data.status:statuses[0],email:String(data.email||'').trim().slice(0,254),phone:String(data.phone||'').trim().slice(0,50),website:validUrl(data.website),source_url:validUrl(data.source_url),contacted_at:safeDate(data.contacted_at),next_followup:safeDate(data.next_followup),notes:String(data.notes||'').slice(0,5000)}}
+async function refresh(){const {data,error}=await db.from('crm_leads').select('*').order('created_at',{ascending:false}).limit(5000);if(error){$('message').textContent='Error: '+error.message;return}records=data||[];render()}
+function render(){
+const filtered=records.filter(r=>{let q=$('q').value.toLocaleLowerCase(),s=$('statusFilter').value,c=$('cityFilter').value;return (s==='Todos'||r.status===s)&&(c==='Todos'||r.city===c)&&[r.name,r.city,r.sector,r.email].some(v=>String(v||'').toLocaleLowerCase().includes(q))});
+const cities=[...new Set(records.map(r=>r.city).filter(Boolean))].sort();const old=$('cityFilter').value;$('cityFilter').replaceChildren(option('Todos'),...cities.map(option));$('cityFilter').value=cities.includes(old)?old:'Todos';
+const counters=[['Empresas',records.length],['Pendientes',records.filter(x=>x.status==='Pendiente de enviar').length],['Esperando respuesta',records.filter(x=>x.status==='Esperando respuesta').length],['Clientes',records.filter(x=>x.status==='Cliente').length]];
+$('stats').replaceChildren(...counters.map(([label,n])=>{const d=document.createElement('div');d.className='panel stat';const t=document.createElement('small');t.textContent=label;const v=document.createElement('strong');v.textContent=n;d.append(t,v);return d}));
+$('rows').replaceChildren(...filtered.map(r=>{const tr=document.createElement('tr');[r.name,r.city,r.sector,r.status,r.email,r.next_followup||'—'].forEach(v=>{const td=document.createElement('td');td.textContent=v||'—';tr.append(td)});const td=document.createElement('td'),b=document.createElement('button');b.className='secondary';b.textContent='Abrir';b.onclick=()=>openEditor(r);td.append(b);tr.append(td);return tr}));
+$('message').textContent=filtered.length+' empresas visibles · '+records.length+' registradas';
+}
+function openEditor(r){editing=r||null;$('formTitle').textContent=r?'Editar empresa':'Nueva empresa';$('leadForm').reset();for(const el of $('leadForm').elements){if(el.name)el.value=(r&&r[el.name])||''}if(!r)$('editStatus').value=statuses[0];$('delete').classList.toggle('hidden',!r);$('formMessage').textContent='';$('editor').showModal()}
+$('newLead').onclick=()=>openEditor(null);$('close').onclick=()=>$('editor').close();
+$('leadForm').onsubmit=async e=>{e.preventDefault();$('formMessage').textContent='';try{const payload=normalize(Object.fromEntries(new FormData(e.target)));let result;if(editing){result=await db.from('crm_leads').update(payload).eq('id',editing.id).eq('owner_id',user.id)}else{result=await db.from('crm_leads').insert({...payload,owner_id:user.id})}if(result.error)throw result.error;$('editor').close();await refresh()}catch(err){$('formMessage').textContent=err.message}};
+$('delete').onclick=async()=>{if(!editing||!confirm('¿Eliminar definitivamente esta empresa?'))return;const {error}=await db.from('crm_leads').delete().eq('id',editing.id).eq('owner_id',user.id);if(error){$('formMessage').textContent=error.message;return}$('editor').close();await refresh()};
+$('q').oninput=render;$('statusFilter').onchange=render;$('cityFilter').onchange=render;
+$('logout').onclick=()=>db.auth.signOut();
+$('loginForm').onsubmit=async e=>{e.preventDefault();$('loginMessage').textContent='';const {error}=await db.auth.signInWithPassword({email:$('email').value,password:$('password').value});if(error)$('loginMessage').textContent='Acceso denegado. Revisa tus credenciales.'};
+async function session(){const {data}=await db.auth.getUser();user=data.user;const ok=!!user;$('login').classList.toggle('hidden',ok);$('app').classList.toggle('hidden',!ok);$('logout').classList.toggle('hidden',!ok);if(ok)await refresh();else records=[]}
+db.auth.onAuthStateChange(()=>{setTimeout(session,0)});session();
+$('export').onclick=()=>{if(!window.XLSX){$('message').textContent='No se pudo cargar Excel';return}const fields=['name','city','sector','status','email','phone','website','source_url','contacted_at','next_followup','notes'];const ws=XLSX.utils.json_to_sheet(records.map(r=>Object.fromEntries(fields.map(f=>[f,r[f]||'']))));const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Empresas');XLSX.writeFile(wb,'yourdesigngpt-leads.xlsx')};
+$('import').onclick=()=>$('file').click();
+$('file').onchange=async e=>{const file=e.target.files[0];e.target.value='';if(!file)return;if(!window.XLSX){$('message').textContent='No se pudo cargar Excel';return}try{
+const wb=XLSX.read(await file.arrayBuffer(),{type:'array',cellDates:false});const raw=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:'',raw:false});
+if(raw.length>1000)throw Error('Máximo 1000 registros por importación');const parsed=raw.map(normalize);if(!confirm('¿Importar '+parsed.length+' empresas? Revisa antes que no existan duplicados.'))return;
+const keys=new Set(records.map(r=>[r.name,r.city].join('|').toLocaleLowerCase()));const unique=parsed.filter(r=>{const k=[r.name,r.city].join('|').toLocaleLowerCase();if(keys.has(k))return false;keys.add(k);return true});let n=0;
+for(let i=0;i<unique.length;i+=100){const {error}=await db.from('crm_leads').insert(unique.slice(i,i+100).map(r=>({...r,owner_id:user.id})));if(error)throw Error('Importadas '+n+' antes de error: '+error.message);n+=Math.min(100,unique.length-i)}
+await refresh();$('message').textContent='Importadas '+n+' empresas; omitidos '+(parsed.length-n)+' posibles duplicados'}catch(err){$('message').textContent='Importación: '+err.message}};
+})();
+</script></body></html>
