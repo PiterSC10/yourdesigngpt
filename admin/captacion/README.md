@@ -8,7 +8,7 @@ Este CRM funciona en /admin/captacion/ y no cambia la portada pública.
 5. Publica GitHub en Vercel y entra en /admin/captacion/; verifica login, CRUD, importación y exportación.
 6. Evita compartir expedientes o Excel con datos de contacto; exporta copias solo a ubicaciones seguras.
 La autorización se aplica en la base mediante RLS por owner_id; el ocultamiento de enlaces NO constituye protección.
-Importación Excel: columnas name, city, sector, status, email, phone, website, source_url, contacted_at, next_followup, notes. Fechas YYYY-MM-DD. Deduplicación básica por name+city. Hasta 1000 filas/importación.
+Importación Excel: columnas name, city, sector, status, email, phone, website, source_url, contacted_at, next_followup, notes, web_status, email_status, activity_status, contact_permission, last_verified_at. Fechas YYYY-MM-DD. Deduplicación básica por name+city. Hasta 1000 filas/importación.
 La app NO envía comunicaciones ni automatiza captación. Cumple con LSSI/RGPD antes de contactar.
 
 
@@ -35,3 +35,12 @@ La app NO envía comunicaciones ni automatiza captación. Cumple con LSSI/RGPD a
 - Indicador visual de respuesta nueva: icono bombilla + contador de respuestas sin leer, vínculo a ficha y conversación Gmail; marcar leída y estado de respuesta tras verificación, sin clasificar automáticamente como interesado sin evidencia.
 - Gmail debe recibir eventos o consultar threads por ID en forma autenticada. Envío con acuse de API no equivale a entrega ni lectura. No enviar campañas comerciales no solicitadas a direcciones públicas.
 - Estado técnico actual: mapa real, mockups imagen, envío Gmail, escucha de respuestas y búsqueda/autoimportación masiva pendientes. No marcar como completado hasta pruebas y credenciales.
+
+## Auditoría de datos — 31/10/2026
+- Excel unificado de trabajo guardado fuera del repositorio público (contiene emails profesionales): 176 negocios únicos; 99 con email publicado; 77 sin email localizado; 1 duplicado de «Aphrodite» descartado.
+- El anterior titular de 100 emails era provisional; al deduplicar resultan 99. No presentarlos como 100 válidos.
+- Ninguno de los 99 emails está confirmado como entregable; ninguna ausencia de web está confirmada independientemente y ningún contacto tiene autorización acreditada para publicidad.
+- La columna web_status «Sin web localizada» se debe usar solo tras búsqueda independiente; un directorio sin URL no basta.
+- La columna contact_permission debe ser «Autorizado» únicamente cuando exista una base válida para el contacto; la interfaz bloquea la apertura del email comercial y el marcado como enviado mientras no conste.
+- Importar primero en un proyecto Supabase privado de pruebas; revisar el resultado de CRUD, filtros, búsqueda y exportación antes de producción.
+- La rama feature/ydg-leads-crm permanece separada de main hasta que estén creados Supabase, usuario privado y RLS comprobadas. El preview Vercel no sustituye esas comprobaciones.
