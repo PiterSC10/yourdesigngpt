@@ -160,3 +160,38 @@ if(Date.now()>=new Date('2027-01-01T00:00:00+01:00').getTime()){const offer=docu
  dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)close();}});
  dialog.addEventListener('close',()=>{document.body.style.overflow=previousOverflow;opener?.focus();});
 })();
+
+/* Modern FAQs: preserve original answers and translations, native keyboard-friendly disclosure. */
+(()=>{
+ const section=document.getElementById('faq');if(!section)return;
+ const old=[...section.querySelectorAll('.faq-item')];if(!old.length)return;
+ const groups=[[4,6],[1,2,3,5,7,8,9,17],[10,13,15],[11,12,14,16,18]];
+ const wording={
+ es:['Todo claro antes de empezar','Resuelve tus dudas y da el siguiente paso con confianza.','Todas','Precio y pagos','Diseño y entrega','Dominio y mantenimiento','Cambios y cancelación','¿Cuánto cuesta?','¿Qué incluye?','¿Y después del primer año?','¿Te queda alguna duda?','Habla con nuestro asistente o prepara tu proyecto.','Abrir asistente','Configurar mi web','PREGUNTAS FRECUENTES'],
+ en:['Everything clear before you start','Find the answers and take your next step with confidence.','All','Pricing & payments','Design & delivery','Domain & maintenance','Changes & cancellation','How much does it cost?','What is included?','After the first year?','Still have a question?','Ask our assistant or prepare your project.','Open assistant','Configure my website','FREQUENTLY ASKED QUESTIONS'],
+ fr:['Tout savoir avant de commencer','Les réponses pour avancer en toute confiance.','Tout','Prix et paiement','Design et livraison','Domaine et maintenance','Modifications et résiliation','Quel est le prix ?','Que comprend le service ?','Après la première année ?','Une autre question ?','Contactez notre assistant ou préparez votre projet.','Ouvrir l’assistant','Configurer mon site','QUESTIONS FRÉQUENTES'],
+ it:['Tutto chiaro prima di iniziare','Trova le risposte e fai il prossimo passo con fiducia.','Tutte','Prezzi e pagamenti','Design e consegna','Dominio e manutenzione','Modifiche e cancellazione','Quanto costa?','Cosa è incluso?','Dopo il primo anno?','Hai ancora dubbi?','Chiedi al nostro assistente o prepara il progetto.','Apri assistente','Configura il mio sito','DOMANDE FREQUENTI'],
+ de:['Alles klar vor dem Start','Antworten für Ihren nächsten Schritt.','Alle','Preise & Zahlung','Design & Lieferung','Domain & Wartung','Änderungen & Kündigung','Was kostet es?','Was ist enthalten?','Nach dem ersten Jahr?','Noch eine Frage?','Fragen Sie unseren Assistenten oder planen Sie Ihr Projekt.','Assistent öffnen','Website konfigurieren','HÄUFIGE FRAGEN']
+ };
+ const shell=document.createElement('div');shell.className='ydg-faq-modern';
+ shell.innerHTML='<header class="fq-heading"><p data-fq="14"></p><h2 data-fq="0"></h2><div data-fq="1"></div></header><div class="fq-quick" aria-label="Consultas destacadas"><button type="button" data-fq-jump="4"><span>01</span><b data-fq="7"></b><i>↗</i></button><button type="button" data-fq-jump="3"><span>02</span><b data-fq="8"></b><i>↗</i></button><button type="button" data-fq-jump="11"><span>03</span><b data-fq="9"></b><i>↗</i></button></div><div class="fq-filters" role="group" aria-label="Filtrar preguntas"></div><div class="fq-list"></div><div class="fq-help"><div><h3 data-fq="10"></h3><p data-fq="11"></p></div><div><button type="button" class="fq-assistant" data-fq="12"></button><a href="#configurador" data-fq="13"></a></div></div>';
+ const filters=shell.querySelector('.fq-filters');
+ for(let n=0;n<5;n++){const b=document.createElement('button');b.type='button';b.dataset.fqCategory=n;b.dataset.fq=n+2;b.setAttribute('aria-pressed',String(n===0));filters.append(b);}
+ const list=shell.querySelector('.fq-list'),details=[];
+ old.forEach((item,i)=>{
+  const number=i+1,q=item.querySelector('.faq-question'),answer=item.querySelector('.faq-answer');if(!q||!answer)return;
+  const d=document.createElement('details');d.className='fq-card';d.id='ydg-faq-'+number;d.dataset.category=groups.findIndex(g=>g.includes(number))+1;
+  const summary=document.createElement('summary');summary.dataset.langKey=q.dataset.langKey;summary.innerHTML=q.querySelector('span')?.innerHTML||q.textContent.trim();d.append(summary);
+  const body=document.createElement('div');body.className='fq-answer';while(answer.firstChild)body.append(answer.firstChild);
+  if([2,3,4,5,7].includes(number)){const a=document.createElement('a');a.href=[3].includes(number)?'#incluye':'#configurador';a.className='fq-inline-link';a.textContent=number===3?'Ver qué incluye':'Configurar mi web';body.append(a);}
+  d.append(body);list.append(d);details.push(d);
+  d.addEventListener('toggle',()=>{if(d.open)details.forEach(other=>{if(other!==d)other.open=false;});});
+ });
+ section.replaceChildren(shell);
+ function filter(category){details.forEach(d=>{d.hidden=category!==0&&+d.dataset.category!==category;if(d.hidden)d.open=false;});filters.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.fqCategory===category)));}
+ filters.addEventListener('click',e=>{const b=e.target.closest('button');if(b)filter(+b.dataset.fqCategory);});
+ shell.querySelectorAll('[data-fq-jump]').forEach(b=>b.addEventListener('click',()=>{filter(0);const d=document.getElementById('ydg-faq-'+b.dataset.fqJump);details.forEach(x=>x.open=x===d);d?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center'});d?.querySelector('summary').focus({preventScroll:true});}));
+ shell.querySelector('.fq-assistant').addEventListener('click',()=>{const launch=document.getElementById('ya-launch');if(launch?.getAttribute('aria-expanded')!=='true')launch?.click();});
+ function translate(){const t=wording[(document.documentElement.lang||'es').slice(0,2)]||wording.es;shell.querySelectorAll('[data-fq]').forEach(el=>el.textContent=t[+el.dataset.fq]);shell.querySelectorAll('.fq-inline-link').forEach(a=>{a.textContent=t[13];});}
+ translate();addEventListener('ydg-language-change',translate);
+})();
