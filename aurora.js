@@ -77,3 +77,20 @@ if(Date.now()>=new Date('2027-01-01T00:00:00+01:00').getTime()){const offer=docu
  const hero=document.querySelector('.aurora-lead');
  if(hero){const row=document.createElement('p');row.className='aurora-contact-features';row.innerHTML='<span>WhatsApp · Reservas</span><span>Llamadas directas</span><span>Mensajes</span>';hero.after(row);}
 })();
+
+/* Final compact pass: plain CTA labels and concise contact benefits. */
+(()=>{
+ function tidy(){
+  document.querySelectorAll('.aurora-primary').forEach(a=>{[...a.childNodes].filter(n=>n.nodeType===3).forEach(n=>{n.textContent=n.textContent.replace(/[↗→]/g,'').trim();});});
+  const lang=(document.documentElement.lang||'es').slice(0,2);
+  const texts={
+   es:['Webs para negocios y profesionales con reservas por WhatsApp, llamadas y mensajes directos.','WhatsApp · Reservas','Llamadas directas','Mensajes'],
+   en:['Websites for businesses and professionals, with booking enquiries by WhatsApp, direct calls and messages.','WhatsApp · Bookings','Direct calls','Messages'],
+   fr:['Sites pour entreprises et professionnels : demandes de réservation par WhatsApp, appels et messages directs.','WhatsApp · Réservations','Appels directs','Messages'],
+   it:['Siti per attività e professionisti: richieste di prenotazione via WhatsApp, chiamate e messaggi diretti.','WhatsApp · Prenotazioni','Chiamate dirette','Messaggi'],
+   de:['Websites für Unternehmen: Buchungsanfragen per WhatsApp, direkte Anrufe und Nachrichten.','WhatsApp · Anfragen','Direkte Anrufe','Nachrichten']
+  }[lang]||null;
+  if(texts){const lead=document.querySelector('.aurora-lead');if(lead)lead.textContent=texts[0];document.querySelectorAll('.aurora-contact-features span').forEach((e,i)=>e.textContent=texts[i+1]||'');}
+ }
+ tidy();addEventListener('ydg-language-change',tidy);
+})();
