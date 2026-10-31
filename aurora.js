@@ -94,3 +94,16 @@ if(Date.now()>=new Date('2027-01-01T00:00:00+01:00').getTime()){const offer=docu
  }
  tidy();addEventListener('ydg-language-change',tidy);
 })();
+
+/* Restore the original gradient wordmark and click signature in the main brand. */
+(()=>{
+ const brand=document.getElementById('ydg-brand-home');
+ if(!brand)return;
+ const label=brand.querySelector('span:not(.aurora-brand-cursor)');
+ if(label)label.innerHTML='<span class="ydg-wordmark">YourDesignGPT</span><small>WEB DESIGN & DEVELOPMENT</small>';
+ brand.querySelector('.aurora-brand-cursor')?.remove();
+ const cursor=document.createElement('span');cursor.className='ydg-click-cursor';cursor.setAttribute('aria-hidden','true');
+ cursor.innerHTML='<svg viewBox="0 0 25 30" width="24" height="28"><path d="M3 2 22 17l-9 1 4 9-5 2-4-10-6 6Z" fill="currentColor" stroke="#07111f" stroke-width="1.4"/></svg>';
+ brand.append(cursor);
+ const ring=document.createElement('span');ring.className='ydg-click-ring';ring.setAttribute('aria-hidden','true');brand.append(ring);
+})();
