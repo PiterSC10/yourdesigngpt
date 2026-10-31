@@ -1,0 +1,21 @@
+document.addEventListener('DOMContentLoaded',()=>{
+const $=id=>document.getElementById(id);
+const dialog=$('searchDialog');
+$('findLeads').onclick=()=>dialog.showModal();
+$('closeSearch').onclick=()=>dialog.close();
+$('runSearch').onclick=()=>open('https://www.google.com/search?q='+encodeURIComponent($('searchSector').value+' en '+$('searchCity').value),'_blank','noopener,noreferrer');
+$('runMaps').onclick=()=>open('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent($('searchSector').value+' en '+$('searchCity').value),'_blank','noopener,noreferrer');
+$('demoLibrary').onclick=()=>{document.querySelector('[data-view="empresas"]')?.click(); alert('Abre la ficha de una empresa y elige «Crear demo rápida». No se modifica ni se publica la web del negocio.')};
+const designs={
+trades:{title:'Servicios profesionales para tu hogar',subtitle:'Soluciones rápidas y fiables en tu localidad',cta:'Solicitar presupuesto',bg:'linear-gradient(130deg,#112a55,#14769b)'},
+beauty:{title:'Belleza y bienestar a tu alcance',subtitle:'Tratamientos, estilo y atención personalizada',cta:'Consultar servicios',bg:'linear-gradient(130deg,#582d55,#da7ca0)'},
+food:{title:'Sabores que merece la pena descubrir',subtitle:'Carta, horarios y ubicación en un solo lugar',cta:'Ver carta',bg:'linear-gradient(130deg,#51261b,#ce8044)'},
+retail:{title:'Tu comercio, también online',subtitle:'Descubre nuestras novedades y productos',cta:'Explorar productos',bg:'linear-gradient(130deg,#24434d,#36a78f)'}
+};
+function currentLead(){const name=$('drawerName').textContent;return window.YDG_LEADS_API?.records().find(r=>r.name===name)||null}
+function kind(r){const s=(r?.sector||'').toLowerCase();return /fontan|electric|reforma|pintor|cerraj|jardin/.test(s)?'trades':/peluquer|estet|belleza|uñas/.test(s)?'beauty':/restaur|bar|cafe|comida/.test(s)?'food':'retail'}
+function demo(r){const selected=$('demoKind').value;const d=designs[selected==='auto'?kind(r):selected];$('demoPreview').replaceChildren();const card=document.createElement('div');card.style.cssText='margin-top:12px;padding:25px 17px;border-radius:14px;color:white;text-align:center;background:'+d.bg;const tag=document.createElement('small');tag.textContent='DEMO NO OFICIAL · YOURDESIGNGPT';const title=document.createElement('h2');title.textContent=r?.name||'Tu negocio';const p=document.createElement('p');p.textContent=d.subtitle;const headline=document.createElement('strong');headline.textContent=d.title;card.append(tag,title,headline,p);const cta=document.createElement('span');cta.style.cssText='display:inline-block;padding:10px 15px;background:white;color:#172033;border-radius:9px';cta.textContent=d.cta;card.append(cta);$('demoPreview').append(card);return d}
+$('makeDemo').onclick=()=>demo(currentLead());
+$('drawerEmail').addEventListener('click',()=>{const r=currentLead();if(!r)return;const d=demo(r);$('draftSubject').value='Propuesta visual sin compromiso para '+r.name;$('draftBody').value='Hola, equipo de '+r.name+':\n\nSoy Pedro Soriano, fundador de YourDesignGPT. Mi interés por el diseño web comenzó hace más de 20 años; uno de mis primeros proyectos fue la web del Instituto Huelin de Málaga, cuando estudiaba allí.\n\nHe creado YourDesignGPT para que pequeños negocios como el vuestro puedan disponer de una web moderna y adaptada a móviles sin grandes inversiones.\n\nNuestra promoción actual es de 99 € por la creación y 100 € al año por dominio, alojamiento, SSL, mantenimiento y tres cambios menores.\n\nSi os interesa, podemos prepararos una demostración visual gratuita y sin compromiso, con una idea adaptada a vuestra actividad ('+d.title+'). Si os gusta, confirmamos la propuesta, nos facilitáis el contenido y nos encargamos del desarrollo y la publicación.\n\nPortfolio: https://yourdesigngpt.vercel.app/\n\n¿Os gustaría recibir una propuesta?\n\nUn saludo,\nPedro Soriano\nYourDesignGPT';});
+const style=document.createElement('style');style.textContent='.demo-workspace{background:#151e31;padding:12px;border-radius:12px;margin:10px 0}.demo-workspace select{margin:10px 0}.demo-workspace button{margin-bottom:6px}#searchDialog{max-width:480px}.lead-drawer{width:min(470px,100vw)}';document.head.append(style);
+});
