@@ -1,0 +1,10 @@
+document.addEventListener('DOMContentLoaded',()=>{
+const $=id=>document.getElementById(id),status=$('gmailStatus'),connect=$('gmailConnect'),check=$('gmailCheck');
+const token=async()=>{const client=window.YDG_LEADS_API?.client();if(!client)return null;const {data}=await client.auth.getSession();return data.session?.access_token||null};
+const call=async(path,method='GET')=>{const jwt=await token();if(!jwt)throw Error('Inicia sesión en el CRM');const r=await fetch('/api/gmail/'+path,{method,headers:{Authorization:'Bearer '+jwt},credentials:'same-origin'});const data=await r.json();if(!r.ok)throw Error(data.error||'Error de Gmail');return data};
+async function refresh(){if(!await token())return;connect.classList.remove('hidden');try{const d=await call('status');status.textContent=!d.setup?'Gmail: configuración pendiente':d.connected?'Gmail conectado: '+d.email:'Gmail sin conectar';connect.textContent=d.connected?'Reconectar Gmail':'✉ Conectar Gmail';check.classList.toggle('hidden',!d.connected)}catch(e){status.textContent='Gmail: '+e.message}}
+connect.onclick=async()=>{connect.disabled=true;try{const d=await call('start','POST');window.location.assign(d.url)}catch(e){alert(e.message);connect.disabled=false}};
+check.onclick=async()=>{check.disabled=true;try{const d=await call('messages');status.textContent='Gmail conectado · '+d.messages.length+' mensajes recientes localizados (sin importar)'}catch(e){alert(e.message)}finally{check.disabled=false}};
+window.addEventListener('ydg-leads-refreshed',refresh);
+if(new URLSearchParams(location.search).has('gmail')){const v=new URLSearchParams(location.search).get('gmail');status.textContent=v==='connected'?'Gmail autorizado correctamente':'No se pudo completar la autorización de Gmail';history.replaceState({},'',location.pathname)}
+});
