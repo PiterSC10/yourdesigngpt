@@ -76,3 +76,44 @@ html body #configurador{padding-bottom:90px!important}
  html body .aurora-contact-features{margin-top:-8px!important;margin-bottom:20px!important;gap:6px}
  html body .aurora-contact-features span{font-size:9px!important;padding:6px 8px}
 }
+
+/* Final compact rhythm: one clear hero, short footer, direct navigation. */
+html body.aurora-focused #aurora-home{max-width:1320px!important;padding:32px 30px 35px!important;min-height:0!important}
+html body #aurora-title{font-size:clamp(38px,4vw,56px)!important;line-height:1.08!important;margin-bottom:18px!important}
+html body .aurora-eyebrow{margin-bottom:17px!important}
+html body .aurora-lead{margin-bottom:20px!important;max-width:460px}
+html body .aurora-offer{padding:21px!important;border-radius:20px!important}
+html body .aurora-price strong{font-size:38px!important}
+html body .aurora-price-label{margin-bottom:12px!important;font-size:12px!important}
+html body .aurora-expiry{padding-top:12px!important;margin-bottom:13px!important}
+html body .aurora-actions a{min-height:44px!important}
+html body .aurora-contact-features{margin-bottom:20px!important}
+html body #ydg-site-header .aurora-nav{max-width:1260px!important}
+html body footer{padding:14px 20px!important}
+html body footer .connect-block{margin:8px auto!important;padding:8px!important}
+html body footer .connect-title{margin-bottom:4px!important}
+html body footer .connect-name{margin-bottom:8px!important}
+html body footer .social-links{gap:12px!important}
+html body footer #aurora-footer-links{margin:7px auto!important;gap:12px 20px!important}
+html body footer>p{font-size:11px!important;margin:5px auto!important}
+html body[data-aurora-view="configurador"] #ydg-assistant{display:none!important}
+html body #configurador .ydg-config-head h2{font-size:clamp(26px,4vw,42px)!important}
+html body #configurador .ydg-config-head{margin-bottom:20px!important}
+@media(max-width:700px){
+ html body.aurora-focused #aurora-home{padding:20px 18px 24px!important}
+ html body #aurora-title{font-size:clamp(32px,8.7vw,46px)!important;letter-spacing:-1.5px!important}
+ html body .aurora-eyebrow{font-size:8px!important;letter-spacing:1.5px!important;margin-bottom:15px!important}
+ html body .aurora-lead{font-size:13px!important;line-height:1.65!important}
+ html body .aurora-offer{padding:18px!important;border-radius:17px!important}
+ html body .aurora-price strong{font-size:34px!important}
+ html body .aurora-price small{font-size:15px!important}
+ html body .aurora-actions a{font-size:12px!important;min-height:42px!important;padding:10px 13px!important}
+ html body .aurora-visual{margin-top:0!important}
+ html body .aurora-hero-grid{gap:12px!important}
+ html body.aurora-focused #configurador{padding:20px 12px 30px!important}
+ html body #configurador .ydg-config-main{padding:17px!important}
+ html body #configurador .ydg-choice-card{min-height:130px!important;padding:15px 10px!important}
+ html body #configurador .ydg-choice-card h3,html body #configurador .ydg-choice-card strong{font-size:14px!important}
+ html body #configurador .ydg-choice-card p{font-size:11px!important}
+ html body footer .connect-block{padding:6px!important}
+}
