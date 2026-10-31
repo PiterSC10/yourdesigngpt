@@ -45,3 +45,21 @@ if(Date.now()>=new Date('2027-01-01T00:00:00+01:00').getTime()){const offer=docu
  document.body.classList.add('aurora-focused');
  route();
 })();
+
+/* Keep configuration directly accessible and restore the brand click gesture. */
+(()=>{
+ const nav=document.querySelector('.aurora-nav'),menu=document.getElementById('nav-content'),brand=document.getElementById('ydg-brand-home');
+ const configure=menu?.querySelector('a[href="#configurador"]');
+ if(configure&&nav){configure.className='aurora-config-direct';nav.insertBefore(configure,document.getElementById('nav-toggle'));}
+ if(brand){
+  brand.classList.add('aurora-click-brand');
+  const cursor=document.createElement('span');cursor.className='aurora-brand-cursor';cursor.setAttribute('aria-hidden','true');
+  cursor.innerHTML='<svg viewBox="0 0 25 30" width="22" height="27"><path d="M3 2 22 17l-9 1 4 9-5 2-4-10-6 6Z" fill="currentColor" stroke="#07111f" stroke-width="1.4"/></svg>';
+  brand.append(cursor);
+  function play(){brand.classList.remove('aurora-brand-playing');void brand.offsetWidth;brand.classList.add('aurora-brand-playing');setTimeout(()=>brand.classList.remove('aurora-brand-playing'),1900);}
+  document.addEventListener('click',e=>{if(e.target.closest('#ydg-brand-home'))play();},true);
+  // The focused navigation handler intercepts links; pointer feedback is independent.
+  brand.addEventListener('pointerdown',play);
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches)play();
+ }
+})();
