@@ -122,3 +122,41 @@ if(Date.now()>=new Date('2027-01-01T00:00:00+01:00').getTime()){const offer=docu
  const price=document.querySelector('.aurora-offer');
  if(price){const badge=document.createElement('p');badge.className='aurora-offer-badge';badge.textContent='TU NEGOCIO, CON WEB PROPIA';price.prepend(badge);}
 })();
+
+/* Sector previews: independent buttons, accessible native dialog, original selection logic. */
+(()=>{
+ const cards=[...document.querySelectorAll('#configurador .ydg-choice-card[data-type]')];
+ if(!cards.length)return;
+ const examples=[
+ {brand:'NEXO / STUDIO',title:'Ideas claras.<br>Negocios que crecen.',tag:'CONSULTORÍA & ESTRATEGIA',desc:'Tu próximo paso empieza con una buena conversación.',cta:'Hablemos de tu proyecto',theme:'business',detail:'Servicios, presentación de empresa y contacto directo.',body:'<div class="mp-metrics"><b>01<small>Estrategia</small></b><b>02<small>Diseño</small></b><b>03<small>Resultados</small></b></div>'},
+ {brand:'BRASA & SAL',title:'El Mediterráneo,<br>en cada mesa.',tag:'COCINA DE TEMPORADA',desc:'Sabores de aquí. Momentos para quedarse.',cta:'Reservar mesa',theme:'restaurant',detail:'Carta visual, horarios y solicitudes de reserva por WhatsApp.',body:'<div class="mp-food"><i></i><span>Producto fresco · Cocina con alma</span></div><div class="mp-minirow"><b>La carta</b><b>El espacio</b><b>Reserva</b></div>'},
+ {brand:'CASA AZUL / BOUTIQUE',title:'Desconecta.<br>Ya has llegado.',tag:'TU REFUGIO JUNTO AL MAR',desc:'Habitaciones con calma y días sin prisa.',cta:'Consultar disponibilidad',theme:'hotel',detail:'Habitaciones, servicios y acceso a reservas o contacto.',body:'<div class="mp-booking"><span>Llegada<big>12 JUN</big></span><span>Salida<big>15 JUN</big></span><span>Huéspedes<big>2 adultos</big></span></div>'},
+ {brand:'ALEX / CREATIVE',title:'Diseño con intención.<br>Ideas con carácter.',tag:'PORTFOLIO PERSONAL',desc:'Identidad visual, experiencias digitales y proyectos propios.',cta:'Explora mi trabajo',theme:'personal',detail:'Presentación, proyectos, experiencia y redes profesionales.',body:'<div class="mp-work"><div>TYPE<br><b>Aa</b></div><div>BRAND<br><b>✳</b></div><div>DIGITAL<br><b>↗</b></div></div>'},
+ {brand:'LA PAUSA / JOURNAL',title:'Historias que<br>merecen un café.',tag:'CULTURA · VIAJES · IDEAS',desc:'Una mirada curiosa a las pequeñas cosas.',cta:'Leer la última historia',theme:'blog',detail:'Artículos, categorías y una lectura cómoda en cualquier pantalla.',body:'<div class="mp-stories"><article><i></i><small>ESCAPADAS</small><b>El lujo de ir despacio</b></article><article><i></i><small>INSPIRACIÓN</small><b>Una idea para cada día</b></article></div>'},
+ {brand:'PULSE / AUDIO',title:'Menos ruido.<br>Más tú.',tag:'DESCUBRE TU NUEVO RITMO',desc:'Una página. Un producto. Todo el protagonismo.',cta:'Descubrir Pulse',theme:'landing',detail:'Propuesta de valor, beneficios y una llamada a la acción clara.',body:'<div class="mp-product"><div class="mp-headphones"><i></i><i></i></div><span>Diseñado para acompañarte.</span></div>'},
+ {brand:'ORBIT / LAB',title:'Tu idea no cabe<br>en una plantilla.',tag:'PROYECTOS A MEDIDA',desc:'Experiencias digitales con personalidad propia.',cta:'Cuéntanos tu idea',theme:'custom',detail:'Una referencia creativa para definir contigo un proyecto a medida.',body:'<div class="mp-orbit"><span>IDEA</span><span>DISEÑO</span><span>ACCIÓN</span></div>'},
+ {brand:'IMPULSO / ACADEMY',title:'Tu siguiente meta,<br>más cerca.',tag:'APRENDE · PRACTICA · AVANZA',desc:'Tu temario y tus cuestionarios, en un solo lugar.',cta:'Explorar los cursos',theme:'academy',detail:'Temarios, cuestionarios y progreso: funciones según el alcance contratado.',body:'<div class="mp-dashboard"><div><small>MI PROGRESO</small><b>68%</b><i></i></div><ul><li>Temario organizado <b>12 temas</b></li><li>Practica a tu ritmo <b>Test</b></li><li>Tu próxima sesión <b>Continuar</b></li></ul></div>'}
+ ];
+ const dialog=document.createElement('dialog');dialog.id='ydg-example-dialog';dialog.setAttribute('aria-labelledby','ydg-example-title');
+ dialog.innerHTML='<div class="mp-dialog-head"><div><p>INSPÍRATE PARA TU PROYECTO</p><h2 id="ydg-example-title"></h2></div><button type="button" class="mp-close" aria-label="Cerrar ejemplo">×</button></div><p class="mp-description"></p><div class="mp-stage"></div><p class="mp-note">Ejemplo orientativo con marca ficticia. Adaptamos el diseño a tu negocio; las funciones se acuerdan según el alcance.</p><div class="mp-dialog-actions"><button type="button" class="mp-choose">Elegir este tipo</button><button type="button" class="mp-back">Seguir mirando</button></div>';
+ document.body.append(dialog);
+ let chosen=0,opener=null,previousOverflow='';
+ function close(){dialog.close();}
+ function render(ex,mobile=false){return '<div class="mp-screen '+ex.theme+(mobile?' mp-phone-screen':'')+'"><div class="mp-site-nav"><b>'+ex.brand+'</b><span>Inicio &nbsp; Colección &nbsp; Contacto</span></div><div class="mp-content"><div class="mp-copy"><small>'+ex.tag+'</small><h3>'+ex.title+'</h3><p>'+ex.desc+'</p><span class="mp-visual-cta">'+ex.cta+' ↗</span></div>'+ex.body+'</div><div class="mp-site-bottom">HECHO PARA TU MARCA <span>Diseño · Experiencia · Conexión</span></div></div>';}
+ function open(i,btn){
+  chosen=i;opener=btn;const ex=examples[i];
+  dialog.querySelector('h2').textContent=cards[i].dataset.type;
+  dialog.querySelector('.mp-description').textContent=ex.detail;
+  dialog.querySelector('.mp-stage').innerHTML='<div class="mp-desktop"><div class="mp-browser-bar"><i></i><i></i><i></i><span>Vista de ordenador · Ejemplo de diseño</span></div>'+render(ex)+'</div><div class="mp-phone" aria-hidden="true"><div class="mp-notch"></div>'+render(ex,true)+'</div>';
+  previousOverflow=document.body.style.overflow;document.body.style.overflow='hidden';dialog.showModal();dialog.querySelector('.mp-close').focus();
+ }
+ cards.forEach((card,i)=>{
+  const wrap=document.createElement('div');wrap.className='ydg-example-choice';card.before(wrap);wrap.append(card);
+  const btn=document.createElement('button');btn.type='button';btn.className='ydg-example-open';btn.textContent='Ver ejemplo';btn.setAttribute('aria-label','Ver ejemplo de '+card.dataset.type);btn.setAttribute('aria-haspopup','dialog');btn.addEventListener('click',()=>open(i,btn));wrap.append(btn);
+ });
+ dialog.querySelector('.mp-close').addEventListener('click',close);
+ dialog.querySelector('.mp-back').addEventListener('click',close);
+ dialog.querySelector('.mp-choose').addEventListener('click',()=>{cards[chosen].click();close();cards[chosen].focus();});
+ dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)close();}});
+ dialog.addEventListener('close',()=>{document.body.style.overflow=previousOverflow;opener?.focus();});
+})();
