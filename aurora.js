@@ -20,7 +20,7 @@ if(Date.now()>=new Date('2027-01-01T00:00:00+01:00').getTime()){const offer=docu
 (()=>{
  const main=document.getElementById('main-content');
  const sections=[...main.children].filter(e=>e.tagName==='SECTION');
- const routes=new Set(['aurora-home','portfolio','configurador','incluye','faq','capacidades','tienda','como-funciona','links-importantes','calidad']);
+ const routes=new Set(['aurora-home','portfolio','configurador','incluye','faq','capacidades','tienda','como-funciona','links-importantes','calidad','servicios-web','opiniones']);
  function show(id,scroll=true){
   if(!routes.has(id))id='aurora-home';
   document.body.dataset.auroraView=id;
@@ -106,4 +106,19 @@ if(Date.now()>=new Date('2027-01-01T00:00:00+01:00').getTime()){const offer=docu
  cursor.innerHTML='<svg viewBox="0 0 25 30" width="24" height="28"><path d="M3 2 22 17l-9 1 4 9-5 2-4-10-6 6Z" fill="currentColor" stroke="#07111f" stroke-width="1.4"/></svg>';
  brand.append(cursor);
  const ring=document.createElement('span');ring.className='ydg-click-ring';ring.setAttribute('aria-hidden','true');brand.append(ring);
+})();
+
+/* Full visible site navigation, with editorial footer links. */
+(()=>{
+ const links=document.querySelector('.aurora-links');
+ const items=[['#main-content','Inicio'],['#portfolio','Proyectos'],['#incluye','Qué incluye'],['#como-funciona','Cómo trabajamos'],['#calidad','Escáner web'],['#capacidades','CV y experiencia'],['#tienda','YDG Store'],['#faq','Preguntas frecuentes'],['#links-importantes','Contacto']];
+ if(links)links.innerHTML=items.map(([href,label])=>'<a href="'+href+'">'+label+'</a>').join('');
+ document.getElementById('aurora-footer-links')?.remove();
+ const scan=document.getElementById('calidad');
+ if(scan&&!document.getElementById('ydg-scan-scope')){
+  const note=document.createElement('p');note.id='ydg-scan-scope';note.textContent='Demostración visual del proceso de revisión. Los resultados de esta animación son orientativos y no constituyen una auditoría técnica en tiempo real.';
+  scan.querySelector('.ydg-status-actions')?.before(note);
+ }
+ const price=document.querySelector('.aurora-offer');
+ if(price){const badge=document.createElement('p');badge.className='aurora-offer-badge';badge.textContent='TU NEGOCIO, CON WEB PROPIA';price.prepend(badge);}
 })();
