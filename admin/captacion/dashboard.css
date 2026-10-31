@@ -42,3 +42,26 @@ dialog{background:#121e32;border-color:#596b90;box-shadow:0 25px 80px #0009}
 @media(max-width:860px){main{padding:16px 12px}.side{border-right:0;border-bottom:1px solid #314160}.side nav a:hover{transform:none}.stats{gap:10px}}
 @media(max-width:650px){.panel{padding:14px}.stat{min-height:100px}.stat strong{font-size:28px}.lead-drawer{padding:16px}.bar{align-items:flex-start}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
+
+
+/* Mockup-matched CRM dashboard 3.0 */
+body{background:#080f22}.side{width:248px;background:linear-gradient(180deg,#0c1530,#0a1227);padding:20px 12px;gap:22px}
+.brand{padding:9px 12px 14px}.brand b{display:flex;align-items:center;gap:9px;font-size:18px;letter-spacing:-.04em}.brand span.brand-bolt{display:inline-grid;place-items:center;font-size:37px;font-weight:900;color:#8c45ff;text-shadow:2px 2px #21bdfc}.brand small{font-size:12px;margin-left:42px;color:#c0c9e9}
+.side nav{gap:5px}.side nav a{padding:14px 15px;border-radius:9px;font-size:13px}.side nav a.active{background:linear-gradient(90deg,#273c9b,#40348d);border-left:3px solid #24d2ff}
+.side-tip{background:linear-gradient(145deg,#132969,#211347);border:1px solid #3456d8;color:#e5ebff;padding:22px 16px}
+main{padding:20px 20px 35px}header.bar{border:0;padding-bottom:0;margin-bottom:19px}header h1{font-size:29px}header small{font-size:13px}
+.stats{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.stat{min-height:120px!important;padding:15px!important;display:flex;flex-direction:column;justify-content:center;gap:7px;background:#0d2046!important;border:1px solid #254e8e!important;border-radius:13px!important}
+.stat:nth-child(2){background:#0b264e!important}.stat:nth-child(3){background:#29123e!important;border-color:#663083!important}.stat:nth-child(4){background:#2c201b!important;border-color:#8c5a1e!important}.stat:nth-child(5){background:#0a302e!important;border-color:#126a61!important}
+.stat:before{display:none}.stat .stat-icon{display:grid;place-items:center;width:40px;height:40px;border-radius:10px;font-size:25px;background:linear-gradient(135deg,#1d79d2,#0d387d);color:#80e8ff}.stat:nth-child(3) .stat-icon{background:#63239c;color:#f1a9ff}.stat:nth-child(4) .stat-icon{background:#8c5117;color:#ffd187}.stat:nth-child(5) .stat-icon{background:#0a685c;color:#86ffe8}
+.stat small{font-size:12px;color:#c3d3f7;order:2}.stat strong{font-size:32px;line-height:1;order:1}.stat .stat-icon{order:0}
+.workflows{margin:14px 0}.workflows button{font-size:12px;padding:9px 12px;border-radius:9px}
+.leads-table-panel{border-radius:14px;background:#0c162d;border-color:#233658;padding:13px}
+.leads-table-panel .bar h2{font-size:19px}.leads-table-panel .bar button{font-size:12px;padding:9px}
+.leads-table-panel .filters{grid-template-columns:repeat(3,minmax(130px,1fr));gap:8px}
+.leads-table-panel .filters input{grid-column:1/-1}
+.leads-table-panel .filters select,.leads-table-panel .filters input{background:#0d1a34;border-color:#2d3e5f;font-size:12px;padding:10px}
+.scroll{border-color:#253654}table{font-size:12px}th{background:#111e3b;color:#aabde4}td{padding:12px 9px;border-bottom:1px solid #243450}#rows tr:nth-child(even){background:#111c34}
+.status-badge{display:inline-block;padding:5px 10px;border-radius:20px;background:#334364;color:#e4ecff;white-space:nowrap;font-size:11px;font-weight:700}
+.status-badge[data-status="Interesado"]{background:#725017;color:#ffe09b}.status-badge[data-status="Cliente"]{background:#0a6655;color:#9affdf}.status-badge[data-status="Enviado"],.status-badge[data-status="Esperando respuesta"]{background:#105b59;color:#a2fff0}.status-badge[data-status="Descartado"],.status-badge[data-status="No contactar"]{background:#6b2638;color:#ffb1c5}.status-badge[data-status="Pendiente de enviar"]{background:#4d2a95;color:#dfc2ff}
+.lead-drawer{width:min(440px,100vw);background:#0e1930;border-left-color:#293b62}
+@media(max-width:1250px){.stats{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:860px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.side{width:100%}.brand{display:none}}@media(max-width:650px){.leads-table-panel .filters{grid-template-columns:1fr}.stat{min-height:100px!important}}
