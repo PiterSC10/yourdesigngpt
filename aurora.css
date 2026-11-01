@@ -239,3 +239,21 @@ html body.ydg-classic-hero{padding-top:0!important}
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior:auto!important; animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; }
 }
+
+
+/* FINAL FAQ CLEANUP: remove every decorative arrow/chevron from FAQ rows and cards */
+#faq .faq-icon,
+#faq .faq-question svg,
+#faq .faq-question i,
+#faq .faq-question::before,
+#faq .faq-question::after,
+.ydg-faq-modern .fq-card summary::before,
+.ydg-faq-modern .fq-card summary::after,
+.ydg-faq-modern .fq-quick button::before,
+.ydg-faq-modern .fq-quick button::after,
+.ydg-faq-modern .fq-quick i,
+.fq-card summary::before,
+.fq-card summary::after { display:none!important; content:none!important; }
+#faq .faq-question,
+.ydg-faq-modern .fq-card summary,
+.fq-card summary { justify-content:flex-start!important; }
