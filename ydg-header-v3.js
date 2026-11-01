@@ -309,10 +309,21 @@
       requestAnimationFrame(animate);
     }
 
-    // Recalculate anchor offsets using the actual sticky header height.
+    // Keep document flow intact while the desktop header is fixed to the viewport.
+    let headerSpacer = document.getElementById('ydg-header-fixed-spacer');
+    if (!headerSpacer) {
+      headerSpacer = document.createElement('div');
+      headerSpacer.id = 'ydg-header-fixed-spacer';
+      headerSpacer.setAttribute('aria-hidden','true');
+      header.parentNode.insertBefore(headerSpacer,header);
+    }
+
+    // Recalculate anchor offsets using the actual header height.
     const measure = () => {
       const h = Math.ceil(header.getBoundingClientRect().height);
       document.documentElement.style.setProperty('--ydg-header-height',h+'px');
+      headerSpacer.style.height = window.innerWidth > 760 ? h+'px' : '0px';
+      headerSpacer.style.display = window.innerWidth > 760 ? 'block' : 'none';
       document.querySelectorAll('main section[id]').forEach(el => { el.style.scrollMarginTop = (h+12)+'px'; });
     };
     measure();
