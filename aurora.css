@@ -223,3 +223,19 @@ html body #faq .ydg-faq-modern{max-width:1050px;margin:auto;text-align:left}
 
 /* YDG classic homepage: remove the reserved blank strip above the header. */
 html body.ydg-classic-hero{padding-top:0!important}
+
+
+/* YDG performance cleanup: remove legacy presentation motion and floating dog mascot */
+#ydg-robot-widget,
+#ydg-robot-widget-reopen,
+.ydg-dog-mascot,
+.ydg-mascot,
+.ydg-dog-widget,
+.hero-particles,
+.ydg-robot-parallax,
+.ydg-robot-parallax img,
+.ydg-drone-pass { display:none!important; }
+#fx-intro { display:none!important; animation:none!important; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior:auto!important; animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; }
+}
