@@ -227,6 +227,39 @@
       @media(max-width:560px){.ydg-visitor-panel{margin:28px 14px 20px;padding:16px;gap:10px}.ydg-visitor-sub{max-width:180px}.ydg-visitor-number{font-size:24px}}
       @media(prefers-reduced-motion:reduce){.ydg-visitor-dot,.ydg-visitor-scan{animation:none!important}}
     `;
+    style.textContent += `
+      /* Final navigation cleanup */
+      @media(min-width:761px){
+        #ydg-site-header.aurora-header{
+          position:fixed!important;top:0!important;left:0!important;right:0!important;
+          width:100%!important;max-width:none!important;z-index:9999!important;
+        }
+        #ydg-site-header .aurora-nav,
+        #ydg-site-header .ydg-header-menu-row-v3,
+        #ydg-site-header #nav-content,
+        #ydg-site-header .aurora-links{
+          overflow:visible!important;overflow-x:visible!important;overflow-y:visible!important;
+        }
+        #ydg-site-header .aurora-links{flex-wrap:nowrap!important}
+      }
+      #ydg-site-header,
+      #ydg-site-header .aurora-nav,
+      #ydg-site-header .ydg-header-menu-row-v3,
+      #ydg-site-header #nav-content{
+        scrollbar-width:none!important;
+      }
+      #ydg-site-header::-webkit-scrollbar,
+      #ydg-site-header .aurora-nav::-webkit-scrollbar,
+      #ydg-site-header #nav-content::-webkit-scrollbar,
+      #ydg-site-header .aurora-links::-webkit-scrollbar{display:none!important;width:0!important;height:0!important}
+      html,body{overflow-x:hidden!important}
+      html{scroll-padding-top:calc(var(--ydg-header-height,110px) + 12px)!important}
+      main section[id]{scroll-margin-top:calc(var(--ydg-header-height,110px) + 12px)!important}
+      /* FAQ: remove the redundant grey chevron; keep the right-hand plus control */
+      #faq .faq-question .faq-icon,
+      #faq .faq-question svg{display:none!important}
+      #faq .faq-question{justify-content:flex-start!important}
+    `;
     document.head.appendChild(style);
 
     // Honest local counter: increments once per new browser session on this device.
