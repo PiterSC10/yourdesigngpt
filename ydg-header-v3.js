@@ -322,8 +322,8 @@
     const measure = () => {
       const h = Math.ceil(header.getBoundingClientRect().height);
       document.documentElement.style.setProperty('--ydg-header-height',h+'px');
-      headerSpacer.style.height = window.innerWidth > 760 ? h+'px' : '0px';
-      headerSpacer.style.display = window.innerWidth > 760 ? 'block' : 'none';
+      headerSpacer.style.height = h+'px';
+      headerSpacer.style.display = 'block';
       document.querySelectorAll('main section[id]').forEach(el => { el.style.scrollMarginTop = (h+12)+'px'; });
     };
     measure();
