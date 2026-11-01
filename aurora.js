@@ -16,8 +16,9 @@ apply();addEventListener('ydg-language-change',apply);
 if(Date.now()>=new Date('2027-01-01T00:00:00+01:00').getTime()){const offer=document.querySelector('.aurora-offer');if(offer){offer.querySelector('.aurora-price').innerHTML='<strong>495 €</strong><span>+</span><strong>150 €<small data-aurora="year">/año</small></strong>';offer.querySelector('.aurora-expiry').remove();apply();}}
 })();
 
-/* Focused navigation: one section at a time, no long homepage. */
+/* Keep the original scrolling homepage shown on first paint. No delayed second layout. */
 (()=>{
+ if(document.body.classList.contains('ydg-classic-hero'))return;
  const main=document.getElementById('main-content');
  const sections=[...main.children].filter(e=>e.tagName==='SECTION');
  const routes=new Set(['aurora-home','portfolio','configurador','incluye','faq','capacidades','tienda','como-funciona','links-importantes','calidad','servicios-web','opiniones']);
@@ -50,7 +51,7 @@ if(Date.now()>=new Date('2027-01-01T00:00:00+01:00').getTime()){const offer=docu
 (()=>{
  const nav=document.querySelector('.aurora-nav'),menu=document.getElementById('nav-content'),brand=document.getElementById('ydg-brand-home');
  const configure=menu?.querySelector('a[href="#configurador"]');
- if(configure&&nav){configure.className='aurora-config-direct';nav.insertBefore(configure,document.getElementById('nav-toggle'));}
+ if(configure&&nav&&!nav.querySelector('.aurora-config-direct')){configure.className='aurora-config-direct';nav.insertBefore(configure,document.getElementById('nav-toggle'));}
  if(brand){
   brand.classList.add('aurora-click-brand');
   const cursor=document.createElement('span');cursor.className='aurora-brand-cursor';cursor.setAttribute('aria-hidden','true');
@@ -71,11 +72,9 @@ if(Date.now()>=new Date('2027-01-01T00:00:00+01:00').getTime()){const offer=docu
 
 /* Direct navigation on all screen sizes, without a nested menu. */
 (()=>{
- const flags=document.getElementById('ydg-language-strip'),footer=document.querySelector('footer');
- if(flags&&footer)footer.append(flags);
+ // Language flags stay in the original header, rather than moving after the first paint.
  document.getElementById('nav-toggle')?.remove();
- const hero=document.querySelector('.aurora-lead');
- if(hero&&!document.querySelector('.aurora-contact-features')){const row=document.createElement('p');row.className='aurora-contact-features';row.innerHTML='<span>WhatsApp · Reservas</span><span>Llamadas directas</span><span>Mensajes</span>';hero.after(row);}
+ // Preserve the original clean hero without inserting a second set of feature chips.
 })();
 
 /* Final compact pass: plain CTA labels and concise contact benefits. */
@@ -112,7 +111,7 @@ if(Date.now()>=new Date('2027-01-01T00:00:00+01:00').getTime()){const offer=docu
 (()=>{
  const links=document.querySelector('.aurora-links');
  const items=[['#main-content','Inicio'],['#portfolio','Proyectos'],['#incluye','Qué incluye'],['#como-funciona','Cómo trabajamos'],['#calidad','Escáner web'],['#capacidades','CV y experiencia'],['#tienda','YDG Store'],['#faq','Preguntas frecuentes'],['#links-importantes','Contacto']];
- if(links)links.innerHTML=items.map(([href,label])=>'<a href="'+href+'">'+label+'</a>').join('');
+ // Preserve the original five navigation tabs; do not rebuild them after paint.
  document.getElementById('aurora-footer-links')?.remove();
  const scan=document.getElementById('calidad');
  if(scan&&!document.getElementById('ydg-scan-scope')){
@@ -120,7 +119,7 @@ if(Date.now()>=new Date('2027-01-01T00:00:00+01:00').getTime()){const offer=docu
   scan.querySelector('.ydg-status-actions')?.before(note);
  }
  const price=document.querySelector('.aurora-offer');
- if(price&&!price.querySelector('.aurora-offer-badge')){const badge=document.createElement('p');badge.className='aurora-offer-badge';badge.textContent='TU NEGOCIO, CON WEB PROPIA';price.prepend(badge);}
+ // Keep the original purple price card unchanged; no late-added badge.
 })();
 
 /* Sector previews: independent buttons, accessible native dialog, original selection logic. */
