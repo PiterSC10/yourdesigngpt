@@ -13,7 +13,7 @@
     }
     #ydg-site-header .aurora-nav{
       display:flex!important;align-items:center!important;gap:clamp(7px,1vw,14px)!important;
-      flex-wrap:nowrap!important;width:100%;max-width:1500px;margin:0 auto;
+      flex-wrap:nowrap!important;width:100%;max-width:1500px;margin:0 auto;overflow-x:auto;scrollbar-width:none;
       padding:9px clamp(10px,2vw,24px)!important;min-height:68px;
     }
     #ydg-site-header .aurora-brand{flex:0 0 auto!important;min-width:0}
@@ -76,7 +76,7 @@
       #ydg-site-header .aurora-links{gap:2px!important}
       #ydg-site-header .aurora-links a{font-size:9px!important;padding:7px 6px!important}
       #ydg-site-header .aurora-config-direct,#ydg-site-header .aurora-client{font-size:9px!important;padding:7px 7px!important}
-      #ydg-site-header .ydg-language-strip{display:none!important}
+      #ydg-site-header .ydg-language-strip{display:flex!important;gap:1px!important}
     }
     @media(max-width:430px){
       #ydg-site-header .aurora-brand span{display:none!important}
