@@ -257,3 +257,21 @@ html body.ydg-classic-hero{padding-top:0!important}
 #faq .faq-question,
 .ydg-faq-modern .fq-card summary,
 .fq-card summary { justify-content:flex-start!important; }
+
+/* YDG Mobile V4: eliminate legacy header offset and keep main content within the viewport. */
+@media (max-width:760px) {
+  html,html body { max-width:100%!important; overflow-x:clip!important; }
+  html body { padding-top:0!important; }
+  html body #ydg-site-header.aurora-header {
+    position:sticky!important; top:0!important; left:auto!important; right:auto!important;
+    width:100%!important; max-width:100%!important; margin:0!important;
+    padding:0!important; z-index:9999!important;
+  }
+  html body #main-content { max-width:100%!important; min-width:0!important; }
+  html body #main-content>section { max-width:100%!important; min-width:0!important; }
+  html body #aurora-home { margin-top:0!important; padding-top:clamp(18px,4vw,26px)!important; }
+  html body #portfolio .portfolio-grid { grid-template-columns:minmax(0,1fr)!important; }
+  html body #portfolio .portfolio-card { min-width:0!important; max-width:100%!important; }
+  html body #configurador .ydg-config-shell { min-width:0!important; max-width:100%!important; }
+  html body #main-content figure>img { max-width:100%; height:auto; }
+}
