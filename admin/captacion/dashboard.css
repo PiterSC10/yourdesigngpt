@@ -90,3 +90,22 @@ main{padding:20px 20px 35px}header.bar{border:0;padding-bottom:0;margin-bottom:1
 .lead-actions .lead-status-action{display:inline-block;width:auto;max-width:180px;min-width:135px;padding:8px 9px;font-size:12px;background:#152746;border:1px solid #344e78}
 .leads-table-panel{scroll-margin-top:90px}
 @media(max-width:650px){.lead-actions{min-width:200px}.lead-actions .lead-status-action{margin-top:6px}}
+
+/* Unified workspace: KPI cards are the single main funnel navigation. */
+#quickActions,#priorityPanel{display:none!important}
+#leadDrawer{z-index:100010!important;top:0!important;right:0!important;bottom:0!important;
+ height:100dvh!important;max-height:100dvh!important;overflow-y:auto!important;
+ overscroll-behavior:contain;scrollbar-gutter:stable;padding:0 18px 28px!important;
+ width:min(480px,100vw)!important;box-shadow:-22px 0 70px #000b!important}
+#leadDrawer .drawer-title{position:sticky;top:0;z-index:3;display:flex;align-items:center;
+ justify-content:space-between;gap:12px;margin:0 -18px 16px;padding:20px 18px 14px;
+ background:#0e1930;border-bottom:1px solid #344b70}
+#leadDrawer .drawer-title h2{min-width:0;margin:0;font-size:20px;overflow-wrap:anywhere}
+#drawerClose{display:grid;place-items:center;flex:none;min-width:44px;min-height:44px;
+ font-size:22px;background:#29416b;color:#fff;cursor:pointer}
+#drawerClose:hover{background:#5e407d}
+#ydgLeadBackdrop{position:fixed;inset:0;background:#0207139c;z-index:100009;
+ border:0;padding:0;border-radius:0;cursor:default}
+body.ydg-drawer-open{overflow:hidden}
+@media(max-width:600px){#leadDrawer{width:100vw!important;padding:0 14px 24px!important}
+ #leadDrawer .drawer-title{margin:0 -14px 14px;padding:14px}}
