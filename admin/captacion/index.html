@@ -60,14 +60,17 @@ main{display:block!important;width:100%!important;max-width:1600px!important;mar
 <script>
 (function(){
 'use strict';
-const statuses=['Pendiente','Preparada','Lista para enviar','Enviado','Seguimiento','Cliente','No interesado'];
+// Persist canonical states accepted by the existing Supabase CHECK constraint.
+const statuses=['Por investigar','Pendiente de enviar','Enviado','Esperando respuesta','Interesado','Cliente','Descartado','No contactar'];
+const statusLabels={'Por investigar':'Pendiente de preparar','Pendiente de enviar':'Pendiente de enviar','Enviado':'Enviado · esperando respuesta','Esperando respuesta':'Contestado / seguimiento','Interesado':'Interesado','Cliente':'Cliente','Descartado':'No interesado','No contactar':'No contactar'};
+const statusLabel=value=>statusLabels[value]||value;
 const pendingStatuses=['Preparada','Lista para enviar','Pendiente de enviar'];
 const sentStatuses=['Enviado','Seguimiento','Esperando respuesta','Interesado','Cliente'];
 let activeKpi='all';
 function matchesKpi(r,kpi){
  if(kpi==='emails') return Boolean(String(r.email||'').trim());
  if(kpi==='pending') return pendingStatuses.includes(r.status);
- if(kpi==='followups') return r.status==='Seguimiento'||r.status==='Esperando respuesta'||Boolean(r.next_followup);
+ if(kpi==='followups') return ['Seguimiento','Esperando respuesta','Interesado'].includes(r.status)||Boolean(r.next_followup);
  if(kpi==='sent') return Boolean(r.contacted_at)||sentStatuses.includes(r.status);
  return true;
 }
@@ -89,22 +92,22 @@ const config=window.YDG_CRM_CONFIG||{};
 if(!config.url||!config.anonKey||!window.supabase){$('setup').classList.remove('hidden');return}
 db=window.supabase.createClient(config.url,config.anonKey,{auth:{persistSession:true,autoRefreshToken:true}});
 const option=(v)=>{const x=document.createElement('option');x.value=v;x.textContent=v;return x};
-statuses.forEach(s=>{$('editStatus').append(option(s));$('statusFilter').append(option(s));$('trackingStatus').append(option(s))});
+statuses.forEach(s=>{for(const id of ['editStatus','statusFilter','trackingStatus']){const o=option(s);o.textContent=statusLabel(s);$(id).append(o)}});
 $('statusFilter').prepend(option('Todos')); $('statusFilter').value='Todos';
 for(const [id,values] of [['editWebStatus',webStatuses],['editEmailStatus',emailStatuses],['editActivityStatus',activityStatuses],['editPermission',permissions]])values.forEach(v=>$(id).append(option(v)));
 $('webFilter').append(option('Todas las webs'),...webStatuses.map(option));
 function safeDate(v){return /^\d{4}-\d{2}-\d{2}$/.test(String(v||''))?String(v):null}
 function validUrl(v){if(!v)return null;try{const u=new URL(v);return ['http:','https:'].includes(u.protocol)?u.href:null}catch{return null}}
 function normalize(data){let name=String(data.name||'').trim();if(!name)throw Error('Nombre obligatorio');
-return {name:name.slice(0,150),city:String(data.city||'').trim().slice(0,100),sector:String(data.sector||'').trim().slice(0,100),status:(statuses.includes(data.status)?data.status:({'Por investigar':'Pendiente','Pendiente de enviar':'Preparada','Esperando respuesta':'Seguimiento','Interesado':'Seguimiento','Descartado':'No interesado','No contactar':'No interesado'}[data.status]||statuses[0])),email:String(data.email||'').trim().slice(0,254),phone:String(data.phone||'').trim().slice(0,50),website:validUrl(data.website),source_url:validUrl(data.source_url),contacted_at:safeDate(data.contacted_at),next_followup:safeDate(data.next_followup),notes:String(data.notes||'').slice(0,5000),web_status:webStatuses.includes(data.web_status)?data.web_status:webStatuses[0],email_status:emailStatuses.includes(data.email_status)?data.email_status:(String(data.email||'').trim()?emailStatuses[1]:emailStatuses[0]),activity_status:activityStatuses.includes(data.activity_status)?data.activity_status:activityStatuses[0],contact_permission:permissions.includes(data.contact_permission)?data.contact_permission:permissions[0],last_verified_at:safeDate(data.last_verified_at)}}
+return {name:name.slice(0,150),city:String(data.city||'').trim().slice(0,100),sector:String(data.sector||'').trim().slice(0,100),status:(statuses.includes(data.status)?data.status:({'Pendiente':'Por investigar','Preparada':'Pendiente de enviar','Lista para enviar':'Pendiente de enviar','Seguimiento':'Esperando respuesta','No interesado':'Descartado'}[data.status]||statuses[0])),email:String(data.email||'').trim().slice(0,254),phone:String(data.phone||'').trim().slice(0,50),website:validUrl(data.website),source_url:validUrl(data.source_url),contacted_at:safeDate(data.contacted_at),next_followup:safeDate(data.next_followup),notes:String(data.notes||'').slice(0,5000),web_status:webStatuses.includes(data.web_status)?data.web_status:webStatuses[0],email_status:emailStatuses.includes(data.email_status)?data.email_status:(String(data.email||'').trim()?emailStatuses[1]:emailStatuses[0]),activity_status:activityStatuses.includes(data.activity_status)?data.activity_status:activityStatuses[0],contact_permission:permissions.includes(data.contact_permission)?data.contact_permission:permissions[0],last_verified_at:safeDate(data.last_verified_at)}}
 async function refresh(){const {data,error}=await db.from('crm_leads').select('*').order('created_at',{ascending:false}).limit(5000);if(error){records=[];$('rows').replaceChildren();$('message').textContent='Error: '+error.message;throw error}records=data||[];render()}
 function render(){setTimeout(()=>window.dispatchEvent(new Event('ydg-leads-refreshed')),0);
 const filtered=records.filter(r=>{if(!matchesKpi(r,activeKpi))return false;let sector=$('sectorFilter').value;let q=$('q').value.toLocaleLowerCase(),s=$('statusFilter').value,c=$('cityFilter').value,w=$('webFilter').value,m=$('emailFilter').value;return (sector==='Todos'||r.sector===sector)&&(s==='Todos'||r.status===s)&&(c==='Todos'||r.city===c)&&(w==='Todas las webs'||r.web_status===w)&&(m==='Todos'||(m==='Con email'?!!r.email:!r.email))&&[r.name,r.city,r.sector,r.email].some(v=>String(v||'').toLocaleLowerCase().includes(q))});
 const sectorOld=$('sectorFilter').value;const sectors=[...new Set(records.map(r=>r.sector).filter(Boolean))].sort();$('sectorFilter').replaceChildren(option('Todos'),...sectors.map(option));$('sectorFilter').value=sectors.includes(sectorOld)?sectorOld:'Todos';
 const cities=[...new Set(records.map(r=>r.city).filter(Boolean))].sort();const old=$('cityFilter').value;$('cityFilter').replaceChildren(option('Todos'),...cities.map(option));$('cityFilter').value=cities.includes(old)?old:'Todos';
 const today=new Date();const localToday=[today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('-');
-const overdue=records.filter(x=>x.next_followup&&x.next_followup<localToday&&!['Cliente','Descartado','No contactar'].includes(x.status));
-const due=records.filter(x=>x.next_followup===localToday&&!['Cliente','Descartado','No contactar'].includes(x.status));
+const overdue=records.filter(x=>x.next_followup&&x.next_followup<localToday&&!['Cliente','Descartado','No contactar','No interesado'].includes(x.status));
+const due=records.filter(x=>x.next_followup===localToday&&!['Cliente','Descartado','No contactar','No interesado'].includes(x.status));
 const toContact=records.filter(x=>matchesKpi(x,'pending'));
 const prioritySets=[['Vencidos',overdue,'#ff7894'],['Para hoy',due,'#ffce79'],['Pendientes de enviar',toContact,'#8bcaff']];
 $('priorityCards').replaceChildren(...prioritySets.map(([label,items,color])=>{const b=document.createElement('button');b.type='button';b.className='priority-card';b.style.setProperty('--priority-accent',color);const title=document.createElement('span');title.textContent=label;const number=document.createElement('strong');number.textContent=items.length;const detail=document.createElement('small');detail.textContent=items.length?items.slice(0,2).map(x=>x.name).join(' · '):'Sin tareas pendientes';b.append(title,number,detail);b.onclick=()=>{if(label==='Pendientes de enviar'){resetForKpi('pending')}else if(items.length){openEditor(items[0])}else{$('message').textContent='No hay tareas en esta categoría'}};return b}));
@@ -130,16 +133,16 @@ $('rows').replaceChildren(...filtered.map(r=>{const tr=document.createElement('t
  const open=document.createElement('button');open.className='secondary';open.textContent='Abrir ficha';open.onclick=()=>{if(window.YDG_LEADS_OPEN)window.YDG_LEADS_OPEN(r);else openEditor(r)};
  const select=document.createElement('select');select.className='lead-status-action';select.setAttribute('aria-label','Cambiar estado de '+r.name);
  select.append(option('Cambiar estado…'));
- for(const state of statuses){const o=option(state);o.textContent=state==='Seguimiento'?'Contestado / seguimiento':state;select.append(o)}
+ for(const state of statuses){const o=option(state);o.textContent=statusLabel(state);select.append(o)}
  select.value='Cambiar estado…';
  select.onchange=async()=>{
    const status=select.value;select.disabled=true;
    try {
      if(status==='Enviado') {
        if(r.contact_permission!=='Autorizado')throw Error('Antes del envío hay que registrar la base legal del contacto.');
-       await window.YDG_LEADS_API.markSent(r.id);
+       const saved=await window.YDG_LEADS_API.markSent(r.id);if(!saved)return;
      } else if(status!=='Cambiar estado…') {
-       await updateCommercial(r.id,status,status==='Seguimiento'?'Respuesta recibida / seguimiento comercial':'Cambio manual desde listado',r.next_followup);
+       await updateCommercial(r.id,status,status==='Esperando respuesta'?'Respuesta registrada manualmente; requiere seguimiento':'Cambio manual desde listado',r.next_followup);
      }
    }catch(error){alert('No se ha guardado el estado: '+error.message)}
    finally{select.value='Cambiar estado…';select.disabled=false}
@@ -164,7 +167,14 @@ if(raw.length>1000)throw Error('Máximo 1000 registros por importación');const 
 const keyOf=r=>[r.name,r.city].map(x=>String(x||'').trim().toLocaleLowerCase('es')).join('|');const keys=new Set(records.map(keyOf));const unique=parsed.filter(r=>{const k=keyOf(r);if(keys.has(k))return false;keys.add(k);return true});let n=0;
 for(let i=0;i<unique.length;i+=100){const {error}=await db.from('crm_leads').insert(unique.slice(i,i+100).map(r=>({...r,owner_id:user.id})));if(error)throw Error('Importadas '+n+' antes de error: '+error.message);n+=Math.min(100,unique.length-i)}
 await refresh();$('message').textContent='Importadas '+n+' empresas; omitidos '+(parsed.length-n)+' posibles duplicados'}catch(err){$('message').textContent='Importación: '+err.message}};
-async function updateCommercial(id,status,note,nextDate){const lead=records.find(x=>String(x.id)===String(id));if(!lead)throw Error('Empresa no encontrada');const stamp=new Date().toLocaleString('es-ES');const entry='['+stamp+'] '+status+(note?' · '+note:'');const notes=[lead.notes,entry].filter(Boolean).join('\n');const payload={status,notes,next_followup:nextDate||null};if(status==='Enviado')payload.contacted_at=new Date().toISOString().slice(0,10);const {error}=await db.from('crm_leads').update(payload).eq('id',id).eq('owner_id',user.id);if(error)throw error;await refresh();return true}
+async function updateCommercial(id,status,note,nextDate){const lead=records.find(x=>String(x.id)===String(id));if(!lead)throw Error('Empresa no encontrada');const stamp=new Date().toLocaleString('es-ES');const entry='['+stamp+'] '+status+(note?' · '+note:'');const notes=[lead.notes,entry].filter(Boolean).join('\n');if(!statuses.includes(status))throw Error('Estado no admitido: '+status);
+if(status==='Enviado'&&lead.contact_permission!=='Autorizado')throw Error('No consta autorización o base válida para el contacto.');
+const payload={status,notes,next_followup:nextDate||null};
+if(status==='Enviado')payload.contacted_at=new Date().toISOString().slice(0,10);
+const {data,error}=await db.from('crm_leads').update(payload).eq('id',id).eq('owner_id',user.id).select('id,status').single();
+if(error)throw Error('Supabase: '+error.message);
+if(!data||data.status!==status)throw Error('El cambio no quedó confirmado por la base de datos');
+await refresh();return true}
 window.YDG_LEADS_API={records:()=>records,edit:openEditor,client:()=>db,user:()=>user,refresh,updateCommercial,markSent:async(id)=>{const lead=records.find(x=>String(x.id)===String(id));if(!lead)throw Error('Empresa no encontrada');if(!confirm('Confirma que el correo ya se ha enviado realmente. Solo entonces se registrará como Enviado.'))return false;await updateCommercial(id,'Enviado','Correo enviado y confirmado por el usuario',lead.next_followup);return true}};
 })();
 </script></body></html>
