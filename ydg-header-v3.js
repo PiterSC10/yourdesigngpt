@@ -282,51 +282,55 @@
     style.textContent += "\n      /* Mobile V5: compact 3-column navigation, no horizontal clipping. */\n      @media(max-width:760px){\n        html body #ydg-site-header .ydg-header-menu-row-v3,\n        html body #ydg-site-header.ydg-mobile-menu-open-v3 .ydg-header-menu-row-v3 {\n          display:block!important;width:100%!important;max-width:100%!important;\n          padding:7px 0 2px!important;margin:0!important;\n          border:0!important;background:transparent!important;\n        }\n        html body #ydg-site-header .aurora-links,\n        html body #ydg-site-header.ydg-mobile-menu-open-v3 .aurora-links {\n          display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;\n          grid-auto-flow:row!important;align-items:stretch!important;\n          gap:7px!important;max-height:none!important;overflow:visible!important;\n          scroll-snap-type:none!important;white-space:normal!important;\n          width:100%!important;max-width:100%!important;min-width:0!important;\n          padding:0!important;margin:0!important;\n        }\n        html body #ydg-site-header .aurora-links a,\n        html body #ydg-site-header.ydg-mobile-menu-open-v3 .aurora-links a{\n          display:flex!important;align-items:center!important;justify-content:center!important;\n          width:100%!important;min-width:0!important;max-width:100%!important;\n          min-height:40px!important;padding:9px 5px!important;\n          white-space:normal!important;overflow-wrap:break-word!important;\n          text-align:center!important;font-size:clamp(10px,2.9vw,12px)!important;\n          line-height:1.2!important;border-radius:10px!important;\n          margin:0!important;\n        }\n        /* Seventh navigation destination stays available, centered as a full-width tile. */\n        html body #ydg-site-header .aurora-links a:nth-child(7):last-child{\n          grid-column:1/-1!important;\n        }\n      }\n";
     document.head.appendChild(style);
 
-    // Honest local counter: increments once per new browser session on this device.
-    // Replace with a shared analytics counter when a site-wide provider is connected.
-    const storageKey = 'ydg_local_visit_sequence_v1';
-    let count = 1;
-    try {
-      count = Number(localStorage.getItem(storageKey) || '0');
-      if (!sessionStorage.getItem('ydg_counted_this_session')) {
-        count += 1;
-        localStorage.setItem(storageKey, String(count));
-        sessionStorage.setItem('ydg_counted_this_session', '1');
-      }
-      if (!Number.isFinite(count) || count < 1) count = 1;
-    } catch (_) { count = 1; }
-
+    // Backend-backed, session-idempotent counter; visuals unchanged.
     if (!document.querySelector('.ydg-visitor-panel')) {
       const panel = document.createElement('section');
       panel.className = 'ydg-visitor-panel';
-      panel.setAttribute('aria-label','Contador visual de visitas');
+      panel.setAttribute('aria-label','Contador de visitas reales');
       panel.innerHTML = `
         <div class="ydg-visitor-meta">
           <div class="ydg-visitor-icon" aria-hidden="true">⌁</div>
           <div><div class="ydg-visitor-kicker">YDG // LIVE TRAFFIC SCAN</div>
-          <div class="ydg-visitor-sub">Actividad de navegación · contador local de este dispositivo</div>
+          <div class="ydg-visitor-sub" data-ydg-visitor-status>Consultando visitas registradas…</div>
           <div class="ydg-visitor-scan" aria-hidden="true"></div></div>
         </div>
         <div style="text-align:right;flex:none">
-          <div class="ydg-visitor-kicker">VISITANTE Nº</div>
-          <div class="ydg-visitor-number" data-ydg-visitor-number>000001</div>
+          <div class="ydg-visitor-kicker">VISITAS REGISTRADAS</div>
+          <div class="ydg-visitor-number" data-ydg-visitor-number>—</div>
           <div class="ydg-visitor-live"><span class="ydg-visitor-dot"></span> SYSTEM ONLINE</div>
         </div>`;
       const footer = document.querySelector('footer');
       if (footer) footer.parentNode.insertBefore(panel, footer);
       else document.body.appendChild(panel);
       const number = panel.querySelector('[data-ydg-visitor-number]');
-      const target = String(count).padStart(6,'0');
-      const end = Number(target);
-      const duration = 900;
-      const begin = performance.now();
-      const animate = now => {
-        const p = Math.min(1,(now-begin)/duration);
-        const eased = 1-Math.pow(1-p,3);
-        number.textContent = String(Math.floor(end*eased)).padStart(6,'0');
-        if (p<1) requestAnimationFrame(animate);
+      const status = panel.querySelector('[data-ydg-visitor-status]');
+      const paint = data => {
+        if (!Number.isSafeInteger(data.total) || data.total < 0 ||
+            !Number.isSafeInteger(data.hoy) || data.hoy < 0) throw Error('Datos de visitas inválidos');
+        number.textContent = String(data.total).padStart(6,'0');
+        status.textContent = 'Visitas reales compartidas · hoy ' + new Intl.NumberFormat('es-ES').format(data.hoy);
       };
-      requestAnimationFrame(animate);
+      (async () => {
+        try {
+          const key = 'ydg_visit_session_v2';
+          let token = sessionStorage.getItem(key);
+          if (!token || !/^[a-f0-9]{32}$/.test(token)) {
+            const bytes = new Uint8Array(16);
+            crypto.getRandomValues(bytes);
+            token = Array.from(bytes, byte => byte.toString(16).padStart(2,'0')).join('');
+            sessionStorage.setItem(key,token);
+          }
+          const response = await fetch('/api/visitas', {
+            method:'POST',headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({session:token}),cache:'no-store'
+          });
+          if (!response.ok) throw Error('Contador no disponible');
+          paint(await response.json());
+        } catch (_) {
+          number.textContent = '—';
+          status.textContent = 'Visitas temporalmente no disponibles';
+        }
+      })();
     }
 
     // Keep document flow intact while the desktop header is fixed to the viewport.
