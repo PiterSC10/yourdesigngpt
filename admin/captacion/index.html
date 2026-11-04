@@ -64,10 +64,24 @@ main{display:block!important;width:100%!important;max-width:1600px!important;mar
 const statuses=['Por investigar','Pendiente de enviar','Enviado','Esperando respuesta','Interesado','Cliente','Descartado','No contactar'];
 const statusLabels={'Por investigar':'Pendiente de preparar','Pendiente de enviar':'Pendiente de enviar','Enviado':'Enviado · esperando respuesta','Esperando respuesta':'Contestado / seguimiento','Interesado':'Interesado','Cliente':'Cliente','Descartado':'No interesado','No contactar':'No contactar'};
 const statusLabel=value=>statusLabels[value]||value;
+const invalidMarker='[YDG_INVALIDO]';
+const validMarker='[YDG_REACTIVADO]';
+const invalidReasons=['Web propia existente','Negocio cerrado','Datos incorrectos','Empresa duplicada','Sin actividad comprobable','Fuera del perfil objetivo','Otro motivo'];
+function isInvalid(lead){const n=String(lead?.notes||'');return lead?.status==='Descartado'&&n.lastIndexOf(invalidMarker)>n.lastIndexOf(validMarker)}
+function invalidReason(lead){const n=String(lead?.notes||'');if(!isInvalid(lead))return '';const line=n.slice(n.lastIndexOf(invalidMarker)).split('\n')[0];return line.slice(invalidMarker.length).trim().replace(/^Motivo:\s*/,'')}
+function reasonForInvalid(){
+ const response=window.prompt('Motivo para marcar como NO VÁLIDO:\n'+invalidReasons.map((x,i)=>(i+1)+'. '+x).join('\n')+'\n\nEscribe el número o explica el motivo:','');
+ if(response===null)return null;
+ const value=response.trim();if(!value)return null;
+ const selected=/^[1-7]$/.test(value)?invalidReasons[Number(value)-1]:value;
+ return selected.slice(0,150);
+}
 const pendingStatuses=['Preparada','Lista para enviar','Pendiente de enviar'];
 const sentStatuses=['Enviado','Seguimiento','Esperando respuesta','Interesado','Cliente'];
 let activeKpi='all';
 function matchesKpi(r,kpi){
+ if(kpi==='invalid')return isInvalid(r);
+ if(isInvalid(r))return false;
  if(kpi==='emails') return Boolean(String(r.email||'').trim());
  if(kpi==='pending') return pendingStatuses.includes(r.status);
  if(kpi==='followups') return ['Seguimiento','Esperando respuesta','Interesado'].includes(r.status);
@@ -112,41 +126,47 @@ const toContact=records.filter(x=>matchesKpi(x,'pending'));
 const prioritySets=[['Vencidos',overdue,'#ff7894'],['Para hoy',due,'#ffce79'],['Pendientes de enviar',toContact,'#8bcaff']];
 $('priorityCards').replaceChildren(...prioritySets.map(([label,items,color])=>{const b=document.createElement('button');b.type='button';b.className='priority-card';b.style.setProperty('--priority-accent',color);const title=document.createElement('span');title.textContent=label;const number=document.createElement('strong');number.textContent=items.length;const detail=document.createElement('small');detail.textContent=items.length?items.slice(0,2).map(x=>x.name).join(' · '):'Sin tareas pendientes';b.append(title,number,detail);b.onclick=()=>{if(label==='Pendientes de enviar'){resetForKpi('pending')}else if(items.length){openEditor(items[0])}else{$('message').textContent='No hay tareas en esta categoría'}};return b}));
 const counters=[
- ['Empresas',records.length,'all'],
+ ['Empresas',records.filter(x=>!isInvalid(x)).length,'all'],
  ['Emails disponibles',records.filter(x=>matchesKpi(x,'emails')).length,'emails'],
  ['Pendientes de enviar',records.filter(x=>matchesKpi(x,'pending')).length,'pending'],
  ['Seguimientos',records.filter(x=>matchesKpi(x,'followups')).length,'followups'],
- ['Propuestas enviadas',records.filter(x=>matchesKpi(x,'sent')).length,'sent']
+ ['Propuestas enviadas',records.filter(x=>matchesKpi(x,'sent')).length,'sent'],
+ ['No válidos',records.filter(isInvalid).length,'invalid']
 ];
 $('stats').replaceChildren(...counters.map(([label,n,kpi],i)=>{
  const d=document.createElement('button');d.type='button';
  d.className='panel stat stat-action';d.dataset.kpi=kpi;
  d.setAttribute('aria-pressed',String(activeKpi===kpi));
  d.setAttribute('aria-label','Ver '+label.toLowerCase()+' ('+n+')');
- const ico=document.createElement('span');ico.className='stat-icon';ico.textContent=['▦','✉','➤','▣','✓'][i];
+ const ico=document.createElement('span');ico.className='stat-icon';ico.textContent=['▦','✉','➤','▣','✓','✕'][i];
  const t=document.createElement('small');t.textContent=label;
  const v=document.createElement('strong');v.textContent=n;
  d.append(ico,t,v);d.onclick=()=>resetForKpi(kpi);
  return d;
 }));
-$('rows').replaceChildren(...filtered.map(r=>{const tr=document.createElement('tr');[r.name,r.city,r.sector,r.status,r.email,r.next_followup||'—'].forEach(v=>{const td=document.createElement('td');td.textContent=v||'—';if(tr.children.length===3){td.className='status-cell';const badge=document.createElement('span');badge.className='status-badge';badge.dataset.status=String(v||'');badge.textContent=v||'—';td.replaceChildren(badge)}tr.append(td)});const td=document.createElement('td');td.className='lead-actions';
+$('rows').replaceChildren(...filtered.map(r=>{const tr=document.createElement('tr');[r.name,r.city,r.sector,isInvalid(r)?'No válido':r.status,r.email,r.next_followup||'—'].forEach(v=>{const td=document.createElement('td');td.textContent=v||'—';if(tr.children.length===3){td.className='status-cell';const badge=document.createElement('span');badge.className='status-badge';badge.dataset.status=String(v||'');badge.textContent=v||'—';td.replaceChildren(badge)}tr.append(td)});const td=document.createElement('td');td.className='lead-actions';
  const open=document.createElement('button');open.className='secondary';
  const ready=['Pendiente de enviar','Preparada','Lista para enviar'].includes(r.status);
  const sent=r.status==='Enviado';
  const completed=['Esperando respuesta','Interesado','Cliente','Descartado','No contactar'].includes(r.status);
+ const invalid=isInvalid(r);
  open.textContent=ready||sent||completed?'Revisar':'Abrir ficha';
  open.onclick=()=>{if(window.YDG_LEADS_OPEN)window.YDG_LEADS_OPEN(r);else openEditor(r)};
  const progress=document.createElement('span');
- progress.className='crm-progress '+(ready?'ready':sent?'sent':completed?'processed':r.email?'unprepared':'noemail');
- progress.textContent=ready?'✓ Preparado':sent?'✓ Enviado':r.status==='Cliente'?'✓ Cliente':r.status==='Esperando respuesta'?'✓ En seguimiento':r.status==='Interesado'?'✓ Interesado':['Descartado','No contactar'].includes(r.status)?'✕ Cerrado':r.email?'Por preparar':'Sin email';
+ progress.className='crm-progress '+(invalid?'invalid':ready?'ready':sent?'sent':completed?'processed':r.email?'unprepared':'noemail');
+ if(invalid){progress.title='Motivo: '+invalidReason(r);}
+ progress.textContent=invalid?'✕ No válido':ready?'✓ Preparado':sent?'✓ Enviado':r.status==='Cliente'?'✓ Cliente':r.status==='Esperando respuesta'?'✓ En seguimiento':r.status==='Interesado'?'✓ Interesado':['Descartado','No contactar'].includes(r.status)?'✕ Cerrado':r.email?'Por preparar':'Sin email';
  const select=document.createElement('select');select.className='lead-status-action';select.setAttribute('aria-label','Cambiar estado de '+r.name);
  select.append(option('Cambiar estado…'));
  for(const state of statuses){const o=option(state);o.textContent=statusLabel(state);select.append(o)}
+ const noValid=option('YDG_NO_VALIDO');noValid.textContent='No válido · indicar motivo';select.append(noValid);
  select.value='Cambiar estado…';
  select.onchange=async()=>{
    const status=select.value;select.disabled=true;
    try {
-     if(status==='Enviado') {
+     if(status==='YDG_NO_VALIDO'){
+       const reason=reasonForInvalid();if(reason)await markInvalid(r.id,reason);
+     }else if(status==='Enviado') {
        if(r.contact_permission!=='Autorizado')throw Error('Antes del envío hay que registrar la base legal del contacto.');
        const saved=await window.YDG_LEADS_API.markSent(r.id);if(!saved)return;
      } else if(status!=='Cambiar estado…') {
@@ -175,7 +195,7 @@ if(raw.length>1000)throw Error('Máximo 1000 registros por importación');const 
 const keyOf=r=>[r.name,r.city].map(x=>String(x||'').trim().toLocaleLowerCase('es')).join('|');const keys=new Set(records.map(keyOf));const unique=parsed.filter(r=>{const k=keyOf(r);if(keys.has(k))return false;keys.add(k);return true});let n=0;
 for(let i=0;i<unique.length;i+=100){const {error}=await db.from('crm_leads').insert(unique.slice(i,i+100).map(r=>({...r,owner_id:user.id})));if(error)throw Error('Importadas '+n+' antes de error: '+error.message);n+=Math.min(100,unique.length-i)}
 await refresh();$('message').textContent='Importadas '+n+' empresas; omitidos '+(parsed.length-n)+' posibles duplicados'}catch(err){$('message').textContent='Importación: '+err.message}};
-async function updateCommercial(id,status,note,nextDate){const lead=records.find(x=>String(x.id)===String(id));if(!lead)throw Error('Empresa no encontrada');const stamp=new Date().toLocaleString('es-ES');const entry='['+stamp+'] '+status+(note?' · '+note:'');const notes=[lead.notes,entry].filter(Boolean).join('\n');if(!statuses.includes(status))throw Error('Estado no admitido: '+status);
+async function updateCommercial(id,status,note,nextDate){const lead=records.find(x=>String(x.id)===String(id));if(!lead)throw Error('Empresa no encontrada');const stamp=new Date().toLocaleString('es-ES');const entry='['+stamp+'] '+status+(note?' · '+note:'');const notes=[lead.notes,entry,isInvalid(lead)&&!String(note||'').includes(invalidMarker)?validMarker:''].filter(Boolean).join('\n').slice(-5000);if(!statuses.includes(status))throw Error('Estado no admitido: '+status);
 if(status==='Enviado'&&lead.contact_permission!=='Autorizado')throw Error('No consta autorización o base válida para el contacto.');
 const payload={status,notes,next_followup:nextDate||null};
 if(status==='Enviado')payload.contacted_at=new Date().toISOString().slice(0,10);
@@ -183,6 +203,7 @@ const {data,error}=await db.from('crm_leads').update(payload).eq('id',id).eq('ow
 if(error)throw Error('Supabase: '+error.message);
 if(!data||data.status!==status)throw Error('El cambio no quedó confirmado por la base de datos');
 await refresh();return true}
-window.YDG_LEADS_API={records:()=>records,edit:openEditor,client:()=>db,user:()=>user,refresh,updateCommercial,markSent:async(id)=>{const lead=records.find(x=>String(x.id)===String(id));if(!lead)throw Error('Empresa no encontrada');if(!confirm('Confirma que el correo ya se ha enviado realmente. Solo entonces se registrará como Enviado.'))return false;await updateCommercial(id,'Enviado','Correo enviado y confirmado por el usuario',lead.next_followup);return true}};
+async function markInvalid(id,reason){const lead=records.find(x=>String(x.id)===String(id));if(!lead)throw Error('Empresa no encontrada');if(!String(reason||'').trim())throw Error('Indica por qué no es válido');return updateCommercial(id,'Descartado',invalidMarker+' Motivo: '+String(reason).trim().slice(0,150),null)}
+window.YDG_LEADS_API={records:()=>records,isInvalid,invalidReason,markInvalid,edit:openEditor,client:()=>db,user:()=>user,refresh,updateCommercial,markSent:async(id)=>{const lead=records.find(x=>String(x.id)===String(id));if(!lead)throw Error('Empresa no encontrada');if(!confirm('Confirma que el correo ya se ha enviado realmente. Solo entonces se registrará como Enviado.'))return false;await updateCommercial(id,'Enviado','Correo enviado y confirmado por el usuario',lead.next_followup);return true}};
 })();
 </script></body></html>
