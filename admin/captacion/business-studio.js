@@ -6,7 +6,7 @@ $('app')?.prepend(page);
 const nav=document.querySelector('.side nav');const studioNav=document.getElementById('topStudioLink')||document.createElement('a');studioNav.href='#business-studio';studioNav.textContent='✦  Business Studio';studioNav.dataset.view='business-studio';if(!studioNav.isConnected)nav?.append(studioNav);
 const archiveNav=null;
 let current=null,step='research',history=[],referenceFiles=[];
-function leads(){return records().filter(r=>String(r.email||'').trim()&&(!r.web_status||['Sin comprobar','Sin web localizada','Solo redes sociales'].includes(r.web_status)))}
+function leads(){return records().filter(r=>!api()?.isInvalid?.(r)&&String(r.email||'').trim()&&(!r.web_status||['Sin comprobar','Sin web localizada','Solo redes sociales'].includes(r.web_status)))}
 // Los registros sin email se conservan únicamente como exclusión interna. Nunca se muestran en Business Studio; el importador compara nombre+localidad contra TODOS los registros de Supabase para no recuperarlos en futuras búsquedas.\nfunction noEmail(){return records().filter(r=>!String(r.email||'').trim())}
 function renderList(){const rs=leads(),q=$('bsQuery').value.toLowerCase(),sec=$('bsSector').value,city=$('bsCity').value;const filtered=rs.filter(r=>(!sec||r.sector===sec)&&(!city||r.city===city)&&[r.name,r.email,r.city,r.sector].some(v=>String(v||'').toLowerCase().includes(q)));$('bsLeads').replaceChildren();filtered.slice(0,100).forEach(r=>{const row=document.createElement('div');row.className='leadpick';const info=document.createElement('div');const name=document.createElement('b');name.textContent=r.name;const sub=document.createElement('div');sub.className='muted';sub.textContent=[r.sector,r.city,r.email].filter(Boolean).join(' · ');info.append(name,sub);const state=String(r.status||'');
 const ready=['Pendiente de enviar','Preparada','Lista para enviar'].includes(state);
@@ -42,6 +42,7 @@ function renderStep(){const labels={research:'Investigación del negocio',creati
   ['Interesado','Interesado'],
   ['Cliente','Cliente'],
   ['Descartado','No interesado'],
+  ['YDG_NO_VALIDO','No válido · indicar motivo'],
   ['No contactar','No contactar'],
   ['Por investigar','Pendiente de preparar']
  ];
@@ -70,6 +71,12 @@ function renderStep(){const labels={research:'Investigación del negocio',creati
     if(!prep())throw Error('No se ha cargado el gestor de borradores.');
     await prep().save(current,subject.value,body.value,true);
     await updateView('✓ Email preparado y guardado. Aparece en Pendientes de enviar para mañana.');
+   }else if(next==='YDG_NO_VALIDO'){
+    const reason=window.prompt('Motivo de NO VÁLIDO (web propia, datos incorrectos, cerrado, duplicado, otro):','');
+    if(reason===null){info.textContent='Sin cambios: operación cancelada';return}
+    if(!reason.trim())throw Error('Indica el motivo para registrar la empresa como no válida');
+    await api().markInvalid(current.id,reason.trim());
+    await updateView('✓ Empresa archivada como No válido: '+reason.trim()+'. Se excluye de próximas preparaciones.');
    }else if(next==='Enviado'){
     if(current.contact_permission!=='Autorizado')throw Error('Antes de registrar un envío, verifica la base legal del contacto.');
     const confirmed=await api().markSent(current.id);
