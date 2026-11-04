@@ -127,7 +127,7 @@ $('stats').replaceChildren(...counters.map(([label,n,kpi],i)=>{
  return d;
 }));
 $('rows').replaceChildren(...filtered.map(r=>{const tr=document.createElement('tr');[r.name,r.city,r.sector,r.status,r.email,r.next_followup||'—'].forEach(v=>{const td=document.createElement('td');td.textContent=v||'—';if(tr.children.length===3){td.className='status-cell';const badge=document.createElement('span');badge.className='status-badge';badge.dataset.status=String(v||'');badge.textContent=v||'—';td.replaceChildren(badge)}tr.append(td)});const td=document.createElement('td');td.className='lead-actions';
- const open=document.createElement('button');open.className='secondary';open.textContent='Abrir ficha';open.onclick=()=>window.YDG_LEADS_OPEN?.(r)??openEditor(r);
+ const open=document.createElement('button');open.className='secondary';open.textContent='Abrir ficha';open.onclick=()=>{if(window.YDG_LEADS_OPEN)window.YDG_LEADS_OPEN(r);else openEditor(r)};
  const select=document.createElement('select');select.className='lead-status-action';select.setAttribute('aria-label','Cambiar estado de '+r.name);
  select.append(option('Cambiar estado…'));
  for(const state of statuses){const o=option(state);o.textContent=state==='Seguimiento'?'Contestado / seguimiento':state;select.append(o)}
