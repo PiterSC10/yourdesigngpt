@@ -109,3 +109,18 @@ main{padding:20px 20px 35px}header.bar{border:0;padding-bottom:0;margin-bottom:1
 body.ydg-drawer-open{overflow:hidden}
 @media(max-width:600px){#leadDrawer{width:100vw!important;padding:0 14px 24px!important}
  #leadDrawer .drawer-title{margin:0 -14px 14px;padding:14px}}
+
+/* Synced preparation status: main CRM table and Business Studio share crm_leads.status. */
+.crm-progress,#ydgBusinessStudio .bs-progress{display:inline-flex;align-items:center;justify-content:center;
+ padding:6px 10px;border-radius:999px;border:1px solid #3b5274;background:#172743;color:#bfceec;
+ font-size:11px;font-weight:800;white-space:nowrap}
+.crm-progress.ready,#ydgBusinessStudio .bs-progress.bs-ready{background:#0c4537;border-color:#198c70;color:#a4ffe2}
+.crm-progress.sent,#ydgBusinessStudio .bs-progress.bs-sent{background:#103b5b;border-color:#397daf;color:#b9e9ff}
+.crm-progress.processed,#ydgBusinessStudio .bs-progress.bs-follow{background:#302444;border-color:#7450a2;color:#e8cbff}
+.crm-progress.noemail{background:#302a27;border-color:#776043;color:#ead7af}
+#ydgBusinessStudio .bs-progress.bs-closed{background:#392630;border-color:#92536d;color:#ffc3d1}
+.lead-actions{min-width:300px;white-space:nowrap}
+.lead-actions .crm-progress{margin-right:9px}
+#ydgBusinessStudio .bs-lead-progress{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+#ydgBusinessStudio .bs-review{padding:7px 10px;font-size:12px}
+@media(max-width:670px){.lead-actions{min-width:220px}.lead-actions .crm-progress{margin-bottom:6px}}
