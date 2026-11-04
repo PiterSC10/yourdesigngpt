@@ -130,7 +130,15 @@ $('stats').replaceChildren(...counters.map(([label,n,kpi],i)=>{
  return d;
 }));
 $('rows').replaceChildren(...filtered.map(r=>{const tr=document.createElement('tr');[r.name,r.city,r.sector,r.status,r.email,r.next_followup||'—'].forEach(v=>{const td=document.createElement('td');td.textContent=v||'—';if(tr.children.length===3){td.className='status-cell';const badge=document.createElement('span');badge.className='status-badge';badge.dataset.status=String(v||'');badge.textContent=v||'—';td.replaceChildren(badge)}tr.append(td)});const td=document.createElement('td');td.className='lead-actions';
- const open=document.createElement('button');open.className='secondary';open.textContent='Abrir ficha';open.onclick=()=>{if(window.YDG_LEADS_OPEN)window.YDG_LEADS_OPEN(r);else openEditor(r)};
+ const open=document.createElement('button');open.className='secondary';
+ const ready=['Pendiente de enviar','Preparada','Lista para enviar'].includes(r.status);
+ const sent=r.status==='Enviado';
+ const completed=['Esperando respuesta','Interesado','Cliente','Descartado','No contactar'].includes(r.status);
+ open.textContent=ready||sent||completed?'Revisar':'Abrir ficha';
+ open.onclick=()=>{if(window.YDG_LEADS_OPEN)window.YDG_LEADS_OPEN(r);else openEditor(r)};
+ const progress=document.createElement('span');
+ progress.className='crm-progress '+(ready?'ready':sent?'sent':completed?'processed':r.email?'unprepared':'noemail');
+ progress.textContent=ready?'✓ Preparado':sent?'✓ Enviado':r.status==='Cliente'?'✓ Cliente':r.status==='Esperando respuesta'?'✓ En seguimiento':r.status==='Interesado'?'✓ Interesado':['Descartado','No contactar'].includes(r.status)?'✕ Cerrado':r.email?'Por preparar':'Sin email';
  const select=document.createElement('select');select.className='lead-status-action';select.setAttribute('aria-label','Cambiar estado de '+r.name);
  select.append(option('Cambiar estado…'));
  for(const state of statuses){const o=option(state);o.textContent=statusLabel(state);select.append(o)}
@@ -147,7 +155,7 @@ $('rows').replaceChildren(...filtered.map(r=>{const tr=document.createElement('t
    }catch(error){alert('No se ha guardado el estado: '+error.message)}
    finally{select.value='Cambiar estado…';select.disabled=false}
  };
- td.append(open,select);tr.dataset.leadId=r.id;tr.append(td);return tr}));
+ td.append(progress,open,select);tr.dataset.leadId=r.id;tr.append(td);return tr}));
 $('message').textContent=filtered.length+' empresas visibles · '+records.length+' registradas' +(activeKpi!=='all'?' · Vista: '+counters.find(c=>c[2]===activeKpi)?.[0]:'');
 }
 function openEditor(r){editing=r||null;$('formTitle').textContent=r?'Editar empresa':'Nueva empresa';$('leadForm').reset();for(const el of $('leadForm').elements){if(el.name)el.value=(r&&r[el.name])||''}if(!r){$('editStatus').value=statuses[0];$('editWebStatus').value=webStatuses[0];$('editEmailStatus').value=emailStatuses[0];$('editActivityStatus').value=activityStatuses[0];$('editPermission').value=permissions[0]}$('delete').classList.toggle('hidden',!r);$('formMessage').textContent='';$('editor').showModal()}
