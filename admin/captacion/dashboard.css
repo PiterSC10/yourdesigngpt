@@ -124,3 +124,13 @@ body.ydg-drawer-open{overflow:hidden}
 #ydgBusinessStudio .bs-lead-progress{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
 #ydgBusinessStudio .bs-review{padding:7px 10px;font-size:12px}
 @media(max-width:670px){.lead-actions{min-width:220px}.lead-actions .crm-progress{margin-bottom:6px}}
+
+/* Sixth KPI: invalid leads kept in an archive, never mixed into active leads. */
+.stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+.stats .stat:nth-child(6){background:#2a1b26!important;border-color:#8f426b!important}
+.stats .stat:nth-child(6) .stat-icon{background:#6f2d53;color:#ffd4e8}
+.crm-progress.invalid{background:#442534;border-color:#ac547d;color:#ffd3e6}
+.status-badge[data-status="No válido"]{background:#602b47;color:#ffcadf}
+@media(max-width:1250px){.stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:740px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:420px){.stats .stat{min-width:0}}
