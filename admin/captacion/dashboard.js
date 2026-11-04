@@ -7,7 +7,20 @@ function showLead(r){lead=r;drawer.dataset.leadId=r.id;$('drawerName').textConte
 $('draftTo').value=r.email||'';$('draftSubject').value='Una propuesta para '+r.name;
 $('draftBody').value='Hola,\n\nSomos YourDesignGPT, un servicio de diseño web para pequeños negocios de la Costa del Sol.\n\nNos gustaría saber si os interesaría conocer una propuesta para mejorar vuestra presencia online con una página web clara y adaptada a móviles.\n\nSi os interesa recibir más información, estaremos encantados de hablar.\n\nUn saludo,\nYourDesignGPT';
 const st=$('trackingStatus');if(st){st.value=r.status||'Pendiente';$('trackingDate').value=r.next_followup||'';const hist=$('trackingHistory');hist.replaceChildren();String(r.notes||'').split(String.fromCharCode(10)).filter(Boolean).slice(-30).reverse().forEach(line=>{const li=document.createElement('li');li.textContent=line;hist.append(li)})}drawer.classList.remove('hidden');tab('info')}
-function bindRows(){const rows=[...$('rows').querySelectorAll('tr')];const api=window.YDG_LEADS_API;if(!api)return;const q=$('q').value.toLocaleLowerCase(),status=$('statusFilter').value,city=$('cityFilter').value,web=$('webFilter').value,mail=$('emailFilter').value;const shown=api.records().filter(r=>($('sectorFilter').value==='Todos'||r.sector===$('sectorFilter').value)&&(status==='Todos'||r.status===status)&&(city==='Todos'||r.city===city)&&(web==='Todas las webs'||r.web_status===web)&&(mail==='Todos'||(mail==='Con email'?!!r.email:!r.email))&&[r.name,r.city,r.sector,r.email].some(v=>String(v||'').toLocaleLowerCase().includes(q)));rows.forEach((tr,i)=>{const r=shown[i];if(r){tr.onclick=e=>{if(e.target.closest('button'))return;showLead(r)};const statusCell=tr.children[3];if(statusCell){const c={'Por investigar':'#78869e','Pendiente de enviar':'#f3bf47','Enviado':'#61a6ff','Esperando respuesta':'#c18aff','Interesado':'#ffab6a','Cliente':'#5cdfa1','No contactar':'#ff8585'};statusCell.style.color=c[r.status]||'#d9dfe9'}}});$('emptyNote').classList.toggle('hidden',api.records().length>0)}
+function bindRows(){
+ const api=window.YDG_LEADS_API;if(!api)return;
+ const lookup=new Map(api.records().map(r=>[String(r.id),r]));
+ $('rows').querySelectorAll('tr').forEach(tr=>{
+   const r=lookup.get(String(tr.dataset.leadId||''));
+   if(!r)return;
+   tr.onclick=e=>{if(e.target.closest('button,select,a,input'))return;showLead(r)};
+   const cell=tr.children[3];
+   if(cell){const colors={'Pendiente':'#78869e','Preparada':'#f3bf47','Lista para enviar':'#f3bf47','Enviado':'#61a6ff','Seguimiento':'#c18aff','Cliente':'#5cdfa1','No interesado':'#ff8585'};
+     cell.style.color=colors[r.status]||'#d9dfe9'}
+ });
+ $('emptyNote').classList.toggle('hidden',api.records().length>0)
+}
+window.YDG_LEADS_OPEN=showLead;
 window.addEventListener('ydg-leads-refreshed',bindRows);
 ['q','statusFilter','cityFilter','sectorFilter','webFilter','emailFilter'].forEach(id=>$(id).addEventListener(id==='q'?'input':'change',()=>setTimeout(bindRows,0)));
 $('drawerClose').onclick=()=>drawer.classList.add('hidden');$('drawerInfo').onclick=()=>tab('info');$('drawerEmail').onclick=()=>tab('mail');
