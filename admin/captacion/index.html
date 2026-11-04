@@ -61,6 +61,25 @@ main{display:block!important;width:100%!important;max-width:1600px!important;mar
 (function(){
 'use strict';
 const statuses=['Pendiente','Preparada','Lista para enviar','Enviado','Seguimiento','Cliente','No interesado'];
+const pendingStatuses=['Preparada','Lista para enviar','Pendiente de enviar'];
+const sentStatuses=['Enviado','Seguimiento','Esperando respuesta','Interesado','Cliente'];
+let activeKpi='all';
+function matchesKpi(r,kpi){
+ if(kpi==='emails') return Boolean(String(r.email||'').trim());
+ if(kpi==='pending') return pendingStatuses.includes(r.status);
+ if(kpi==='followups') return r.status==='Seguimiento'||r.status==='Esperando respuesta'||Boolean(r.next_followup);
+ if(kpi==='sent') return Boolean(r.contacted_at)||sentStatuses.includes(r.status);
+ return true;
+}
+function resetForKpi(kpi){
+ activeKpi=kpi;
+ $('q').value='';
+ $('statusFilter').value='Todos';$('cityFilter').value='Todos';
+ $('sectorFilter').value='Todos';$('webFilter').value='Todas las webs';$('emailFilter').value='Todos';
+ render();
+ document.querySelector('.leads-table-panel').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
 const webStatuses=['Sin comprobar','Sin web localizada','Web propia localizada','Solo redes sociales','Dominio histórico por revisar'];
 const emailStatuses=['No localizado','Publicado sin verificar','Dominio verificado','Entrega confirmada','Rebote'];
 const activityStatuses=['Pendiente de verificar','Activo verificado','Cerrado'];
@@ -80,19 +99,53 @@ function normalize(data){let name=String(data.name||'').trim();if(!name)throw Er
 return {name:name.slice(0,150),city:String(data.city||'').trim().slice(0,100),sector:String(data.sector||'').trim().slice(0,100),status:(statuses.includes(data.status)?data.status:({'Por investigar':'Pendiente','Pendiente de enviar':'Preparada','Esperando respuesta':'Seguimiento','Interesado':'Seguimiento','Descartado':'No interesado','No contactar':'No interesado'}[data.status]||statuses[0])),email:String(data.email||'').trim().slice(0,254),phone:String(data.phone||'').trim().slice(0,50),website:validUrl(data.website),source_url:validUrl(data.source_url),contacted_at:safeDate(data.contacted_at),next_followup:safeDate(data.next_followup),notes:String(data.notes||'').slice(0,5000),web_status:webStatuses.includes(data.web_status)?data.web_status:webStatuses[0],email_status:emailStatuses.includes(data.email_status)?data.email_status:(String(data.email||'').trim()?emailStatuses[1]:emailStatuses[0]),activity_status:activityStatuses.includes(data.activity_status)?data.activity_status:activityStatuses[0],contact_permission:permissions.includes(data.contact_permission)?data.contact_permission:permissions[0],last_verified_at:safeDate(data.last_verified_at)}}
 async function refresh(){const {data,error}=await db.from('crm_leads').select('*').order('created_at',{ascending:false}).limit(5000);if(error){records=[];$('rows').replaceChildren();$('message').textContent='Error: '+error.message;throw error}records=data||[];render()}
 function render(){setTimeout(()=>window.dispatchEvent(new Event('ydg-leads-refreshed')),0);
-const filtered=records.filter(r=>{let sector=$('sectorFilter').value;let q=$('q').value.toLocaleLowerCase(),s=$('statusFilter').value,c=$('cityFilter').value,w=$('webFilter').value,m=$('emailFilter').value;return (sector==='Todos'||r.sector===sector)&&(s==='Todos'||r.status===s)&&(c==='Todos'||r.city===c)&&(w==='Todas las webs'||r.web_status===w)&&(m==='Todos'||(m==='Con email'?!!r.email:!r.email))&&[r.name,r.city,r.sector,r.email].some(v=>String(v||'').toLocaleLowerCase().includes(q))});
+const filtered=records.filter(r=>matchesKpi(r,activeKpi)&&let sector=$('sectorFilter').value;let q=$('q').value.toLocaleLowerCase(),s=$('statusFilter').value,c=$('cityFilter').value,w=$('webFilter').value,m=$('emailFilter').value;return (sector==='Todos'||r.sector===sector)&&(s==='Todos'||r.status===s)&&(c==='Todos'||r.city===c)&&(w==='Todas las webs'||r.web_status===w)&&(m==='Todos'||(m==='Con email'?!!r.email:!r.email))&&[r.name,r.city,r.sector,r.email].some(v=>String(v||'').toLocaleLowerCase().includes(q))});
 const sectorOld=$('sectorFilter').value;const sectors=[...new Set(records.map(r=>r.sector).filter(Boolean))].sort();$('sectorFilter').replaceChildren(option('Todos'),...sectors.map(option));$('sectorFilter').value=sectors.includes(sectorOld)?sectorOld:'Todos';
 const cities=[...new Set(records.map(r=>r.city).filter(Boolean))].sort();const old=$('cityFilter').value;$('cityFilter').replaceChildren(option('Todos'),...cities.map(option));$('cityFilter').value=cities.includes(old)?old:'Todos';
 const today=new Date();const localToday=[today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('-');
 const overdue=records.filter(x=>x.next_followup&&x.next_followup<localToday&&!['Cliente','Descartado','No contactar'].includes(x.status));
 const due=records.filter(x=>x.next_followup===localToday&&!['Cliente','Descartado','No contactar'].includes(x.status));
-const toContact=records.filter(x=>x.status==='Pendiente de enviar');
+const toContact=records.filter(x=>matchesKpi(x,'pending'));
 const prioritySets=[['Vencidos',overdue,'#ff7894'],['Para hoy',due,'#ffce79'],['Pendientes de enviar',toContact,'#8bcaff']];
-$('priorityCards').replaceChildren(...prioritySets.map(([label,items,color])=>{const b=document.createElement('button');b.type='button';b.className='priority-card';b.style.setProperty('--priority-accent',color);const title=document.createElement('span');title.textContent=label;const number=document.createElement('strong');number.textContent=items.length;const detail=document.createElement('small');detail.textContent=items.length?items.slice(0,2).map(x=>x.name).join(' · '):'Sin tareas pendientes';b.append(title,number,detail);b.onclick=()=>{if(label==='Pendientes de enviar'){$('statusFilter').value='Pendiente de enviar';$('q').value='';render()}else if(items.length){openEditor(items[0])}else{$('message').textContent='No hay tareas en esta categoría'}};return b}));
-const counters=[['Empresas',records.length],['Emails disponibles',records.filter(x=>!!x.email).length],['Pendientes de enviar',records.filter(x=>x.status==='Pendiente de enviar').length],['Seguimientos',records.filter(x=>!!x.next_followup).length],['Propuestas enviadas',records.filter(x=>['Enviado','Esperando respuesta','Interesado','Cliente'].includes(x.status)).length]];
-$('stats').replaceChildren(...counters.map(([label,n])=>{const d=document.createElement('div');d.className='panel stat';const ico=document.createElement('span');ico.className='stat-icon';ico.textContent=['▦','✉','➤','▣','✓'][counters.findIndex(c=>c[0]===label)];const t=document.createElement('small');t.textContent=label;const v=document.createElement('strong');v.textContent=n;d.append(ico,t,v);return d}));
-$('rows').replaceChildren(...filtered.map(r=>{const tr=document.createElement('tr');[r.name,r.city,r.sector,r.status,r.email,r.next_followup||'—'].forEach(v=>{const td=document.createElement('td');td.textContent=v||'—';if(tr.children.length===3){td.className='status-cell';const badge=document.createElement('span');badge.className='status-badge';badge.dataset.status=String(v||'');badge.textContent=v||'—';td.replaceChildren(badge)}tr.append(td)});const td=document.createElement('td'),b=document.createElement('button');b.className='secondary';b.textContent='Abrir';b.onclick=()=>openEditor(r);td.append(b);tr.append(td);return tr}));
-$('message').textContent=filtered.length+' empresas visibles · '+records.length+' registradas';
+$('priorityCards').replaceChildren(...prioritySets.map(([label,items,color])=>{const b=document.createElement('button');b.type='button';b.className='priority-card';b.style.setProperty('--priority-accent',color);const title=document.createElement('span');title.textContent=label;const number=document.createElement('strong');number.textContent=items.length;const detail=document.createElement('small');detail.textContent=items.length?items.slice(0,2).map(x=>x.name).join(' · '):'Sin tareas pendientes';b.append(title,number,detail);b.onclick=()=>{if(label==='Pendientes de enviar'){resetForKpi('pending')}else if(items.length){openEditor(items[0])}else{$('message').textContent='No hay tareas en esta categoría'}};return b}));
+const counters=[
+ ['Empresas',records.length,'all'],
+ ['Emails disponibles',records.filter(x=>matchesKpi(x,'emails')).length,'emails'],
+ ['Pendientes de enviar',records.filter(x=>matchesKpi(x,'pending')).length,'pending'],
+ ['Seguimientos',records.filter(x=>matchesKpi(x,'followups')).length,'followups'],
+ ['Propuestas enviadas',records.filter(x=>matchesKpi(x,'sent')).length,'sent']
+];
+$('stats').replaceChildren(...counters.map(([label,n,kpi],i)=>{
+ const d=document.createElement('button');d.type='button';
+ d.className='panel stat stat-action';d.dataset.kpi=kpi;
+ d.setAttribute('aria-pressed',String(activeKpi===kpi));
+ d.setAttribute('aria-label','Ver '+label.toLowerCase()+' ('+n+')');
+ const ico=document.createElement('span');ico.className='stat-icon';ico.textContent=['▦','✉','➤','▣','✓'][i];
+ const t=document.createElement('small');t.textContent=label;
+ const v=document.createElement('strong');v.textContent=n;
+ d.append(ico,t,v);d.onclick=()=>resetForKpi(kpi);
+ return d;
+}));
+$('rows').replaceChildren(...filtered.map(r=>{const tr=document.createElement('tr');[r.name,r.city,r.sector,r.status,r.email,r.next_followup||'—'].forEach(v=>{const td=document.createElement('td');td.textContent=v||'—';if(tr.children.length===3){td.className='status-cell';const badge=document.createElement('span');badge.className='status-badge';badge.dataset.status=String(v||'');badge.textContent=v||'—';td.replaceChildren(badge)}tr.append(td)});const td=document.createElement('td');td.className='lead-actions';
+ const open=document.createElement('button');open.className='secondary';open.textContent='Abrir ficha';open.onclick=()=>window.YDG_LEADS_OPEN?.(r)??openEditor(r);
+ const select=document.createElement('select');select.className='lead-status-action';select.setAttribute('aria-label','Cambiar estado de '+r.name);
+ select.append(option('Cambiar estado…'));
+ for(const state of statuses){const o=option(state);o.textContent=state==='Seguimiento'?'Contestado / seguimiento':state;select.append(o)}
+ select.value='Cambiar estado…';
+ select.onchange=async()=>{
+   const status=select.value;select.disabled=true;
+   try {
+     if(status==='Enviado') {
+       if(r.contact_permission!=='Autorizado')throw Error('Antes del envío hay que registrar la base legal del contacto.');
+       await window.YDG_LEADS_API.markSent(r.id);
+     } else if(status!=='Cambiar estado…') {
+       await updateCommercial(r.id,status,status==='Seguimiento'?'Respuesta recibida / seguimiento comercial':'Cambio manual desde listado',r.next_followup);
+     }
+   }catch(error){alert('No se ha guardado el estado: '+error.message)}
+   finally{select.value='Cambiar estado…';select.disabled=false}
+ };
+ td.append(open,select);tr.dataset.leadId=r.id;tr.append(td);return tr}));
+$('message').textContent=filtered.length+' empresas visibles · '+records.length+' registradas' +(activeKpi!=='all'?' · Vista: '+counters.find(c=>c[2]===activeKpi)?.[0]:'');
 }
 function openEditor(r){editing=r||null;$('formTitle').textContent=r?'Editar empresa':'Nueva empresa';$('leadForm').reset();for(const el of $('leadForm').elements){if(el.name)el.value=(r&&r[el.name])||''}if(!r){$('editStatus').value=statuses[0];$('editWebStatus').value=webStatuses[0];$('editEmailStatus').value=emailStatuses[0];$('editActivityStatus').value=activityStatuses[0];$('editPermission').value=permissions[0]}$('delete').classList.toggle('hidden',!r);$('formMessage').textContent='';$('editor').showModal()}
 $('newLead').onclick=()=>openEditor(null);$('close').onclick=()=>$('editor').close();
