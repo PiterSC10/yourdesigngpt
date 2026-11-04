@@ -1,0 +1,2 @@
+const c=require('./_lib');
+module.exports=async(req,res)=>{if(req.method!=='GET')return c.json(res,405,{error:'Método no permitido'});if(!c.ready())return c.json(res,200,{connected:false,setup:false});try{const u=await c.auth(req);if(!u)return c.json(res,401,{error:'Acceso requerido'});const s=c.unseal(c.cookies(req)[c.COOKIE]||'');return c.json(res,200,{connected:s.uid===u.id,email:s.uid===u.id?s.email:null,setup:true})}catch(e){return c.json(res,200,{connected:false,setup:true})}};
