@@ -70,8 +70,8 @@ let activeKpi='all';
 function matchesKpi(r,kpi){
  if(kpi==='emails') return Boolean(String(r.email||'').trim());
  if(kpi==='pending') return pendingStatuses.includes(r.status);
- if(kpi==='followups') return ['Seguimiento','Esperando respuesta','Interesado'].includes(r.status)||Boolean(r.next_followup);
- if(kpi==='sent') return Boolean(r.contacted_at)||sentStatuses.includes(r.status);
+ if(kpi==='followups') return ['Seguimiento','Esperando respuesta','Interesado'].includes(r.status);
+ if(kpi==='sent') return r.status==='Enviado';
  return true;
 }
 function resetForKpi(kpi){
@@ -106,8 +106,8 @@ const filtered=records.filter(r=>{if(!matchesKpi(r,activeKpi))return false;let s
 const sectorOld=$('sectorFilter').value;const sectors=[...new Set(records.map(r=>r.sector).filter(Boolean))].sort();$('sectorFilter').replaceChildren(option('Todos'),...sectors.map(option));$('sectorFilter').value=sectors.includes(sectorOld)?sectorOld:'Todos';
 const cities=[...new Set(records.map(r=>r.city).filter(Boolean))].sort();const old=$('cityFilter').value;$('cityFilter').replaceChildren(option('Todos'),...cities.map(option));$('cityFilter').value=cities.includes(old)?old:'Todos';
 const today=new Date();const localToday=[today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('-');
-const overdue=records.filter(x=>x.next_followup&&x.next_followup<localToday&&!['Cliente','Descartado','No contactar','No interesado'].includes(x.status));
-const due=records.filter(x=>x.next_followup===localToday&&!['Cliente','Descartado','No contactar','No interesado'].includes(x.status));
+const overdue=records.filter(x=>x.next_followup&&x.next_followup<localToday&&['Enviado','Esperando respuesta','Interesado'].includes(x.status));
+const due=records.filter(x=>x.next_followup===localToday&&['Enviado','Esperando respuesta','Interesado'].includes(x.status));
 const toContact=records.filter(x=>matchesKpi(x,'pending'));
 const prioritySets=[['Vencidos',overdue,'#ff7894'],['Para hoy',due,'#ffce79'],['Pendientes de enviar',toContact,'#8bcaff']];
 $('priorityCards').replaceChildren(...prioritySets.map(([label,items,color])=>{const b=document.createElement('button');b.type='button';b.className='priority-card';b.style.setProperty('--priority-accent',color);const title=document.createElement('span');title.textContent=label;const number=document.createElement('strong');number.textContent=items.length;const detail=document.createElement('small');detail.textContent=items.length?items.slice(0,2).map(x=>x.name).join(' · '):'Sin tareas pendientes';b.append(title,number,detail);b.onclick=()=>{if(label==='Pendientes de enviar'){resetForKpi('pending')}else if(items.length){openEditor(items[0])}else{$('message').textContent='No hay tareas en esta categoría'}};return b}));
