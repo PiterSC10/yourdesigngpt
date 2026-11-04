@@ -80,3 +80,13 @@ main{padding:20px 20px 35px}header.bar{border:0;padding-bottom:0;margin-bottom:1
 .priority-card:hover{background:#1c2c4d}
 @media(max-width:850px){.leads-table-panel .filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.leads-table-panel .filters{grid-template-columns:1fr}.priority-cards{grid-template-columns:1fr}.priority-card{min-height:85px}}
+
+/* Clickable KPI cards and one-step workflow actions; preserve visual palette. */
+.stats .stat-action{width:100%;text-align:left;color:inherit;font:inherit;cursor:pointer;transition:transform .18s,border-color .18s,box-shadow .18s}
+.stats .stat-action:hover{transform:translateY(-2px);box-shadow:0 10px 30px #0006;border-color:#60c9ff!important}
+.stats .stat-action:focus-visible{outline:3px solid #67e8f9;outline-offset:3px}
+.stats .stat-action[aria-pressed="true"]{box-shadow:inset 0 0 0 1px #71d4fb66}
+.lead-actions{min-width:240px}.lead-actions button{margin-right:7px;white-space:nowrap}
+.lead-actions .lead-status-action{display:inline-block;width:auto;max-width:180px;min-width:135px;padding:8px 9px;font-size:12px;background:#152746;border:1px solid #344e78}
+.leads-table-panel{scroll-margin-top:90px}
+@media(max-width:650px){.lead-actions{min-width:200px}.lead-actions .lead-status-action{margin-top:6px}}
