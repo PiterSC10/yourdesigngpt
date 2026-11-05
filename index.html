@@ -11106,8 +11106,16 @@ function initYDGConfigurator117(){
       if(heading){heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true});}
       const section=document.getElementById('configurador');
       if(matchMedia('(max-width: 800px)').matches){
-        // Keep the mobile page stationary; only reset the newly opened panel.
+        // One natural page scroll on phones (no inner configurator scroll).
         if(panel) panel.scrollTop=0;
+        requestAnimationFrame(() => {
+          const stickyHeader=document.getElementById('ydg-site-header');
+          const start=section?.querySelector('.ydg-config-head') || panel;
+          if(!start) return;
+          const offset=(stickyHeader?.getBoundingClientRect().height || 0)+12;
+          const y=Math.max(0,window.scrollY+start.getBoundingClientRect().top-offset);
+          window.scrollTo({top:y,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+        });
       }else if(section){
         const header=document.querySelector('header');
         const offset=(header?.getBoundingClientRect().height || 0)+12;
@@ -11764,6 +11772,120 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   }
   html body #ydg-scroll-progress > i {display:block!important;visibility:visible!important;}
   html {scroll-padding-top:calc(var(--ydg-header-height,150px) + 20px)!important;}
+}
+</style>
+<!-- V141 · Mobile: single-page scrolling + collapsed navigation. Desktop remains unchanged. -->
+<style id="ydg-mobile-clean-layout-v141">
+@media(max-width:760px){
+  html,html body {overflow-x:clip!important;width:100%!important;max-width:100%!important;}
+  html body,html body.aurora-focused {padding-top:0!important;}
+  html body #ydg-site-header.aurora-header {
+    position:sticky!important;top:0!important;left:auto!important;right:auto!important;
+    width:100%!important;max-width:100%!important;max-height:none!important;
+    padding:0!important;margin:0!important;z-index:9999!important;
+    background:rgba(5,11,21,.98)!important;
+  }
+  html body #ydg-site-header .aurora-nav.ydg-header-v3 {
+    display:flex!important;flex-direction:column!important;gap:0!important;
+    width:100%!important;padding:7px 12px 9px!important;box-sizing:border-box!important;
+  }
+  html body #ydg-site-header .ydg-header-top-v3 {
+    display:grid!important;grid-template-columns:minmax(0,1fr) 44px!important;
+    grid-template-rows:auto auto!important;column-gap:10px!important;row-gap:6px!important;
+    width:100%!important;align-items:center!important;
+  }
+  html body #ydg-site-header .ydg-header-top-v3 .aurora-brand{
+    grid-column:1!important;grid-row:1!important;min-width:0!important;max-width:100%!important;
+  }
+  html body #ydg-site-header .ydg-header-top-v3 .ydg-mobile-toggle-v3{
+    grid-column:2!important;grid-row:1!important;display:flex!important;
+    width:42px!important;min-width:42px!important;height:42px!important;margin:0!important;
+  }
+  html body #ydg-site-header .ydg-header-top-v3 .ydg-header-actions-v3 {
+    grid-column:1/-1!important;grid-row:2!important;
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    width:100%!important;margin:0!important;padding:0!important;gap:8px!important;
+  }
+  html body #ydg-site-header .ydg-header-actions-v3 a.aurora-config-direct,
+  html body #ydg-site-header .ydg-header-actions-v3 a.aurora-client {
+    width:100%!important;max-width:100%!important;min-width:0!important;
+    min-height:40px!important;padding:9px 6px!important;font-size:clamp(11px,3vw,13px)!important;
+    line-height:1.2!important;border-radius:11px!important;text-align:center!important;
+    white-space:normal!important;overflow-wrap:anywhere!important;
+  }
+  html body #ydg-site-header.aurora-header:not(.ydg-mobile-menu-open-v3) .ydg-mobile-language-v4,
+  html body #ydg-site-header.aurora-header:not(.ydg-mobile-menu-open-v3) .ydg-header-menu-row-v3 {
+    display:none!important;visibility:hidden!important;
+  }
+  html body #ydg-site-header.aurora-header.ydg-mobile-menu-open-v3 .ydg-mobile-language-v4 {
+    display:flex!important;visibility:visible!important;
+    padding:9px 0 6px!important;
+  }
+  html body #ydg-site-header.aurora-header.ydg-mobile-menu-open-v3 .ydg-header-menu-row-v3 {
+    display:flex!important;visibility:visible!important;
+    width:100%!important;padding:9px 0 4px!important;
+  }
+  html body #ydg-site-header.ydg-mobile-menu-open-v3 .aurora-links {
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:7px!important;width:100%!important;overflow:visible!important;max-height:none!important;
+  }
+  html body #ydg-site-header.ydg-mobile-menu-open-v3 .aurora-links a {
+    min-width:0!important;min-height:40px!important;padding:10px 6px!important;
+    font-size:12px!important;line-height:1.2!important;white-space:normal!important;
+  }
+  html body #ydg-site-header.ydg-mobile-menu-open-v3 .aurora-links a:nth-child(7):last-child {
+    grid-column:auto!important;
+  }
+  html body #configurador {width:100%!important;max-width:100%!important;min-width:0!important;overflow:visible!important;padding:20px 10px 28px!important;box-sizing:border-box!important;}
+  html body #configurador .ydg-config-shell {
+    display:flex!important;flex-direction:column!important;align-items:stretch!important;
+    gap:14px!important;width:100%!important;max-width:100%!important;min-width:0!important;
+  }
+  html body #configurador .ydg-config-main,
+  html body #configurador .ydg-config-side {
+    position:relative!important;grid-column:auto!important;grid-row:auto!important;
+    width:100%!important;max-width:100%!important;min-width:0!important;
+    margin:0!important;box-sizing:border-box!important;
+  }
+  html body #configurador .ydg-config-main {order:0!important;padding:16px 12px!important;}
+  html body #configurador .ydg-config-side {order:1!important;padding:16px!important;top:auto!important;}
+  html body #configurador .ydg-config-head {gap:10px!important;margin-bottom:15px!important;}
+  html body #configurador #ydg-visual-config-form {
+    display:block!important;width:100%!important;min-width:0!important;
+    height:auto!important;min-height:0!important;max-height:none!important;
+    overflow:visible!important;overscroll-behavior:auto!important;
+  }
+  html body #configurador .ydg-step-panel.is-active {
+    display:block!important;position:relative!important;
+    width:100%!important;min-width:0!important;
+    height:auto!important;min-height:0!important;max-height:none!important;
+    overflow:visible!important;overflow-x:visible!important;overflow-y:visible!important;
+    overscroll-behavior:auto!important;scrollbar-gutter:auto!important;
+    padding:3px 0 9px!important;animation:none!important;
+  }
+  html body #configurador .ydg-step-panel:not(.is-active){display:none!important;}
+  html body #configurador .ydg-step-actions,
+  html body #configurador .ydg-step-actions.dual {
+    position:static!important;inset:auto!important;bottom:auto!important;z-index:auto!important;
+    background:transparent!important;box-shadow:none!important;
+    padding:8px 0 2px!important;margin-top:12px!important;min-height:0!important;
+  }
+  html body #configurador .ydg-step-actions button{min-height:44px!important;}
+  html body #configurador .ydg-type-grid {grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important;}
+  html body #configurador .ydg-example-choice {min-width:0!important;max-width:100%!important;}
+  html body #configurador .ydg-example-open {width:100%!important;min-height:40px!important;}
+  html body #configurador .ydg-choice-card {max-width:100%!important;min-width:0!important;min-height:86px!important;}
+  html body #configurador .ydg-mini-choice {min-width:0!important;}
+  html body #configurador .ydg-summary,html body #configurador .ydg-submit-row {max-width:100%!important;}
+  html body #configurador .ydg-input-wrap {min-width:0!important;}
+  html body #configurador .ydg-input-wrap input,html body #configurador .ydg-input-wrap textarea {width:100%!important;min-width:0!important;box-sizing:border-box!important;}
+  html body #main-content {width:100%!important;max-width:100%!important;min-width:0!important;}
+  html body #configurador .ydg-config-steps {max-width:100%!important;}
+}
+@media(max-width:360px){
+  html body #configurador{padding-left:7px!important;padding-right:7px!important;}
+  html body #configurador .ydg-config-main{padding-left:9px!important;padding-right:9px!important;}
+  html body #configurador .ydg-choice-card{min-height:82px!important;}
 }
 </style>
 </body>
