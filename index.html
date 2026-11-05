@@ -7432,34 +7432,24 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
 #ydg-config-email-fallback[hidden]{display:none}
 #ydg-config-email-fallback{min-width:0;max-width:100%;margin-top:8px;text-decoration:none}
 </style><link rel="stylesheet" href="aurora.css?v=136">
-<style id="ydg-compact-portfolio-style">
-/* Portfolio compacto · identidad visual por marca */
+<style id="ydg-portfolio-final-style">
 #portfolio .portfolio-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important;max-width:1200px!important;overflow:visible!important;padding:0!important;margin:0 auto!important;align-items:stretch!important}
-#portfolio .portfolio-card{min-width:0!important;width:auto!important;flex:none!important;height:auto!important;border-radius:16px!important}
-#portfolio .portfolio-cover{height:130px!important;min-height:0!important;margin:10px 10px 0!important;aspect-ratio:auto!important;display:grid!important;place-items:center!important;border-radius:12px!important;background:radial-gradient(circle at 50% 35%,rgba(45,212,191,.13),transparent 70%),#101b2c!important;overflow:hidden!important}
-#portfolio .portfolio-cover>img,#portfolio .portfolio-cover>picture,#portfolio .portfolio-cover>div,#portfolio .portfolio-cover>.portfolio-browser,#portfolio .portfolio-cover>.portfolio-badge{display:none!important}
+#portfolio .portfolio-card{min-width:0!important;width:100%!important;max-width:none!important;flex:none!important;height:auto!important;border-radius:15px!important;overflow:hidden!important}
+#portfolio .portfolio-cover{height:112px!important;min-height:0!important;margin:8px 8px 0!important;aspect-ratio:auto!important;display:grid!important;place-items:center!important;border-radius:12px!important;background:linear-gradient(135deg,#142b3e,#102034)!important;overflow:hidden!important;position:relative!important}
+#portfolio .portfolio-cover>img:not(.ydg-portfolio-logo),#portfolio .portfolio-cover>picture,#portfolio .portfolio-cover>div,#portfolio .portfolio-cover>.portfolio-browser,#portfolio .portfolio-cover>.portfolio-badge{display:none!important}
 #portfolio .portfolio-cover::after{display:none!important}
-#portfolio .ydg-brand-icon{width:76px;height:76px;display:grid;place-items:center;border-radius:19px;background:linear-gradient(135deg,var(--brand-a,#164e63),var(--brand-b,#0f172a));box-shadow:0 10px 25px #0005,inset 0 1px 0 #ffffff30;color:white;font-size:23px;font-weight:900;letter-spacing:-.04em;text-align:center;line-height:1.05;padding:7px;transition:transform .2s ease}
-#portfolio .portfolio-card:hover .ydg-brand-icon{transform:translateY(-3px) scale(1.04)}
-#portfolio .portfolio-body{padding:12px!important;gap:6px!important}
-#portfolio .portfolio-title{font-size:1rem!important;line-height:1.25!important;margin:0!important}
-#portfolio .portfolio-sector{font-size:.67rem!important;margin:0!important}
-#portfolio .portfolio-description,#portfolio .portfolio-tech{display:none!important}
-#portfolio .portfolio-link{font-size:.78rem!important;margin-top:5px!important}
-#portfolio .ydg-project-estimate{font-size:.7rem!important;margin-top:5px!important}
-#portfolio .portfolio-swipe-hint{display:none!important}
+#portfolio .ydg-portfolio-logo{display:block!important;position:relative!important;z-index:5!important;width:68px!important;height:68px!important;max-width:68px!important;object-fit:contain!important;border-radius:14px!important;padding:9px!important;background:#ffffff!important;box-shadow:0 5px 18px #0004!important}
+#portfolio .ydg-portfolio-fallback{display:grid!important;place-items:center!important;position:relative!important;z-index:5!important;width:68px;height:68px;border-radius:14px;background:#f6f9fc;box-shadow:0 5px 18px #0004}
+#portfolio .ydg-portfolio-fallback svg{width:39px;height:39px;stroke:#126c86;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+#portfolio .portfolio-body{padding:10px!important;gap:4px!important}
+#portfolio .portfolio-title{font-size:.94rem!important;line-height:1.22!important;margin:0!important;overflow-wrap:anywhere!important}
+#portfolio .portfolio-sector{font-size:.65rem!important;margin:0!important}
+#portfolio .portfolio-description,#portfolio .portfolio-tech,#portfolio .portfolio-swipe-hint{display:none!important}
+#portfolio .portfolio-link{font-size:.72rem!important;margin-top:4px!important}
+#portfolio .ydg-project-estimate{font-size:.68rem!important;margin-top:4px!important}
 @media(max-width:1000px){#portfolio .portfolio-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
-@media(max-width:650px){#portfolio .portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}#portfolio .portfolio-cover{height:105px!important;margin:7px 7px 0!important}#portfolio .ydg-brand-icon{width:62px;height:62px;font-size:19px;border-radius:15px}#portfolio .portfolio-body{padding:9px!important}#portfolio .portfolio-title{font-size:.88rem!important}#portfolio .portfolio-sector{font-size:.6rem!important}#portfolio .portfolio-link{font-size:.7rem!important}}
-</style><style id="ydg-real-brand-logo-style">
-#portfolio .portfolio-cover>.ydg-brand-logo{display:block!important;width:74px!important;height:74px!important;max-width:74px!important;object-fit:contain!important;border-radius:15px!important;box-shadow:0 8px 24px #0004!important;background:#ffffff0d!important;padding:5px!important;position:relative!important;z-index:3!important}
-#portfolio .portfolio-cover.ydg-logo-unavailable{background:linear-gradient(135deg,#17334b,#152438)!important}
-#portfolio .portfolio-cover.ydg-logo-unavailable:before{content:"WEB";font-weight:900;letter-spacing:.14em;color:#b4e6e2;font-size:1.2rem}
-@media(max-width:650px){#portfolio .portfolio-cover>.ydg-brand-logo{width:58px!important;height:58px!important;max-width:58px!important}#portfolio .portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
-</style><style id="ydg-topic-portfolio-icons-style">
-#portfolio .portfolio-cover>.ydg-topic-icon{display:grid!important;place-items:center!important;width:78px;height:78px;border-radius:19px;background:var(--topic-bg);color:var(--topic-color);font-size:43px;line-height:1;box-shadow:0 12px 25px #0005,inset 0 1px 0 #fff8;position:relative;z-index:4;transition:transform .2s}
-#portfolio .portfolio-card:hover .ydg-topic-icon{transform:translateY(-3px) scale(1.05)}
-#portfolio .portfolio-cover.ydg-logo-unavailable:before{display:none!important}
-@media(max-width:650px){#portfolio .portfolio-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}#portfolio .portfolio-card{min-width:0!important;flex:none!important}#portfolio .portfolio-cover>.ydg-topic-icon{width:64px;height:64px;font-size:36px;border-radius:16px}}
+@media(max-width:650px){#portfolio .portfolio-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}#portfolio .portfolio-cover{height:77px!important;margin:5px 5px 0!important;border-radius:9px!important}#portfolio .ydg-portfolio-logo,#portfolio .ydg-portfolio-fallback{width:48px!important;height:48px!important;max-width:48px!important;border-radius:10px!important;padding:5px!important}#portfolio .ydg-portfolio-fallback svg{width:30px;height:30px}#portfolio .portfolio-body{padding:7px!important;gap:3px!important}#portfolio .portfolio-title{font-size:.73rem!important}#portfolio .portfolio-sector{font-size:.55rem!important}#portfolio .portfolio-link{font-size:.62rem!important}}
+@media(max-width:390px){#portfolio .portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}#portfolio .portfolio-cover{height:92px!important}#portfolio .ydg-portfolio-logo,#portfolio .ydg-portfolio-fallback{width:57px!important;height:57px!important;max-width:57px!important}#portfolio .portfolio-title{font-size:.82rem!important}}
 </style></head>
 <body class="ydg-promo-on antialiased ydg-classic-hero">
 <!-- V80 · Launch Offer Modal -->
@@ -11947,23 +11937,28 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 <script id="ydg-compact-portfolio-logos">
 (function(){
-const icons=[
-['mercedes','💌','#b54c86','#f7dbe9'],['sudoku','▦','#2563eb','#dbeafe'],
-['radiosas','🩻','#0891b2','#cffafe'],['dea habbo','🛡','#7c3aed','#ede9fe'],
-['10pedro','🎮','#4f46e5','#e0e7ff'],['jet','🌊','#0284c7','#dbeafe'],
-['áurea','🍽','#b45309','#fef3c7'],['voltio','⚡','#ca8a04','#fef9c3'],
-['aquafix','💧','#0284c7','#dbeafe'],['lúmina','✦','#be185d','#fce7f3'],
-['hotel','🏨','#0f766e','#ccfbf1'],['personal','👤','#475569','#e2e8f0']
-];
+const paths={
+sudoku:'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/><path d="M6 6h.01M12 12h.01M18 18h.01" stroke-width="3"/>',
+radiosas:'<rect x="4" y="2.5" width="16" height="19" rx="2"/><path d="M12 5v14M8 8l4 3 4-3M8 12l4 3 4-3M7 18h10"/>',
+dea:'<path d="M12 2 20 5v6c0 5-3.4 8.5-8 11-4.6-2.5-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/>',
+habbo:'<rect x="3" y="6" width="18" height="12" rx="4"/><path d="M8 9v6M5 12h6M16 10h.01M19 13h.01"/>',
+mercedes:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 7 9-7"/><path d="M12 3v2"/>',
+aurea:'<path d="M5 3v8M8 3v8M5 8h3M6.5 11v10M16 3c-4 3-4 9 0 10v8"/>',
+voltio:'<path d="m13 2-9 12h7l-1 8 10-12h-7z"/>',
+aquafix:'<path d="M12 2C9 7 5 11 5 15a7 7 0 0 0 14 0c0-4-4-8-7-13z"/><path d="M9 16a3 3 0 0 0 3 3"/>',
+lumina:'<path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5z"/>',
+default:'<rect x="3" y="5" width="18" height="15" rx="2"/><path d="M3 9h18M8 13h8M8 16h5"/>'
+};
+function icon(name){if(name.includes('sudoku'))return paths.sudoku;if(name.includes('radiosas'))return paths.radiosas;if(name.includes('dea habbo'))return paths.dea;if(name.includes('10pedro')||name.includes('habbo'))return paths.habbo;if(name.includes('mercedes'))return paths.mercedes;if(name.includes('áurea'))return paths.aurea;if(name.includes('voltio'))return paths.voltio;if(name.includes('aquafix'))return paths.aquafix;if(name.includes('lúmina'))return paths.lumina;return paths.default}
 function init(){
 document.querySelectorAll('#portfolio .portfolio-card').forEach(card=>{
 const cover=card.querySelector('.portfolio-cover');if(!cover)return;
-cover.querySelectorAll('.ydg-brand-logo,.ydg-brand-icon,.ydg-topic-icon').forEach(el=>el.remove());
-const name=(card.querySelector('.portfolio-title')?.textContent||'Proyecto').trim().toLowerCase();
-const item=icons.find(x=>name.includes(x[0]))||['','◈','#0f766e','#ccfbf1'];
-const logo=document.createElement('span');logo.className='ydg-topic-icon';logo.textContent=item[1];logo.setAttribute('aria-hidden','true');
-logo.style.setProperty('--topic-color',item[2]);logo.style.setProperty('--topic-bg',item[3]);
-cover.appendChild(logo);
+cover.querySelectorAll('.ydg-brand-icon,.ydg-brand-logo,.ydg-topic-icon,.ydg-portfolio-logo,.ydg-portfolio-fallback').forEach(el=>el.remove());
+const name=(card.querySelector('.portfolio-title')?.textContent||'Proyecto').trim();
+const fallback=()=>{if(cover.querySelector('.ydg-portfolio-fallback'))return;const span=document.createElement('span');span.className='ydg-portfolio-fallback';span.setAttribute('aria-hidden','true');span.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+icon(name.toLowerCase())+'</svg>';cover.appendChild(span)};
+const link=cover.getAttribute('href')||card.querySelector('a[href^="http"]')?.href;
+if(!link){fallback();return}
+try{const origin=new URL(link,location.href).origin;const img=document.createElement('img');img.className='ydg-portfolio-logo';img.alt='Icono de '+name;img.loading='lazy';img.decoding='async';img.referrerPolicy='no-referrer';let step=0;const candidates=[origin+'/apple-touch-icon.png',origin+'/favicon.ico'];img.onerror=()=>{step++;if(step<candidates.length)img.src=candidates[step];else{img.remove();fallback()}};img.src=candidates[0];cover.appendChild(img)}catch(e){fallback()}
 });
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
