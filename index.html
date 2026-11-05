@@ -7450,6 +7450,11 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
 #portfolio .portfolio-swipe-hint{display:none!important}
 @media(max-width:1000px){#portfolio .portfolio-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
 @media(max-width:650px){#portfolio .portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}#portfolio .portfolio-cover{height:105px!important;margin:7px 7px 0!important}#portfolio .ydg-brand-icon{width:62px;height:62px;font-size:19px;border-radius:15px}#portfolio .portfolio-body{padding:9px!important}#portfolio .portfolio-title{font-size:.88rem!important}#portfolio .portfolio-sector{font-size:.6rem!important}#portfolio .portfolio-link{font-size:.7rem!important}}
+</style><style id="ydg-real-brand-logo-style">
+#portfolio .portfolio-cover>.ydg-brand-logo{display:block!important;width:74px!important;height:74px!important;max-width:74px!important;object-fit:contain!important;border-radius:15px!important;box-shadow:0 8px 24px #0004!important;background:#ffffff0d!important;padding:5px!important;position:relative!important;z-index:3!important}
+#portfolio .portfolio-cover.ydg-logo-unavailable{background:linear-gradient(135deg,#17334b,#152438)!important}
+#portfolio .portfolio-cover.ydg-logo-unavailable:before{content:"WEB";font-weight:900;letter-spacing:.14em;color:#b4e6e2;font-size:1.2rem}
+@media(max-width:650px){#portfolio .portfolio-cover>.ydg-brand-logo{width:58px!important;height:58px!important;max-width:58px!important}#portfolio .portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 </style></head>
 <body class="ydg-promo-on antialiased ydg-classic-hero">
 <!-- V80 · Launch Offer Modal -->
@@ -11937,8 +11942,30 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 <script id="ydg-compact-portfolio-logos">
 (function(){
-const colors=[['#164e63','#0f766e'],['#1e3a8a','#334155'],['#6b214b','#9d4773'],['#312e81','#4c1d95'],['#155e75','#1e293b'],['#92400e','#713f12'],['#14532d','#0f766e']];
-function init(){document.querySelectorAll('#portfolio .portfolio-card').forEach((card,i)=>{const cover=card.querySelector('.portfolio-cover');if(!cover||cover.querySelector('.ydg-brand-icon'))return;const name=(card.querySelector('.portfolio-title')?.textContent||'Proyecto').trim();const initials=name.toLowerCase().includes('mercedes')?'💌':name.toLowerCase().includes('sudoku')?'▦':name.toLowerCase().includes('dea habbo')?'DEA':name.toLowerCase().includes('radiosas')?'RX':name.toLowerCase().includes('10pedro')?'10P':name.split(/\s+/).filter(w=>!['de','del','la','el'].includes(w.toLowerCase())).slice(0,2).map(w=>w[0]).join('').toUpperCase();const logo=document.createElement('span');logo.className='ydg-brand-icon';logo.textContent=initials;logo.setAttribute('aria-hidden','true');const pair=colors[i%colors.length];logo.style.setProperty('--brand-a',pair[0]);logo.style.setProperty('--brand-b',pair[1]);cover.appendChild(logo);});}
+function init(){
+ document.querySelectorAll('#portfolio .portfolio-card').forEach(card=>{
+  const cover=card.querySelector('.portfolio-cover');
+  if(!cover||cover.querySelector('.ydg-brand-logo'))return;
+  const link=cover.getAttribute('href');
+  if(!link)return;
+  const name=(card.querySelector('.portfolio-title')?.textContent||'Proyecto').trim();
+  const img=document.createElement('img');
+  img.className='ydg-brand-logo';
+  img.alt='Logotipo de '+name;
+  img.loading='lazy';
+  img.decoding='async';
+  img.referrerPolicy='no-referrer';
+  try{
+   const url=new URL(link,location.href);
+   img.src=url.origin+'/favicon.ico';
+   img.onerror=function(){
+    if(!img.dataset.retry){img.dataset.retry='1';img.src=url.origin+'/apple-touch-icon.png';}
+    else {img.remove();cover.classList.add('ydg-logo-unavailable');}
+   };
+  }catch(e){return;}
+  cover.appendChild(img);
+ });
+}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
