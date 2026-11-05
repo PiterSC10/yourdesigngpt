@@ -11695,6 +11695,58 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   #main-content :is(section,[id]) {scroll-margin-top:calc(var(--ydg-header-height, 150px) + 18px);}
 }
 </style>
+<!-- V139 · Responsive configurator compactness and fixed desktop navigation. -->
+<style id="ydg-responsive-config-v139">
+@media (min-width:1024px) {
+  html body #ydg-site-header.aurora-header {
+    position:fixed!important;top:3px!important;left:0!important;right:0!important;
+    transform:none!important;visibility:visible!important;opacity:1!important;
+    z-index:100000!important;
+  }
+  html body { padding-top:calc(var(--ydg-header-height,150px) + 3px)!important; }
+  html #ydg-scroll-progress {position:fixed!important;top:0!important;z-index:100001!important;}
+  html {scroll-padding-top:calc(var(--ydg-header-height,150px) + 16px)!important;}
+}
+@media (max-width:767px) {
+  html body #configurador {width:100%!important;max-width:100%!important;padding:18px 10px 28px!important;box-sizing:border-box!important;}
+  html body #configurador .ydg-config-shell {display:flex!important;flex-direction:column!important;gap:12px!important;width:100%!important;min-width:0!important;max-width:100%!important;margin:0 auto!important;}
+  html body #configurador .ydg-config-main {width:100%!important;min-width:0!important;max-width:100%!important;padding:14px 12px!important;box-sizing:border-box!important;border-radius:17px!important;order:0!important;}
+  html body #configurador .ydg-config-side {width:100%!important;min-width:0!important;max-width:100%!important;padding:14px!important;box-sizing:border-box!important;border-radius:17px!important;order:1!important;position:static!important;}
+  html body #configurador .ydg-config-head {display:flex!important;flex-direction:column!important;gap:8px!important;margin-bottom:12px!important;}
+  html body #configurador .ydg-config-head h2 {font-size:clamp(24px,7vw,30px)!important;line-height:1.06!important;}
+  html body #configurador .ydg-config-head p {font-size:12px!important;line-height:1.45!important;margin-top:5px!important;}
+  html body #configurador .ydg-config-steps {align-self:center!important;justify-content:center!important;width:100%!important;gap:9px!important;}
+  html body #configurador .ydg-config-steps button {width:30px!important;height:30px!important;min-width:30px!important;min-height:30px!important;}
+  html body #configurador .ydg-config-steps span {width:clamp(20px,12vw,46px)!important;}
+  html body #configurador #ydg-visual-config-form {width:100%!important;min-width:0!important;height:clamp(340px,calc(100dvh - 235px),590px)!important;max-height:590px!important;overflow:hidden!important;}
+  html body #configurador .ydg-step-panel.is-active {height:100%!important;min-width:0!important;overflow-y:auto!important;overflow-x:hidden!important;box-sizing:border-box!important;padding:2px 4px 8px!important;scrollbar-gutter:stable!important;}
+  html body #configurador .ydg-type-grid {display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;}
+  html body #configurador .ydg-choice-card {width:100%!important;min-width:0!important;height:auto!important;min-height:88px!important;padding:9px 6px!important;gap:4px!important;border-radius:12px!important;transform:none!important;}
+  html body #configurador .ydg-choice-icon {font-size:22px!important;line-height:1.1!important;width:auto!important;height:auto!important;}
+  html body #configurador .ydg-choice-card b {font-size:12px!important;line-height:1.22!important;overflow-wrap:anywhere!important;}
+  html body #configurador .ydg-choice-card small {font-size:10px!important;line-height:1.25!important;max-width:100%!important;overflow-wrap:anywhere!important;}
+  html body #configurador .ydg-functions-grid {display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important;}
+  html body #configurador .ydg-mini-choice {min-width:0!important;min-height:54px!important;padding:8px 4px!important;gap:3px!important;}
+  html body #configurador .ydg-mini-choice span {font-size:11px!important;overflow-wrap:anywhere!important;}
+  html body #configurador .ydg-subgrid {grid-template-columns:1fr!important;gap:12px!important;margin-top:13px!important;}
+  html body #configurador .ydg-language-row,html body #configurador .ydg-style-row {gap:7px!important;max-width:100%!important;}
+  html body #configurador .ydg-final-grid {grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important;}
+  html body #configurador .ydg-input-wide {grid-column:1/-1!important;}
+  html body #configurador .ydg-input-wrap input,html body #configurador .ydg-input-wrap textarea {min-width:0!important;max-width:100%!important;box-sizing:border-box!important;font-size:16px!important;}
+  html body #configurador .ydg-submit-row {flex-direction:column!important;align-items:stretch!important;}
+  html body #configurador .ydg-submit-budget {width:100%!important;min-width:0!important;min-height:46px!important;}
+  html body #configurador .ydg-step-actions {position:sticky!important;bottom:0!important;z-index:3!important;margin-top:12px!important;padding:9px 1px 5px!important;background:#07111f!important;}
+  html body #configurador .ydg-step-actions button {min-height:44px!important;}
+}
+@media (max-width:370px) {
+  html body #configurador {padding-left:7px!important;padding-right:7px!important;}
+  html body #configurador .ydg-config-main {padding:12px 9px!important;}
+  html body #configurador .ydg-choice-card {min-height:82px!important;padding:7px 4px!important;}
+  html body #configurador .ydg-choice-card b {font-size:11px!important;}
+  html body #configurador .ydg-choice-card small {font-size:9px!important;}
+  html body #configurador .ydg-step-panel[data-step="3"] .ydg-final-grid {grid-template-columns:1fr!important;}
+}
+</style>
 </body>
 </html>
 
