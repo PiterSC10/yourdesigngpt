@@ -346,8 +346,12 @@
     const measure = () => {
       const h = Math.ceil(header.getBoundingClientRect().height);
       document.documentElement.style.setProperty('--ydg-header-height',h+'px');
-      headerSpacer.style.height = '0px';
-      headerSpacer.style.display = 'none';
+      // Desktop fixed header must reserve real document space: no content can sit behind it.
+      const desktop = window.matchMedia('(min-width:1024px)').matches;
+      headerSpacer.style.height = desktop ? (h + 3) + 'px' : '0px';
+      headerSpacer.style.display = desktop ? 'block' : 'none';
+      headerSpacer.style.width = '100%';
+      headerSpacer.style.pointerEvents = 'none';
       document.querySelectorAll('main section[id]').forEach(el => { el.style.scrollMarginTop = (h+12)+'px'; });
     };
     measure();
