@@ -13,8 +13,13 @@
       "permanent": true
     },
     {
-      "source": "/admin/captacion/:path*",
-      "destination": "https://leads-yourdesigngpt.vercel.app/admin/captacion/:path*",
+      "source": "/admin/captacion/:path(.*)",
+      "destination": "https://leads-yourdesigngpt.vercel.app/admin/captacion/:path",
+      "permanent": false
+    },
+    {
+      "source": "/admin/captacion",
+      "destination": "https://leads-yourdesigngpt.vercel.app/admin/captacion/",
       "permanent": false
     }
   ]
