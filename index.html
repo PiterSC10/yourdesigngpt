@@ -2196,7 +2196,8 @@ section h2.gradient-text{
   left:0;
   right:0;
   height:3px;
-  z-index:9999;
+  /* Keep above the fixed navigation header without covering modal dialogs. */
+  z-index:100001;
   pointer-events:none;
   background:rgba(255,255,255,.025);
 }
