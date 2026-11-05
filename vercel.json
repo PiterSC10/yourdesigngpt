@@ -1,0 +1,16 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "yourdesigngpt.vercel.app"
+        }
+      ],
+      "destination": "https://yourdesigngpt.es/:path*",
+      "permanent": true
+    }
+  ]
+}
