@@ -7428,6 +7428,8 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
 #configurador .ydg-choice-card.ydg-academy-choice.is-selected::after{background:#f9a8d4;color:#4a123b}
 #configurador .ydg-academy-note{font-size:.73rem;line-height:1.6;padding:11px 13px;margin:12px 0;border:1px solid #f472b655;border-radius:12px;background:#351c344d;color:#fbcfe8}
 #configurador .ydg-academy-note[hidden]{display:none}
+#ydg-config-email-fallback[hidden]{display:none}
+#ydg-config-email-fallback{min-width:0;max-width:100%;margin-top:8px;text-decoration:none}
 </style><link rel="stylesheet" href="aurora.css?v=136">
 </head>
 <body class="ydg-promo-on antialiased ydg-classic-hero">
@@ -7710,6 +7712,7 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
           </div>
           <p class="ydg-submit-note" data-lang-key="cfg-submit-note">Sin compromiso · Dominio .es o .com + hosting + SSL + mantenimiento técnico para mantener la web operativa + cambios menores ilimitados durante los 12 meses.</p>
           <div id="ydg-config-status" class="ydg-config-status" aria-live="polite"></div>
+          <a id="ydg-config-email-fallback" class="ydg-submit-budget" href="mailto:iampetersc@gmail.com" hidden></a>
         </div>
       </form>
     </div>
@@ -11034,6 +11037,7 @@ function initYDGConfigurator117(){
   const styleField=document.getElementById('ydg-style-field');
   const summary=document.getElementById('ydg-summary-text');
   const status=document.getElementById('ydg-config-status');
+  const emailFallback=document.getElementById('ydg-config-email-fallback');
 
   const otherButton=form.querySelector('.ydg-mini-choice[data-function="Otros"]');
   const otherWrap=document.getElementById('ydg-other-function-wrap');
@@ -11231,13 +11235,29 @@ function initYDGConfigurator117(){
     });
   });
 
+  emailFallback.addEventListener('click', e=>{
+    if(!form.reportValidity()){
+      e.preventDefault();
+      return;
+    }
+    updateSummary();
+    const lines=[];
+    for(const [key, value] of new FormData(form)){
+      if(!key.startsWith('_') && value) lines.push(key+': '+value);
+    }
+    const subject=encodeURIComponent('Solicitud de presupuesto · YourDesignGPT');
+    emailFallback.href='mailto:iampetersc@gmail.com?subject='+subject+'&body='+encodeURIComponent(lines.join('\r\n'));
+  });
+
   // FORM SEND
   form.addEventListener('submit',async e=>{
     e.preventDefault();
     if(!form.reportValidity()) return;
     updateSummary();
 
-    const submit=form.querySelector('.ydg-submit-budget');
+    const submit=form.querySelector('button.ydg-submit-budget');
+    const fields=new FormData(form);
+    emailFallback.hidden=true;
     if(status){
       status.textContent='Enviando tu configuración…';
       status.style.color='#7dd3fc';
@@ -11247,7 +11267,8 @@ function initYDGConfigurator117(){
     try{
       const res=await fetch(form.action,{
         method:'POST',
-        body:new FormData(form),
+        body:fields,
+        signal:AbortSignal.timeout(8000),
         headers:{Accept:'application/json'}
       });
       if(!res.ok)throw new Error('send');
@@ -11261,10 +11282,18 @@ function initYDGConfigurator117(){
       const text=submit?.querySelector('span');
       if(text)text.textContent='Solicitud enviada';
     }catch(_){
-      if(status){
-        status.textContent='No se pudo enviar ahora. Puedes usar el botón de contacto o WhatsApp.';
-        status.style.color='#fca5a5';
-      }
+      const messages={
+        es:['No se confirmó el envío automático. Puedes enviar la solicitud desde tu correo.', 'Abrir mi correo'],
+        en:['Automatic delivery could not be confirmed. You can send the request from your email app.', 'Open my email'],
+        fr:['L’envoi automatique n’a pas été confirmé. Vous pouvez envoyer la demande par e-mail.', 'Ouvrir ma messagerie'],
+        it:['L’invio automatico non è stato confermato. Puoi inviare la richiesta via email.', 'Apri la mia email'],
+        de:['Der automatische Versand wurde nicht bestätigt. Sie können die Anfrage per E-Mail senden.', 'E-Mail öffnen']
+      };
+      const [message, label]=messages[document.documentElement.lang] || messages.es;
+      status.textContent=message;
+      status.style.color='#fca5a5';
+      emailFallback.textContent=label;
+      emailFallback.hidden=false;
     }finally{
       if(submit)submit.disabled=false;
     }

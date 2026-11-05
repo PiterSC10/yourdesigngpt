@@ -11,6 +11,11 @@
       ],
       "destination": "https://yourdesigngpt.es/:path*",
       "permanent": true
+    },
+    {
+      "source": "/admin/captacion/:path*",
+      "destination": "https://leads-yourdesigngpt.vercel.app/admin/captacion/:path*",
+      "permanent": false
     }
   ]
 }
