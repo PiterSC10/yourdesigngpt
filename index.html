@@ -7432,7 +7432,25 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
 #ydg-config-email-fallback[hidden]{display:none}
 #ydg-config-email-fallback{min-width:0;max-width:100%;margin-top:8px;text-decoration:none}
 </style><link rel="stylesheet" href="aurora.css?v=136">
-</head>
+<style id="ydg-compact-portfolio-style">
+/* Portfolio compacto · identidad visual por marca */
+#portfolio .portfolio-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important;max-width:1200px!important;overflow:visible!important;padding:0!important;margin:0 auto!important;align-items:stretch!important}
+#portfolio .portfolio-card{min-width:0!important;width:auto!important;flex:none!important;height:auto!important;border-radius:16px!important}
+#portfolio .portfolio-cover{height:130px!important;min-height:0!important;margin:10px 10px 0!important;aspect-ratio:auto!important;display:grid!important;place-items:center!important;border-radius:12px!important;background:radial-gradient(circle at 50% 35%,rgba(45,212,191,.13),transparent 70%),#101b2c!important;overflow:hidden!important}
+#portfolio .portfolio-cover>img,#portfolio .portfolio-cover>picture,#portfolio .portfolio-cover>div,#portfolio .portfolio-cover>.portfolio-browser,#portfolio .portfolio-cover>.portfolio-badge{display:none!important}
+#portfolio .portfolio-cover::after{display:none!important}
+#portfolio .ydg-brand-icon{width:76px;height:76px;display:grid;place-items:center;border-radius:19px;background:linear-gradient(135deg,var(--brand-a,#164e63),var(--brand-b,#0f172a));box-shadow:0 10px 25px #0005,inset 0 1px 0 #ffffff30;color:white;font-size:23px;font-weight:900;letter-spacing:-.04em;text-align:center;line-height:1.05;padding:7px;transition:transform .2s ease}
+#portfolio .portfolio-card:hover .ydg-brand-icon{transform:translateY(-3px) scale(1.04)}
+#portfolio .portfolio-body{padding:12px!important;gap:6px!important}
+#portfolio .portfolio-title{font-size:1rem!important;line-height:1.25!important;margin:0!important}
+#portfolio .portfolio-sector{font-size:.67rem!important;margin:0!important}
+#portfolio .portfolio-description,#portfolio .portfolio-tech{display:none!important}
+#portfolio .portfolio-link{font-size:.78rem!important;margin-top:5px!important}
+#portfolio .ydg-project-estimate{font-size:.7rem!important;margin-top:5px!important}
+#portfolio .portfolio-swipe-hint{display:none!important}
+@media(max-width:1000px){#portfolio .portfolio-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(max-width:650px){#portfolio .portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}#portfolio .portfolio-cover{height:105px!important;margin:7px 7px 0!important}#portfolio .ydg-brand-icon{width:62px;height:62px;font-size:19px;border-radius:15px}#portfolio .portfolio-body{padding:9px!important}#portfolio .portfolio-title{font-size:.88rem!important}#portfolio .portfolio-sector{font-size:.6rem!important}#portfolio .portfolio-link{font-size:.7rem!important}}
+</style></head>
 <body class="ydg-promo-on antialiased ydg-classic-hero">
 <!-- V80 · Launch Offer Modal -->
 
@@ -11916,6 +11934,14 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   html body #configurador .ydg-choice-card{min-height:82px!important;}
 }
 </style>
+
+<script id="ydg-compact-portfolio-logos">
+(function(){
+const colors=[['#164e63','#0f766e'],['#1e3a8a','#334155'],['#6b214b','#9d4773'],['#312e81','#4c1d95'],['#155e75','#1e293b'],['#92400e','#713f12'],['#14532d','#0f766e']];
+function init(){document.querySelectorAll('#portfolio .portfolio-card').forEach((card,i)=>{const cover=card.querySelector('.portfolio-cover');if(!cover||cover.querySelector('.ydg-brand-icon'))return;const name=(card.querySelector('.portfolio-title')?.textContent||'Proyecto').trim();const initials=name.toLowerCase().includes('mercedes')?'💌':name.toLowerCase().includes('sudoku')?'▦':name.toLowerCase().includes('dea habbo')?'DEA':name.toLowerCase().includes('radiosas')?'RX':name.toLowerCase().includes('10pedro')?'10P':name.split(/\s+/).filter(w=>!['de','del','la','el'].includes(w.toLowerCase())).slice(0,2).map(w=>w[0]).join('').toUpperCase();const logo=document.createElement('span');logo.className='ydg-brand-icon';logo.textContent=initials;logo.setAttribute('aria-hidden','true');const pair=colors[i%colors.length];logo.style.setProperty('--brand-a',pair[0]);logo.style.setProperty('--brand-b',pair[1]);cover.appendChild(logo);});}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
 </body>
 </html>
 
