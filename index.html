@@ -7500,7 +7500,7 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
   #portfolio .portfolio-grid { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
 }
 @media (max-width: 650px) {
-  #portfolio .portfolio-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  html body #portfolio .portfolio-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   #portfolio .portfolio-body { padding: 9px !important; }
   #portfolio .portfolio-title { font-size: .83rem !important; }
   #portfolio .portfolio-sector { font-size: .65rem !important; }
@@ -9934,17 +9934,7 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
   addEventListener('ydg-language-change',sync);
   sync();
 
-  const grid=document.querySelector('.portfolio-grid');
-  if(grid&&matchMedia('(max-width:767px)').matches&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
-    let i=0,timer;const cards=[...grid.children];
-    const run=()=>{if(cards.length<2||document.hidden)return;i=(i+1)%cards.length;grid.scrollTo({left:cards[i].offsetLeft-grid.clientWidth*.07,behavior:'smooth'})};
-    const stop=()=>clearInterval(timer);
-    const start=()=>{stop();timer=setInterval(run,5200)};
-    start();
-    grid.addEventListener('touchstart',stop,{passive:true});
-    grid.addEventListener('touchend',start,{passive:true});
-    document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
-  }
+
 })();
 </script>
 <script>
