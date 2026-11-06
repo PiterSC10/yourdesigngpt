@@ -7471,6 +7471,42 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
 #portfolio .portfolio-card{overflow:hidden!important}
 @media(max-width:650px){#portfolio .portfolio-cover{aspect-ratio:1.12/1!important;height:auto!important}#portfolio .portfolio-cover>div[aria-label]>strong{font-size:11px!important}#portfolio .portfolio-cover>div[aria-label]>span:first-child{font-size:25px!important}}
 @media(max-width:390px){#portfolio .portfolio-cover{aspect-ratio:1.45/1!important}}
+
+#portfolio .portfolio-cover:has(> .portfolio-artwork) {
+  aspect-ratio: 3 / 2 !important;
+  background: #0d1726 !important;
+}
+#portfolio .portfolio-cover > img.portfolio-artwork {
+  object-fit: contain !important;
+  transform: none !important;
+}
+#portfolio .portfolio-card:has(.portfolio-artwork)::after {
+  display: none !important;
+}
+#portfolio .portfolio-sector {
+  overflow-wrap: anywhere;
+}
+#portfolio .ydg-estimate-toggle {
+  max-width: 100%;
+  border-radius: 10px;
+  font-size: .72rem;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+#portfolio .ydg-estimate-detail {
+  overflow-wrap: anywhere;
+}
+@media (min-width: 900px) {
+  #portfolio .portfolio-grid { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+}
+@media (max-width: 650px) {
+  #portfolio .portfolio-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  #portfolio .portfolio-body { padding: 9px !important; }
+  #portfolio .portfolio-title { font-size: .83rem !important; }
+  #portfolio .portfolio-sector { font-size: .65rem !important; }
+  #portfolio .portfolio-link { font-size: .72rem !important; }
+  #portfolio .ydg-estimate-toggle { padding: 7px 8px; }
+}
 </style>
 <title>Diseño Web en Málaga desde 99 € | YourDesignGPT</title>
 <meta name="description" content="Diseño web en Málaga y Torremolinos para autónomos y pequeños negocios. Páginas web económicas desde 99 €, adaptadas a móvil. Solicita tu presupuesto.">
@@ -7824,9 +7860,7 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
 <div class="portfolio-grid" id="portfolio-mobile-carousel">
 <article class="portfolio-card" data-ydg-preview="EL RINCÓN DE MERCEDES · WEBAPP">
 <a aria-label="Ver El Rincón de Mercedes" class="portfolio-cover" href="https://pitersc10.github.io/ElRinconDeMercedes/" target="_blank" rel="noopener noreferrer">
-<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small>yourdesigngpt / aplicación web</small></span>
-<span class="portfolio-badge">El Rincón de Mercedes</span>
-<div aria-label="Ilustración gráfica de editor de postales" style="height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(140deg,#f9dbe7,#eddfef,#e5f1df);color:#82536b;text-align:center;padding:25px"><span style="font-size:72px">🌸💌</span><strong style="font-family:Georgia,serif;font-size:28px">El Rincón de Mercedes</strong><span style="font-size:14px">Crea momentos bonitos</span></div>
+<img class="portfolio-artwork" src="/assets/portfolio/el-rincon-de-mercedes.webp" width="359" height="228" alt="" loading="lazy" decoding="async">
 </a><div class="portfolio-body">
 <div class="portfolio-sector">Creatividad · WebApp personal</div>
 <h3 class="portfolio-title">El Rincón de Mercedes</h3>
@@ -7837,9 +7871,7 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
 </div></article>
 <article class="portfolio-card" data-ydg-preview="PAPÁ SUDOKU · PROYECTO PERSONAL">
 <a class="portfolio-cover" href="https://papasudoku.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Abrir aplicación original Papá Sudoku">
-<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small>yourdesigngpt / proyecto personal</small></span>
-<span class="portfolio-badge">Papá Sudoku</span>
-<div aria-label="Ilustración gráfica de juego de sudoku" style="height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(140deg,#d9e8f8,#ebf1fa,#dbeee8);color:#29445d;text-align:center;padding:25px"><span style="font-size:64px">🔢🧩</span><strong style="font-family:Georgia,serif;font-size:29px">Papá Sudoku</strong><span style="font-size:14px">Concentración y entretenimiento</span></div>
+<img class="portfolio-artwork" src="/assets/portfolio/papa-sudoku.webp" width="360" height="228" alt="" loading="lazy" decoding="async">
 </a><div class="portfolio-body">
 <div class="portfolio-sector">Entretenimiento · Juego lógico</div>
 <h3 class="portfolio-title">Papá Sudoku</h3>
@@ -7850,13 +7882,12 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
 </div></article>
 <article class="portfolio-card" data-ydg-preview="RADIOSAS ACADEMY · DEMO LIMITADA">
 <a aria-label="Ver demo limitada de RadioSAS Academy" class="portfolio-cover" href="radiosas-demo/">
-<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small>yourdesigngpt / demo limitada</small></span><span class="portfolio-badge">RadioSAS Academy</span><img alt="RadioSAS Academy: plataforma de test con avatar genérico Aquí tu foto, sin datos personales" height="675" loading="lazy" src="radiosas-demo/portada.svg" width="1200"></a>
+<img class="portfolio-artwork" src="/assets/portfolio/radiosas-academy.webp" width="361" height="228" alt="" loading="lazy" decoding="async">
+</a>
 <div class="portfolio-body"><div class="portfolio-sector">EdTech · Plataforma de preparación de exámenes</div><h3 class="portfolio-title">RadioSAS Academy</h3><p class="portfolio-description">Academia de test personalizable con corrección y estadísticas locales. Demo pública con solo 5 enunciados de un banco de referencia de 1.000; exámenes, soluciones y banco completo no accesibles.</p><div class="portfolio-tech"><span>Test y simulacros</span><span>Progreso local</span><span>Demo limitada</span></div><a class="portfolio-link" href="radiosas-demo/">Ver demostración limitada →</a><div class="ydg-project-estimate"><button type="button" class="ydg-estimate-toggle" aria-expanded="false">Ver valoración estimada</button><span class="ydg-estimate-detail" hidden>Estimación orientativa de un desarrollo a medida de alcance similar: 1.500–3.000 €. No es un precio pagado ni una tasación. Adaptación de la plataforma existente: 99 € de creación + 100 € del primer año (199 € en total). Ambos pagos son necesarios para publicar. Renovación desde el segundo año: 100 €/año; puedes cancelarla y conservar el servicio durante el periodo abonado. Nuevas funciones y validación académica del banco, aparte.</span></div></div></article>
 <article class="portfolio-card" data-ydg-preview="DEA HABBO ES · PROYECTO REAL">
 <a aria-label="Ver proyecto DEA HABBO ES" class="portfolio-cover" href="https://dea-habbo-es.vercel.app/" target="_blank" rel="noopener noreferrer">
-<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small>yourdesigngpt / proyecto real</small></span>
-<span class="portfolio-badge">DEA HABBO ES</span>
-<img alt="Imagen ilustrativa del sector tecnológico del proyecto DEA HABBO ES" height="675" loading="lazy" src="dea-habbo-es-portfolio-1200x675.webp" width="1200"/>
+<img class="portfolio-artwork" src="/assets/portfolio/dea-habbo-es.webp" width="360" height="228" alt="" loading="lazy" decoding="async">
 </a>
 <div class="portfolio-body">
 <div class="portfolio-sector">Agencia virtual · Plataforma de gestión</div>
@@ -7884,11 +7915,7 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
 
 <article class="portfolio-card" data-ydg-preview="JET SKI · RESPONSIVE · DEMO">
 <a aria-label="Ver proyecto Ibiza Jet Experience" class="portfolio-cover" href="ibiza-jetski.html">
-<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small data-lang-key="portfolio-browser-label">yourdesigngpt / proyecto</small></span>
-<span class="portfolio-badge">Ibiza Jet Experience</span>
-
-
-<img alt="Ibiza Jet Experience · web premium de motos de agua" height="720" loading="lazy" src="jetski-hero-final.webp" width="1200"/>
+<img class="portfolio-artwork" src="/assets/portfolio/ibiza-jet-experience.webp" width="360" height="239" alt="" loading="lazy" decoding="async">
 </a>
 <div class="portfolio-body">
 <div class="portfolio-sector" data-lang-key="portfolio-jetski-sector">Jet Ski · Experiencias premium</div>
@@ -7896,13 +7923,12 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
 <p class="portfolio-description" data-lang-key="portfolio-jetski-desc">Web comercial para motos de agua en Ibiza con experiencias, rutas, galería, seguridad, contacto y sistema preparado para reservas.</p>
 <div class="portfolio-tech"><span data-lang-key="tag-bookings">Reservas</span><span>Responsive</span><span data-lang-key="tag-routes">Rutas</span></div>
 <a class="portfolio-link" href="ibiza-jetski.html" data-lang-key="portfolio-case">Ver web →</a>
+<div class="ydg-project-estimate"><button type="button" class="ydg-estimate-toggle" aria-expanded="false">Ver valoración estimada</button><span class="ydg-estimate-detail" hidden>Valoración económica por determinar según el alcance del proyecto.</span></div>
 </div>
 </article>
 <article class="portfolio-card" data-ydg-preview="RESTAURANTE · RESPONSIVE · DEMO">
 <a aria-label="Ver proyecto Restaurante Áurea Málaga" class="portfolio-cover" href="restaurante.html">
-<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small data-lang-key="portfolio-browser-label">yourdesigngpt / proyecto</small></span>
-<span class="portfolio-badge" data-lang-key="portfolio-restaurant-badge">Áurea Málaga</span>
-<img alt="Vista del proyecto web Restaurante Áurea Málaga" height="675" loading="lazy" src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&amp;fit=crop&amp;w=1200&amp;q=82" width="1200"/>
+<img class="portfolio-artwork" src="/assets/portfolio/aurea-malaga.webp" width="361" height="239" alt="" loading="lazy" decoding="async">
 </a>
 <div class="portfolio-body">
 <div class="portfolio-sector" data-lang-key="portfolio-restaurant-sector">Restauración · Web premium</div>
@@ -7910,13 +7936,12 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
 <p class="portfolio-description" data-lang-key="portfolio-restaurant-desc">Web gastronómica elegante con carta, especialidades, galería, reservas, contacto y una experiencia visual orientada a conversión.</p>
 <div class="portfolio-tech"><span>Carta digital</span><span>Reservas</span><span>Galería</span></div>
 <a class="portfolio-link" href="restaurante.html" data-lang-key="portfolio-case">Ver web →</a>
+<div class="ydg-project-estimate"><button type="button" class="ydg-estimate-toggle" aria-expanded="false">Ver valoración estimada</button><span class="ydg-estimate-detail" hidden>Valoración económica por determinar según el alcance del proyecto.</span></div>
 </div>
 </article>
 <article class="portfolio-card" data-ydg-preview="ELECTRICIDAD · RESPONSIVE · DEMO">
 <a aria-label="Ver proyecto Voltio Málaga" class="portfolio-cover" href="electricista.html">
-<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small data-lang-key="portfolio-browser-label">yourdesigngpt / proyecto</small></span>
-<span class="portfolio-badge" data-lang-key="portfolio-electrician-badge">Voltio Málaga</span>
-<img alt="Vista del proyecto web Voltio Málaga" height="675" loading="lazy" src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&amp;fit=crop&amp;w=1200&amp;q=82" width="1200"/>
+<img class="portfolio-artwork" src="/assets/portfolio/voltio-malaga.webp" width="359" height="239" alt="" loading="lazy" decoding="async">
 </a>
 <div class="portfolio-body">
 <div class="portfolio-sector" data-lang-key="portfolio-electrician-sector">Electricidad · Servicios locales</div>
@@ -7924,13 +7949,12 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
 <p class="portfolio-description" data-lang-key="portfolio-electrician-desc">Diseño profesional enfocado a averías, urgencias, instalaciones y captación local mediante llamadas, formularios y WhatsApp.</p>
 <div class="portfolio-tech"><span>Servicios</span><span>Contacto</span><span>Responsive</span></div>
 <a class="portfolio-link" href="electricista.html" data-lang-key="portfolio-case">Ver web →</a>
+<div class="ydg-project-estimate"><button type="button" class="ydg-estimate-toggle" aria-expanded="false">Ver valoración estimada</button><span class="ydg-estimate-detail" hidden>Valoración económica por determinar según el alcance del proyecto.</span></div>
 </div>
 </article>
 <article class="portfolio-card" data-ydg-preview="FONTANERÍA · RESPONSIVE · DEMO">
 <a aria-label="Ver proyecto AquaFix Málaga" class="portfolio-cover" href="fontanero.html">
-<span aria-hidden="true" class="portfolio-browser"><i></i><i></i><i></i><small data-lang-key="portfolio-browser-label">yourdesigngpt / proyecto</small></span>
-<span class="portfolio-badge" data-lang-key="portfolio-plumber-badge">AquaFix Málaga</span>
-<img alt="Vista del proyecto web AquaFix Málaga" height="675" loading="lazy" src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&amp;fit=crop&amp;w=1200&amp;q=82" width="1200"/>
+<img class="portfolio-artwork" src="/assets/portfolio/aquafix.webp" width="360" height="239" alt="" loading="lazy" decoding="async">
 </a>
 <div class="portfolio-body">
 <div class="portfolio-sector" data-lang-key="portfolio-plumber-sector">Fontanería · Captación local</div>
@@ -7938,6 +7962,7 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
 <p class="portfolio-description" data-lang-key="portfolio-plumber-desc">Web de servicios con urgencias, fugas, atascos, zonas de trabajo, contacto inmediato y estructura preparada para SEO local.</p>
 <div class="portfolio-tech"><span>Urgencias</span><span>Contacto</span><span>Responsive</span></div>
 <a class="portfolio-link" href="fontanero.html" data-lang-key="portfolio-case">Ver web →</a>
+<div class="ydg-project-estimate"><button type="button" class="ydg-estimate-toggle" aria-expanded="false">Ver valoración estimada</button><span class="ydg-estimate-detail" hidden>Valoración económica por determinar según el alcance del proyecto.</span></div>
 </div>
 </article>
 <article class="portfolio-card" data-ydg-preview="ESTÉTICA · RESPONSIVE · DEMO">
