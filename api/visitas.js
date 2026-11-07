@@ -48,7 +48,7 @@ export default async function handler(req,res) {
         await put(path,'{}',{access:'private',addRandomSuffix:false,
           allowOverwrite:false,contentType:'application/json'});
       } catch(error) {
-        if (error?.name === 'BlobStoreSuspendedError') {
+        if (error?.name === 'BlobStoreSuspendedError' || error?.constructor?.name === 'BlobStoreSuspendedError') {
           // Preserve visibility of already registered visits without claiming a new write.
           registroPausado=true;
         } else if (!isDuplicate(error)) throw error;

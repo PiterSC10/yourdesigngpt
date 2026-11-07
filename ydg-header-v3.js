@@ -336,8 +336,23 @@
           if (!response.ok) throw Error('Contador no disponible');
           paint(await response.json());
         } catch (_) {
-          number.textContent = '—';
-          status.textContent = 'Visitas temporalmente no disponibles';
+          // Vercel Blob may reject writes while still allowing reads.
+          // Always attempt the historical GET before declaring the counter unavailable.
+          try {
+            const historic = await fetch('/api/visitas', {method:'GET',cache:'no-store'});
+            if (!historic.ok) throw Error('Histórico no disponible');
+            const data = await historic.json();
+            paint({...data,registroPausado:true});
+          } catch (_readError) {
+            number.textContent = '—';
+            status.textContent = 'Visitas temporalmente no disponibles';
+            const live = panel.querySelector('.ydg-visitor-live');
+            if (live) {
+              live.lastChild.textContent = ' REGISTRO NO DISPONIBLE';
+              const dot = live.querySelector('.ydg-visitor-dot');
+              if (dot) {dot.style.background='#f59e0b';dot.style.boxShadow='none';}
+            }
+          }
         }
       })();
     }
