@@ -308,7 +308,16 @@
         if (!Number.isSafeInteger(data.total) || data.total < 0 ||
             !Number.isSafeInteger(data.hoy) || data.hoy < 0) throw Error('Datos de visitas inválidos');
         number.textContent = String(data.total).padStart(6,'0');
-        status.textContent = 'Visitas reales compartidas · hoy ' + new Intl.NumberFormat('es-ES').format(data.hoy);
+        const paused = data.registroPausado === true;
+        status.textContent = paused
+          ? 'Histórico de visitas · registro temporalmente pausado'
+          : 'Visitas registradas · hoy ' + new Intl.NumberFormat('es-ES').format(data.hoy);
+        const live = panel.querySelector('.ydg-visitor-live');
+        if (live) {
+          live.lastChild.textContent = paused ? ' REGISTRO PAUSADO' : ' SISTEMA ACTIVO';
+          const dot = live.querySelector('.ydg-visitor-dot');
+          if (dot) { dot.style.background = paused ? '#f59e0b' : ''; dot.style.boxShadow = paused ? 'none' : ''; }
+        }
       };
       (async () => {
         try {

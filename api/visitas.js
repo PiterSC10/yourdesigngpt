@@ -40,18 +40,24 @@ export default async function handler(req,res) {
   if (req.method==='POST' && (typeof token!=='string'|| !/^[a-f0-9]{32}$/.test(token)))
     return send(400,{error:'Identificador inválido'});
   try {
+    let registroPausado=false;
     if (req.method==='POST') {
       const filename=createHash('sha256').update(token).digest('hex');
       const path=PREFIX+dayOf()+'/'+filename+'.json';
       try {
         await put(path,'{}',{access:'private',addRandomSuffix:false,
           allowOverwrite:false,contentType:'application/json'});
-      } catch(error) {if (!isDuplicate(error)) throw error;}
+      } catch(error) {
+        if (error?.name === 'BlobStoreSuspendedError') {
+          // Preserve visibility of already registered visits without claiming a new write.
+          registroPausado=true;
+        } else if (!isDuplicate(error)) throw error;
+      }
     }
     const {days,...result}=await readVisits();
     if (req.method==='GET' && req.query?.stats==='1')
       return send(200,{...result,historial:Object.keys(days).sort().map(fecha=>({fecha,visitas:days[fecha]}))});
-    return send(200,result);
+    return send(200,{...result,registroPausado});
   } catch(error) {
     console.error('YDG visit storage error:',error?.constructor?.name||'StorageError');
     return send(503,{error:'No se pudieron consultar las visitas'});
