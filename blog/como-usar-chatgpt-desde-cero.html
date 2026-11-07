@@ -49,6 +49,90 @@
 <section class="related ydg-topic-links" aria-labelledby="lecturas-relacionadas"><h2 id="lecturas-relacionadas">Sigue aprendiendo</h2><ul><li><a href="/blog/chatgpt-conseguir-clientes.html">Cómo usar ChatGPT para conseguir clientes</a></li><li><a href="/blog/herramientas-ia-gratis-autonomos.html">Herramientas de IA gratuitas para autónomos</a></li><li><a href="/blog/puede-mentir-inteligencia-artificial.html">¿Puede mentir una inteligencia artificial?</a></li><li><a href="/blog/como-aparecer-en-google.html">Cómo aparecer en Google</a></li></ul><p><a href="/blog/">Ver todos los artículos del blog →</a></p></section>
 <p class="guide-sources"><strong>Fuentes y actualización:</strong> Guía elaborada por YourDesignGPT y revisada el 7 de noviembre de 2026. Consulta la <a href="https://help.openai.com/es-es/articles/12677804-qu%C3%A9-es-chatgpt-preguntas-frecuentes" target="_blank" rel="noopener noreferrer">guía oficial de inicio de ChatGPT</a>, la <a href="https://help.openai.com/es-es/articles/9275245-chatgpt-free-tier-faq" target="_blank" rel="noopener noreferrer">información del plan gratuito</a> y la <a href="https://help.openai.com/es-es/articles/11084440-images-in-chatgpt" target="_blank" rel="noopener noreferrer">documentación de imágenes</a>. Las funciones y límites pueden cambiar.</p>
 </main><footer>© 2026 YourDesignGPT · <a href="/">Inicio</a><a href="/blog/">Blog</a><a href="/blog/politica-editorial.html">Política editorial</a><a href="/privacidad.html">Privacidad</a></footer>
+<aside class="guide-quick-nav" id="guide-quick-nav" aria-label="Navegación rápida de la guía">
+  <div class="guide-quick-panel" id="guide-quick-panel" hidden>
+    <div class="guide-quick-panel-header"><div><span class="guide-quick-overline">GUÍA CHATGPT · VOL. 1</span><strong>Ir a un capítulo</strong></div><button type="button" class="guide-quick-close" id="guide-quick-close" aria-label="Cerrar el índice">×</button></div>
+    <nav aria-label="Saltar entre capítulos">
+      <a href="#que-es" data-guide-jump="que-es"><span>01</span> Qué es ChatGPT</a>
+      <a href="#primeros-pasos" data-guide-jump="primeros-pasos"><span>02</span> Primeros pasos</a>
+      <a href="#como-pedir" data-guide-jump="como-pedir"><span>03</span> Cómo pedir bien</a>
+      <a href="#prompts" data-guide-jump="prompts"><span>04</span> Qué es un prompt</a>
+      <a href="#biblioteca" data-guide-jump="biblioteca"><span>05</span> Copiar 14 prompts</a>
+      <a href="#errores" data-guide-jump="errores"><span>06</span> Errores frecuentes</a>
+      <a href="#preguntas" data-guide-jump="preguntas"><span>07</span> Preguntas frecuentes</a>
+    </nav>
+    <div class="guide-quick-panel-footer"><a href="#inicio">↑ Volver al inicio</a><a href="/blog/">← Ir al blog</a></div>
+  </div>
+  <div class="guide-quick-actions">
+    <button class="guide-quick-menu" id="guide-quick-menu" type="button" aria-expanded="false" aria-controls="guide-quick-panel"><span class="guide-quick-menu-icon" aria-hidden="true">☰</span><span>Índice</span><small id="guide-current-chapter">1/7</small></button>
+    <button class="guide-quick-top" id="guide-quick-top" type="button" aria-label="Volver arriba" title="Volver arriba">↑</button>
+  </div>
+  <div class="guide-quick-progress" aria-hidden="true"><span id="guide-quick-progress-bar"></span></div>
+</aside>
 <div class="guide-toast" id="guide-copy-toast" role="status" aria-live="polite" aria-atomic="true"></div>
 <script>(()=>{const toast=document.getElementById('guide-copy-toast');let timeout;async function write(text){if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);return true;}const field=document.createElement('textarea');field.value=text;field.style.cssText='position:fixed;top:-9999px;left:-9999px';document.body.appendChild(field);field.select();let ok=false;try{ok=document.execCommand('copy')}finally{field.remove()}return ok;}document.querySelectorAll('[data-copy-prompt]').forEach(btn=>btn.addEventListener('click',async()=>{const pre=btn.closest('.guide-prompt')?.querySelector('.guide-prompt-text');if(!pre)return;try{if(!await write(pre.textContent.trim()))throw Error('copy');btn.innerHTML='<span aria-hidden="true">✓</span> ¡Copiado!';toast.textContent='Prompt copiado. Ahora puedes pegarlo en ChatGPT.';toast.classList.add('active');clearTimeout(timeout);timeout=setTimeout(()=>{btn.innerHTML='<span aria-hidden="true">▣</span> Copiar prompt';toast.classList.remove('active')},2600)}catch(_){toast.textContent='No se pudo copiar automáticamente. Selecciona el texto del prompt y cópialo.';toast.classList.add('active');clearTimeout(timeout);timeout=setTimeout(()=>toast.classList.remove('active'),4200)}}));})();</script>
+<script>
+(()=> {
+  const container=document.getElementById('guide-quick-nav');
+  const menu=document.getElementById('guide-quick-menu');
+  const panel=document.getElementById('guide-quick-panel');
+  const closeButton=document.getElementById('guide-quick-close');
+  const top=document.getElementById('guide-quick-top');
+  const current=document.getElementById('guide-current-chapter');
+  const progress=document.getElementById('guide-quick-progress-bar');
+  const links=Array.from(panel.querySelectorAll('[data-guide-jump]'));
+  const sections=links.map(link=>document.getElementById(link.dataset.guideJump));
+  const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+  let expanded=false,scheduled=false;
+  function toggle(open,returnFocus=false) {
+    expanded=open;
+    panel.hidden=!open;
+    menu.setAttribute('aria-expanded',String(open));
+    container.classList.toggle('is-open',open);
+    if(open)closeButton.focus();
+    else if(returnFocus)menu.focus();
+  }
+  function update(){
+    scheduled=false;
+    const doc=document.documentElement;
+    const scrollable=Math.max(1,doc.scrollHeight-window.innerHeight);
+    const pos=Math.max(0,window.scrollY);
+    const ratio=Math.min(100,Math.max(0,pos/scrollable*100));
+    progress.style.width=ratio+'%';
+    const show=pos>Math.min(400,window.innerHeight*.45);
+    container.classList.toggle('is-visible',show);
+    if(!show && expanded)toggle(false);
+    let activeIndex=0;
+    for(let i=0;i<sections.length;i++){
+      if(sections[i] && sections[i].getBoundingClientRect().top<=160)activeIndex=i;
+    }
+    current.textContent=(activeIndex+1)+'/7';
+    links.forEach((link,i)=>{
+      if(i===activeIndex)link.setAttribute('aria-current','location');
+      else link.removeAttribute('aria-current');
+    });
+  }
+  function schedule(){
+    if(scheduled)return;
+    scheduled=true;
+    window.requestAnimationFrame(update);
+  }
+  menu.addEventListener('click',()=>toggle(!expanded));
+  closeButton.addEventListener('click',()=>toggle(false,true));
+  top.addEventListener('click',()=>{
+    toggle(false);
+    window.scrollTo({top:0,behavior:reduceMotion.matches?'instant':'smooth'});
+  });
+  panel.querySelectorAll('a[href^="#"]').forEach(link=>link.addEventListener('click',()=>toggle(false)));
+  document.addEventListener('pointerdown',event=>{
+    if(expanded&&!container.contains(event.target))toggle(false);
+  });
+  document.addEventListener('keydown',event=>{
+    if(event.key==='Escape'&&expanded)toggle(false,true);
+  });
+  window.addEventListener('scroll',schedule,{passive:true});
+  window.addEventListener('resize',schedule,{passive:true});
+  update();
+})();
+</script>
 </body></html>
