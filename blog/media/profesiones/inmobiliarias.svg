@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="330" viewBox="0 0 640 330" role="img"><defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07152e"/><stop offset=".58" stop-color="#122343"/><stop offset="1" stop-color="#311554"/></linearGradient>
+<radialGradient id="glow"><stop stop-color="#9c5af7" stop-opacity=".44"/><stop offset="1" stop-color="#9c5af7" stop-opacity="0"/></radialGradient>
+<linearGradient id="metal" x1="0" y1="0" x2=".95" y2="1"><stop stop-color="#f7ffff"/><stop offset=".25" stop-color="#bed9ef"/><stop offset=".52" stop-color="#617da6"/><stop offset=".75" stop-color="#e0efff"/><stop offset="1" stop-color="#637ca6"/></linearGradient>
+<linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#90eefa"/><stop offset=".3" stop-color="#3879b6"/><stop offset=".6" stop-color="#123f76"/><stop offset="1" stop-color="#779bd2"/></linearGradient>
+<linearGradient id="violet" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#efb4ff"/><stop offset=".42" stop-color="#9460ed"/><stop offset="1" stop-color="#3f2f9e"/></linearGradient>
+<linearGradient id="gold" x1=".15" y1="0" x2="1" y2="1"><stop stop-color="#fff3be"/><stop offset=".3" stop-color="#f5be64"/><stop offset=".57" stop-color="#b8752d"/><stop offset=".8" stop-color="#ffdf83"/><stop offset="1" stop-color="#96501f"/></linearGradient>
+<linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d3ffff"/><stop offset=".45" stop-color="#3ed7f7"/><stop offset="1" stop-color="#3d70da"/></linearGradient>
+<linearGradient id="dark" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#385179"/><stop offset=".4" stop-color="#0b1a39"/><stop offset=".8" stop-color="#101a36"/><stop offset="1" stop-color="#49649e"/></linearGradient>
+<filter id="shadow"><feGaussianBlur stdDeviation="11"/></filter>
+<filter id="soft"><feGaussianBlur stdDeviation="4"/></filter></defs>
+<rect width="640" height="330" fill="url(#bg)"/><ellipse cx="175" cy="116" rx="290" ry="170" fill="url(#glow)"/>
+<ellipse cx="330" cy="302" rx="258" ry="26" fill="#050b1e" opacity=".65" filter="url(#shadow)"/>
+<path d="M0 285Q160 250 320 272T640 274V330H0Z" fill="#335581" opacity=".21"/>
+<path d="M0 292Q160 257 320 280T640 280" fill="none" stroke="#7ceaf3" stroke-opacity=".22" stroke-width="2"/>
+<g opacity=".9"><path d="M70 63h18m-9-9v18" stroke="#b4f9ff" stroke-width="2.4" stroke-linecap="round"/><path d="M555 53h16m-8-8v16" stroke="#d9b7ff" stroke-width="2.2" stroke-linecap="round"/><circle cx="100" cy="160" r="3" fill="#7bf5fb"/><circle cx="551" cy="206" r="3" fill="#bb96ff"/></g>
+<!-- real estate: 3d modern home key -->
+<path d="M157 154l158-119 158 119v121H157Z" fill="#e0eaff" stroke="#8bb9e4" stroke-width="7"/>
+<path d="M128 159L312 24l188 135-27 10-161-115-157 115Z" fill="url(#steel)" stroke="#95dcfc" stroke-width="5"/>
+<path d="M183 153v122h102V153" fill="#bdcae5" opacity=".35"/><rect x="292" y="180" width="84" height="95" fill="#2a5284" stroke="#a5c9e7" stroke-width="5"/><circle cx="361" cy="229" r="5" fill="#f6d47a"/>
+<rect x="190" y="176" width="79" height="61" rx="3" fill="#79c8ed" stroke="#e0f5ff" stroke-width="7"/><path d="M229 179v59m-39-29h79" stroke="#e0f5ff" stroke-width="5"/><rect x="388" y="181" width="68" height="56" fill="#8bc7e6" stroke="#ecf9ff" stroke-width="6"/>
+<g transform="translate(467,193) rotate(-27 55 40)"><circle cx="24" cy="27" r="27" fill="none" stroke="url(#gold)" stroke-width="13"/><path d="M45 40h125v22h-35v22h-21V62H45Z" fill="url(#gold)" stroke="#ffda8e" stroke-width="4"/></g><path d="M158 282h316" stroke="#8ac7e8" stroke-width="10" stroke-linecap="round"/></svg>

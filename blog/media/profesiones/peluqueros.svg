@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="330" viewBox="0 0 640 330" role="img"><defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#08263e"/><stop offset=".58" stop-color="#122343"/><stop offset="1" stop-color="#171338"/></linearGradient>
+<radialGradient id="glow"><stop stop-color="#3be8fc" stop-opacity=".44"/><stop offset="1" stop-color="#3be8fc" stop-opacity="0"/></radialGradient>
+<linearGradient id="metal" x1="0" y1="0" x2=".95" y2="1"><stop stop-color="#f7ffff"/><stop offset=".25" stop-color="#bed9ef"/><stop offset=".52" stop-color="#617da6"/><stop offset=".75" stop-color="#e0efff"/><stop offset="1" stop-color="#637ca6"/></linearGradient>
+<linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#90eefa"/><stop offset=".3" stop-color="#3879b6"/><stop offset=".6" stop-color="#123f76"/><stop offset="1" stop-color="#779bd2"/></linearGradient>
+<linearGradient id="violet" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#efb4ff"/><stop offset=".42" stop-color="#9460ed"/><stop offset="1" stop-color="#3f2f9e"/></linearGradient>
+<linearGradient id="gold" x1=".15" y1="0" x2="1" y2="1"><stop stop-color="#fff3be"/><stop offset=".3" stop-color="#f5be64"/><stop offset=".57" stop-color="#b8752d"/><stop offset=".8" stop-color="#ffdf83"/><stop offset="1" stop-color="#96501f"/></linearGradient>
+<linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d3ffff"/><stop offset=".45" stop-color="#3ed7f7"/><stop offset="1" stop-color="#3d70da"/></linearGradient>
+<linearGradient id="dark" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#385179"/><stop offset=".4" stop-color="#0b1a39"/><stop offset=".8" stop-color="#101a36"/><stop offset="1" stop-color="#49649e"/></linearGradient>
+<filter id="shadow"><feGaussianBlur stdDeviation="11"/></filter>
+<filter id="soft"><feGaussianBlur stdDeviation="4"/></filter></defs>
+<rect width="640" height="330" fill="url(#bg)"/><ellipse cx="462" cy="116" rx="290" ry="170" fill="url(#glow)"/>
+<ellipse cx="330" cy="302" rx="258" ry="26" fill="#050b1e" opacity=".65" filter="url(#shadow)"/>
+<path d="M0 285Q160 250 320 272T640 274V330H0Z" fill="#335581" opacity=".21"/>
+<path d="M0 292Q160 257 320 280T640 280" fill="none" stroke="#7ceaf3" stroke-opacity=".22" stroke-width="2"/>
+<g opacity=".9"><path d="M70 63h18m-9-9v18" stroke="#b4f9ff" stroke-width="2.4" stroke-linecap="round"/><path d="M555 53h16m-8-8v16" stroke="#d9b7ff" stroke-width="2.2" stroke-linecap="round"/><circle cx="100" cy="160" r="3" fill="#7bf5fb"/><circle cx="551" cy="206" r="3" fill="#bb96ff"/></g>
+<!-- peluqueria: hair dryer comb and scissors -->
+<g transform="translate(109,39) rotate(-12 178 128)"><path d="M123 86q-6-55 65-60h88q50 0 60 42l-25 52-113 20-43 2Z" fill="url(#violet)" stroke="#e4b5ff" stroke-width="6"/>
+<ellipse cx="340" cy="98" rx="44" ry="58" fill="#402474" stroke="#c88efb" stroke-width="10"/><ellipse cx="340" cy="98" rx="24" ry="40" fill="#1a103e" stroke="#ac75ef" stroke-width="5"/><path d="M178 136h66l-4 107q-8 29-41 19l-22-94Z" fill="url(#metal)" stroke="#a7a1e7" stroke-width="6"/><path d="M180 158l43 1" stroke="#a7faff" stroke-width="9"/><rect x="92" y="102" width="58" height="22" rx="10" fill="#acb8dc"/><path d="M230 69h42" stroke="#f7daff" stroke-width="7" stroke-linecap="round"/></g>
+<g transform="translate(421,145) rotate(12)"><path d="M22 9l65 141M87 9L22 150" stroke="url(#metal)" stroke-width="15" stroke-linecap="round"/><circle cx="21" cy="15" r="21" fill="none" stroke="#b4e7ff" stroke-width="10"/><circle cx="88" cy="15" r="21" fill="none" stroke="#b4e7ff" stroke-width="10"/><circle cx="54" cy="81" r="9" fill="#eafaff"/></g>
+<path d="M468 266v-59m11 59v-59m11 59v-59m11 59v-59" stroke="#b8a2ed" stroke-width="7" stroke-linecap="round"/></svg>

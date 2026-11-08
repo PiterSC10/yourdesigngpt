@@ -9,3 +9,23 @@
 .ydg-topic-links li a:hover,.ydg-topic-links li a:focus-visible{border-color:#55cbdc;color:white;outline-offset:3px}
 .ydg-topic-links>p{margin:13px 0 0;font-size:13px}
 @media(max-width:540px){.ydg-topic-links{padding:16px}.ydg-topic-links ul{grid-template-columns:1fr}}
+
+/* Highlighted ChatGPT beginner guide, editorial placement at bottom of blog */
+.guide-spotlight-premium{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1.13fr) minmax(0,.87fr);gap:25px;align-items:center;overflow:hidden;margin:30px 0 54px;padding:34px;border-radius:25px;background:linear-gradient(118deg,#0c2542 0%,#221751 55%,#092c50 100%);border:1px solid #58c9e8;box-shadow:0 0 0 1px #ba7bff3d,0 14px 55px #060c21a0}
+.guide-spotlight-premium:before{content:"";position:absolute;z-index:-1;inset:-1px;background:radial-gradient(ellipse at 93% 12%,#7e49dc6e,transparent 52%),radial-gradient(ellipse at 0% 100%,#09d5ee49,transparent 46%);pointer-events:none}
+.guide-spotlight-premium:after{content:"";position:absolute;z-index:2;left:8%;right:8%;height:2px;bottom:0;background:linear-gradient(90deg,transparent,#54eaf0,#d26ffd,transparent);box-shadow:0 0 14px 3px #56ddeb88;pointer-events:none}
+.guide-spotlight-copy{min-width:0}
+.guide-spotlight-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(110deg,#16547e,#6535ab);border:1px solid #a988f7;color:#f8fdff;box-shadow:0 0 22px #6a65ff52;font-size:11px;letter-spacing:.07em;border-radius:999px;padding:9px 13px;font-weight:900}
+.guide-spotlight-star{color:#9cf7ff;font-size:16px}
+.guide-spotlight-eyebrow{color:#6ae5f4;font-size:10px;font-weight:850;letter-spacing:.16em;margin:19px 0 8px}
+.guide-spotlight-copy h2{color:#fff;font-size:clamp(1.9rem,4vw,3.25rem);letter-spacing:-.045em;line-height:1.12;margin:0 0 15px;max-width:580px}
+.guide-spotlight-copy h2 span{background:linear-gradient(90deg,#4ee8ec,#a998fd,#de84ff);color:transparent;background-clip:text}
+.guide-spotlight-sub{color:#d6e8f8;max-width:560px;line-height:1.7;margin:0 0 17px;font-size:15px}
+.guide-spotlight-features{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:24px}
+.guide-spotlight-features span{border:1px solid #487aa0;background:#123758b6;color:#c8eaf4;font-size:11px;font-weight:750;padding:7px 9px;border-radius:999px}
+.guide-spotlight-button{display:inline-flex;gap:18px;align-items:center;justify-content:center;padding:14px 22px;border-radius:13px;background:linear-gradient(110deg,#4ae3ee,#917af8,#c370e6);font-weight:900;color:#08132f;text-decoration:none;box-shadow:0 4px 26px #55cceb55;font-size:15px}
+.guide-spotlight-button:hover,.guide-spotlight-button:focus-visible{filter:brightness(1.09);color:#08132f}
+.guide-spotlight-visual{display:block;position:relative;min-width:0;align-self:stretch;border-radius:18px;overflow:hidden;border:1px solid #8bbbe788;background:#111f51}
+.guide-spotlight-visual img{width:100%;height:100%;min-height:250px;object-fit:cover;display:block;filter:saturate(1.13)}
+.guide-spotlight-visual span{position:absolute;bottom:13px;right:13px;padding:9px 13px;border-radius:9px;background:#061c34e8;border:1px solid #5bd8f4;color:#d2f9ff;font-weight:900;font-size:11px;letter-spacing:.08em;box-shadow:0 0 20px #1225a599}
+@media(max-width:760px){.guide-spotlight-premium{grid-template-columns:1fr;padding:22px;gap:22px}.guide-spotlight-copy h2{font-size:clamp(1.85rem,7vw,2.8rem)}.guide-spotlight-visual img{min-height:0;aspect-ratio:16/9;height:auto}.guide-spotlight-button{width:100%}.guide-spotlight-premium{margin:25px 0 45px}}

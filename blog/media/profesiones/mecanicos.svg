@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="330" viewBox="0 0 640 330" role="img"><defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07152e"/><stop offset=".58" stop-color="#122343"/><stop offset="1" stop-color="#171338"/></linearGradient>
+<radialGradient id="glow"><stop stop-color="#9c5af7" stop-opacity=".44"/><stop offset="1" stop-color="#9c5af7" stop-opacity="0"/></radialGradient>
+<linearGradient id="metal" x1="0" y1="0" x2=".95" y2="1"><stop stop-color="#f7ffff"/><stop offset=".25" stop-color="#bed9ef"/><stop offset=".52" stop-color="#617da6"/><stop offset=".75" stop-color="#e0efff"/><stop offset="1" stop-color="#637ca6"/></linearGradient>
+<linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#90eefa"/><stop offset=".3" stop-color="#3879b6"/><stop offset=".6" stop-color="#123f76"/><stop offset="1" stop-color="#779bd2"/></linearGradient>
+<linearGradient id="violet" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#efb4ff"/><stop offset=".42" stop-color="#9460ed"/><stop offset="1" stop-color="#3f2f9e"/></linearGradient>
+<linearGradient id="gold" x1=".15" y1="0" x2="1" y2="1"><stop stop-color="#fff3be"/><stop offset=".3" stop-color="#f5be64"/><stop offset=".57" stop-color="#b8752d"/><stop offset=".8" stop-color="#ffdf83"/><stop offset="1" stop-color="#96501f"/></linearGradient>
+<linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d3ffff"/><stop offset=".45" stop-color="#3ed7f7"/><stop offset="1" stop-color="#3d70da"/></linearGradient>
+<linearGradient id="dark" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#385179"/><stop offset=".4" stop-color="#0b1a39"/><stop offset=".8" stop-color="#101a36"/><stop offset="1" stop-color="#49649e"/></linearGradient>
+<filter id="shadow"><feGaussianBlur stdDeviation="11"/></filter>
+<filter id="soft"><feGaussianBlur stdDeviation="4"/></filter></defs>
+<rect width="640" height="330" fill="url(#bg)"/><ellipse cx="175" cy="116" rx="290" ry="170" fill="url(#glow)"/>
+<ellipse cx="330" cy="302" rx="258" ry="26" fill="#050b1e" opacity=".65" filter="url(#shadow)"/>
+<path d="M0 285Q160 250 320 272T640 274V330H0Z" fill="#335581" opacity=".21"/>
+<path d="M0 292Q160 257 320 280T640 280" fill="none" stroke="#7ceaf3" stroke-opacity=".22" stroke-width="2"/>
+<g opacity=".9"><path d="M70 63h18m-9-9v18" stroke="#b4f9ff" stroke-width="2.4" stroke-linecap="round"/><path d="M555 53h16m-8-8v16" stroke="#d9b7ff" stroke-width="2.2" stroke-linecap="round"/><circle cx="100" cy="160" r="3" fill="#7bf5fb"/><circle cx="551" cy="206" r="3" fill="#bb96ff"/></g>
+<!-- mecanica: pneumatic tire and wrench -->
+<circle cx="274" cy="169" r="128" fill="#06101e" stroke="#50668e" stroke-width="12"/>
+<circle cx="274" cy="169" r="106" fill="#131e33" stroke="#0b1121" stroke-width="20" stroke-dasharray="17 12"/>
+<circle cx="274" cy="169" r="81" fill="url(#metal)" stroke="#a7d5ff" stroke-width="5"/>
+<circle cx="274" cy="169" r="62" fill="#294069" stroke="#0b1934" stroke-width="10"/>
+<g fill="#b0def8"><circle cx="274" cy="119" r="11"/><circle cx="322" cy="153" r="11"/><circle cx="303" cy="207" r="11"/><circle cx="245" cy="209" r="11"/><circle cx="224" cy="151" r="11"/></g><circle cx="274" cy="169" r="19" fill="#d7f8ff"/>
+<g transform="translate(402,62) rotate(28 50 115)"><path d="M38 0q-44 20-17 68l27 5v157q0 17 20 17t20-17V73q55-35-12-72l-8 34H48Z" fill="url(#metal)" stroke="#9ddbf3" stroke-width="5"/><circle cx="68" cy="219" r="11" fill="#17345d"/></g>
+<circle cx="104" cy="83" r="23" fill="none" stroke="#56caec" stroke-width="8" opacity=".35"/></svg>

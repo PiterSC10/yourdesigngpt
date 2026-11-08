@@ -70,3 +70,21 @@ html{scroll-behavior:smooth}
 .guide-pro-disclaimer{margin:19px 0 0!important;font-size:13px!important;color:#9db4c8!important}
 @media(max-width:720px){.guide-pro-grid{grid-template-columns:1fr}.guide-pro-card{padding:18px}}
 @media(prefers-reduced-motion:reduce){.guide-pro-details summary span{transition:none}}
+
+/* Rich editorial profession imagery: no emojis or cartoon stickers */
+.guide-pro-card{padding:0;border:1px solid #3a547c;box-shadow:inset 0 1px #a1b4ea14;transition:transform .22s,border-color .22s,box-shadow .22s}
+.guide-pro-card:hover{transform:translateY(-3px);border-color:#70dcea;box-shadow:0 13px 30px #07102577,0 0 0 1px #7ae8ed15}
+.guide-pro-top{display:block;margin:0}
+.guide-pro-image{position:relative;overflow:hidden;margin:0;height:auto;aspect-ratio:640/290;border-bottom:1px solid #668baf55;background:#09243d}
+.guide-pro-image img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .35s;filter:saturate(1.1)}
+.guide-pro-card:hover .guide-pro-image img{transform:scale(1.035)}
+.guide-pro-title{padding:16px 20px 0;min-width:0}
+.guide-pro-label{font-size:10px;letter-spacing:.15em;color:#5de7ea}
+.guide-pro-title h3{font-size:19px;line-height:1.3;margin:6px 0 0;color:#f8fbff;letter-spacing:-.02em}
+.guide-pro-subtitle{padding:0 20px;margin:10px 0 16px!important;min-height:42px}
+.guide-pro-details{margin:0 20px 16px}
+.guide-pro-card .guide-prompt-actions{padding:0 20px 20px;gap:10px}
+.guide-pro-card .guide-copy{background:linear-gradient(105deg,#53e9ed,#b97cfa);box-shadow:0 0 16px #40dff735;border-radius:11px}
+.guide-pro-card .guide-prompt-actions a{font-weight:750}
+@media(max-width:720px){.guide-pro-card{padding:0}.guide-pro-title{padding:15px 17px 0}.guide-pro-subtitle{padding:0 17px}.guide-pro-details{margin:0 17px 14px}.guide-pro-card .guide-prompt-actions{padding:0 17px 18px}.guide-pro-image{aspect-ratio:640/290}}
+@media(prefers-reduced-motion:reduce){.guide-pro-card,.guide-pro-image img{transition:none}.guide-pro-card:hover{transform:none}.guide-pro-card:hover .guide-pro-image img{transform:none}}
