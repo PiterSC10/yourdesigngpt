@@ -8581,14 +8581,34 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
 <div class="ydg-client-area-wrap">
 <a class="ydg-client-area-link" id="ydg-client-area-link" href="https://pitersc10.github.io/ydg-client-portal/login.html" rel="nofollow">Área de clientes →</a>
 </div>
-<div class="flex justify-center space-x-4 text-sm mt-4">
-<a class="text-gray-400 hover:text-white" data-lang-key="privacy-policy" href="#" id="privacy-policy-link">Política de privacidad</a>
+<div class="flex flex-wrap justify-center gap-x-4 gap-y-3 text-sm mt-4">
+<a class="text-gray-400 hover:text-white" href="/privacidad.html" id="privacy-policy-link">Política de privacidad</a>
 <a class="text-gray-400 hover:text-white" data-lang-key="legal-notice" href="#" id="legal-notice-link">Aviso legal</a>
-<a class="text-gray-400 hover:text-white" data-lang-key="cookie-policy" href="#" id="cookie-policy-link">Política de cookies</a>
+<a class="text-gray-400 hover:text-white" href="/cookies.html" id="cookie-policy-link">Política de cookies</a>
+<button id="ydg-google-consent-reopen" type="button" hidden style="color:#80e9ff;text-decoration:underline;cursor:pointer;background:transparent;border:0;padding:0;font:inherit">Cambiar consentimiento de publicidad</button>
 </div>
 </div>
 
 </footer>
+<script id="ydg-google-privacy-control">
+/* Google Privacy & messaging API: show the official settings control only when its consent API is ready. */
+(function(){
+  var btn=document.getElementById('ydg-google-consent-reopen');
+  if(!btn)return;
+  window.googlefc=window.googlefc||{};
+  window.googlefc.callbackQueue=window.googlefc.callbackQueue||[];
+  window.googlefc.callbackQueue.push({'CONSENT_API_READY':function(){
+    if(typeof window.googlefc.showRevocationMessage!=='function')return;
+    btn.hidden=false;
+    btn.addEventListener('click',function(){
+      window.googlefc.callbackQueue.push({'CONSENT_API_READY':function(){
+        window.googlefc.showRevocationMessage();
+      }});
+    });
+  }});
+})();
+</script>
+
 
 <div class="install-modal" id="install-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="install-modal-title">
   <div class="install-modal-card">
@@ -9618,12 +9638,7 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
         const legalNoticeLink = document.getElementById('legal-notice-link');
 
         // Solo añadir el event listener si el elemento existe en el DOM
-        if (privacyPolicyLink) {
-            privacyPolicyLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                openModal('privacy-policy-modal-title', 'privacy-policy-modal-content');
-            });
-        }
+        // La política vigente se abre como página pública independiente.
 
         // Solo añadir el event listener si el elemento existe en el DOM
         if (legalNoticeLink) {
@@ -9633,13 +9648,7 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
             });
         }
 
-        const cookiePolicyFooterLink = document.getElementById('cookie-policy-link');
-        if (cookiePolicyFooterLink) {
-            cookiePolicyFooterLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                openModal('cookie-policy-modal-title', 'cookie-policy-modal-content');
-            });
-        }
+        // La política de cookies vigente se abre como página pública independiente.
 
         // Lógica del acordeón FAQ
         document.querySelectorAll('.faq-question').forEach(button => {
