@@ -3,7 +3,7 @@
 <!-- YourDesignGPT V18 · Premium Conversion -->
 <html lang="es">
 <head>
-<script id="ydg-consent-mode-default">window.dataLayer=window.dataLayer||[];window.gtag=window.gtag||function(){window.dataLayer.push(arguments)};gtag('consent','default',{ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});try{if(localStorage.getItem('cookiesAccepted')==='true')gtag('consent','update',{ad_storage:'granted',analytics_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'});}catch(e){}</script>
+<script id="ydg-consent-mode-default">window.dataLayer=window.dataLayer||[];window.gtag=window.gtag||function(){window.dataLayer.push(arguments)};gtag('consent','default',{ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2770944255348213" crossorigin="anonymous"></script>
 <meta charset="utf-8"/>
 <!-- Identidad SEO principal: situada al inicio del HEAD para facilitar el rastreo -->
@@ -9147,8 +9147,8 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
                 'contact-disabled-desc': 'Formulario temporalmente desactivado mientras terminamos de optimizar el sistema de envío.', 'contact-disabled-help': 'Para solicitar información o presupuesto, utiliza ahora <strong class="text-white">Configura la idea de tu web</strong>.', 'contact-disabled-button': 'Ir al presupuesto guiado',
                 'install-label': 'Añadir YourDesignGPT a favoritos', 'install-modal-title': 'Guardar YourDesignGPT',
                 'smart-top-text': 'Descubre lo que podemos crear', 'smart-top-button': 'Ver trabajos', 'smart-mid-text': 'Cuéntanos qué necesita tu negocio', 'smart-mid-button': 'Pedir presupuesto', 'smart-bottom-text': '¿Listo para estrenar tu nueva web?', 'smart-bottom-button': 'Quiero mi web',
-                'cookie-banner-text': 'Usamos cookies propias y de terceros para fines técnicos, analíticos y de personalización. Puedes aceptarlas, rechazarlas o configurarlas en cualquier momento. Más información en nuestra <span id="open-cookie-policy" class="text-link">Política de Cookies</span>.',
-                'accept-cookies-button': 'Aceptar',
+                'cookie-banner-text': 'Guardamos preferencias locales para la web. La publicidad, si se activa, está sujeta a un consentimiento gestionado por una plataforma certificada. Más información en nuestra <a href="/cookies.html">Política de Cookies</a>.',
+                'accept-cookies-button': 'Entendido',
                 'reject-cookies-button': 'Rechazar'
             },
             'en': {
@@ -9512,8 +9512,8 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
                 'contact-disabled-desc': 'This form is temporarily disabled while we finish optimising the sending system.', 'contact-disabled-help': 'For information or a quote, please use <strong class="text-white">Configure your website idea</strong> for now.', 'contact-disabled-button': 'Go to guided quote',
                 'install-label': 'Add YourDesignGPT to bookmarks', 'install-modal-title': 'Save YourDesignGPT',
                 'smart-top-text': 'Discover what we can create', 'smart-top-button': 'View work', 'smart-mid-text': 'Tell us what your business needs', 'smart-mid-button': 'Request a quote', 'smart-bottom-text': 'Ready to launch your new website?', 'smart-bottom-button': 'I want my website',
-                'cookie-banner-text': 'We use our own and third-party cookies for technical, analytical, and personalization purposes. You can accept, reject, or configure them at any time. More information in our <span id="open-cookie-policy" class="text-link">Cookie Policy</span>.',
-                'accept-cookies-button': 'Accept',
+                'cookie-banner-text': 'We store local website preferences. Advertising consent, if enabled, is managed by a certified consent platform. Read our <a href="/cookies.html">Cookie Policy</a>.',
+                'accept-cookies-button': 'Got it',
                 'reject-cookies-button': 'Reject'
             }
         };
@@ -9715,7 +9715,7 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
         if (acceptCookiesButton) {
             acceptCookiesButton.addEventListener('click', () => {
                 localStorage.setItem('cookiesAccepted', 'true');
-                if (typeof window.gtag === 'function') window.gtag('consent','update',{ad_storage:'granted',analytics_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'});
+                // Este aviso guarda preferencias locales; la CMP certificada de Google gestiona consentimiento publicitario.
                 if (cookieBanner) {
                     cookieBanner.style.display = 'none';
                     document.body.classList.remove('ydg-cookie-visible');
