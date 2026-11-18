@@ -8653,18 +8653,7 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
     <div class="ya-note" id="ya-note">Asistente automático · simula una atención en tiempo real · tus preguntas no salen de esta página</div>
   </section>
 </div>
-<button type="button" id="ydg-cookie-settings" style="position:fixed;bottom:12px;left:12px;z-index:9998;padding:7px 10px;background:#14243a;color:#fff;border:1px solid #557;border-radius:9px;font-size:12px" aria-label="Cambiar preferencias de cookies">Cookies</button>
-<div class="hidden" id="cookie-banner" role="dialog" aria-label="Preferencias de cookies">
-<p class="text-base text-center md:text-left">
-            Utilizamos almacenamiento necesario para el funcionamiento de la web. Las tecnologías opcionales deben poder rechazarse.
-            Puedes aceptarlas, rechazarlas o configurarlas en cualquier momento.
-            Más información en nuestra <a href="/cookies.html" style="color:#9ce7ff;text-decoration:underline">Política de Cookies</a>.
-        </p>
-<div class="flex space-x-4 mt-2 md:mt-0">
-<button class="gradient-button" id="accept-cookies">Aceptar</button>
-<button class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-6 rounded-full shadow-md" id="reject-cookies">Rechazar</button>
-</div>
-</div>
+<!-- El consentimiento de publicidad lo gestiona el mensaje europeo publicado de Google AdSense. -->
 <script>
         // Smooth scrolling para enlaces de navegación
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -9607,19 +9596,6 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
                 btn.setAttribute('aria-pressed',String(active));
             });
             try{localStorage.setItem('ydg-lang',currentLang)}catch(e){}
-            // Update cookie banner text
-            const cookieBannerTextElement = document.querySelector('#cookie-banner p');
-            if (cookieBannerTextElement) {
-                cookieBannerTextElement.innerHTML = translations[currentLang]['cookie-banner-text'];
-            }
-            const acceptCookiesButton = document.getElementById('accept-cookies');
-            if (acceptCookiesButton) {
-                acceptCookiesButton.textContent = translations[currentLang]['accept-cookies-button'];
-            }
-            const rejectCookiesButton = document.getElementById('reject-cookies');
-            if (rejectCookiesButton) {
-                rejectCookiesButton.textContent = translations[currentLang]['reject-cookies-button'];
-            }
             window.dispatchEvent(new CustomEvent('ydg-language-change', { detail: { lang: currentLang } }));
         }
 
@@ -9690,55 +9666,7 @@ html{scroll-padding-top:calc(var(--ydg-header-height) + 12px)}
             });
         });
 
-        // Cookie Banner Logic
-        const cookieBanner = document.getElementById('cookie-banner');
-        const acceptCookiesButton = document.getElementById('accept-cookies');
-        const rejectCookiesButton = document.getElementById('reject-cookies');
-        const openCookiePolicyLink = document.getElementById('open-cookie-policy');
-        const changeCookies = document.getElementById('ydg-cookie-settings');
-        if (changeCookies) changeCookies.addEventListener('click',()=>{ if (cookieBanner) {cookieBanner.style.display='flex';document.body.classList.add('ydg-cookie-visible');} });
-
-        // Check if cookies have been accepted
-        if (localStorage.getItem('cookiesAccepted') === 'true' || localStorage.getItem('cookiesAccepted') === 'false') {
-            if (cookieBanner) {
-                cookieBanner.style.display = 'none'; // Hide if already accepted
-                document.body.classList.remove('ydg-cookie-visible');
-            }
-        } else {
-            if (cookieBanner) {
-                cookieBanner.style.display = 'flex'; // Show if not accepted
-                document.body.classList.add('ydg-cookie-visible');
-            }
-        }
-
-        // Event listener for "Accept" button
-        if (acceptCookiesButton) {
-            acceptCookiesButton.addEventListener('click', () => {
-                localStorage.setItem('cookiesAccepted', 'true');
-                // Este aviso guarda preferencias locales; la CMP certificada de Google gestiona consentimiento publicitario.
-                if (cookieBanner) {
-                    cookieBanner.style.display = 'none';
-                    document.body.classList.remove('ydg-cookie-visible');
-                }
-            });
-        }
-
-        // Event listener for "Reject" button (banner remains)
-        if (rejectCookiesButton) {
-            rejectCookiesButton.addEventListener('click', () => {
-                localStorage.setItem('cookiesAccepted', 'false');
-                if (cookieBanner) { cookieBanner.style.display = 'none'; document.body.classList.remove('ydg-cookie-visible'); }
-                if (typeof window.gtag === 'function') window.gtag('consent','update',{ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
-            });
-        }
-
-        // Event listener for "Más información" link in cookie banner
-        if (openCookiePolicyLink) {
-            openCookiePolicyLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                openModal('cookie-policy-modal-title', 'cookie-policy-modal-content');
-            });
-        }
+        // No mostramos un segundo aviso local: Google AdSense gestiona el consentimiento europeo.
 
         // Actualización inicial del idioma al cargar
         document.addEventListener('DOMContentLoaded', updateLanguage);
